@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="tr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "outline-variant": "#e3bdc3", "primary-fixed": "#ffd9de", "surface-container-high": "#f0e6e8", "on-surface-variant": "#5a4044", "inverse-on-surface": "#f9eef0", "on-error-container": "#93000a", "outline": "#8e6f74", "on-tertiary": "#ffffff", "surface-container-low": "#fcf1f3", "secondary-fixed": "#ffd9e4", "primary-container": "#d81b60", "tertiary-container": "#a35879", "on-primary": "#ffffff", "surface-bright": "#fff8f8", "background": "#fff8f8", "on-error": "#ffffff", "tertiary-fixed": "#ffd8e5", "inverse-primary": "#ffb2bf", "secondary-fixed-dim": "#f2b6cb", "surface-container-lowest": "#ffffff", "on-tertiary-container": "#fff2f4", "surface-variant": "#eae0e2", "tertiary-fixed-dim": "#ffb0cf", "secondary": "#805062", "on-background": "#1f1a1c", "on-primary-fixed-variant": "#90003b", "error-container": "#ffdad6", "surface": "#fff8f8", "surface-container": "#f6ebed", "on-secondary": "#ffffff", "surface-dim": "#e2d7d9", "on-surface": "#1f1a1c", "on-tertiary-fixed-variant": "#72304f", "inverse-surface": "#352f31", "tertiary": "#874061", "primary-fixed-dim": "#ffb2bf", "secondary-container": "#fec1d6", "surface-tint": "#bc004f", "on-primary-container": "#fff2f3", "primary": "#b0004a", "error": "#ba1a1a", "surface-container-highest": "#eae0e2", "on-secondary-fixed": "#330f1f", "on-secondary-container": "#7b4c5e", "on-tertiary-fixed": "#3c0223", "on-secondary-fixed-variant": "#65394b", "on-primary-fixed": "#3f0016" }, borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, spacing: { "space-xl": "2.25rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "gutter": "1rem", "space-xs": "0.25rem", "gutter-tablet": "1.5rem", "margin-tablet": "2rem", "margin-desktop": "3rem", "margin": "1.25rem", "space-md": "1rem", "gutter-desktop": "2rem" }, fontFamily: { "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "display": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"] }, fontSize: { "body-lg": ["1.125rem", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }], "body-md": ["1rem", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }], "headline-sm": ["1.25rem", { "lineHeight": "1.35", "letterSpacing": "-0.01em", "fontWeight": "600" }], "display": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800" }], "label-lg": ["0.875rem", { "lineHeight": "1.25", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-sm": ["0.875rem", { "lineHeight": "1.45", "letterSpacing": "0", "fontWeight": "400" }], "headline-lg-mobile": ["1.75rem", { "lineHeight": "1.25", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-sm": ["0.6875rem", { "lineHeight": "1.15", "letterSpacing": "0.03em", "fontWeight": "500" }], "label-md": ["0.75rem", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600" }], "headline-lg": ["2.25rem", { "lineHeight": "1.2", "letterSpacing": "-0.025em", "fontWeight": "700" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#fff8f8;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.topographic-pattern{background-image:radial-gradient(#e3bdc3 0.6px, transparent 0.6px), radial-gradient(#ffd9de 0.6px, #fff8f8 0.6px);background-size:24px 24px;background-position:0 0, 12px 12px;opacity:0.35;}
+    @keyframes floatBotanical { 0%, 100% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-5px) rotate(8deg); } }
+    @keyframes pulseGlow { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.1); } }
+    @keyframes sparkleRotate { 0% { transform: rotate(0deg) scale(0.9); } 50% { transform: rotate(180deg) scale(1.15); } 100% { transform: rotate(360deg) scale(0.9); } }
+    .animate-botanical { animation: floatBotanical 4s ease-in-out infinite; }
+    .animate-pulse-glow { animation: pulseGlow 2.8s ease-in-out infinite; }
+    .animate-sparkle { animation: sparkleRotate 7s linear infinite; }
+    .clay-card {
+      box-shadow: 0 16px 36px -8px rgba(216,27,96,0.12), 0 4px 14px 0 rgba(135,64,97,0.06), inset 0 1.5px 2px 0 rgba(255,255,255,0.95), inset 0 -2px 5px 0 rgba(216,27,96,0.04);
+    }
+    .clay-pill {
+      box-shadow: 0 4px 14px rgba(216,27,96,0.12), inset 0 1px 1px rgba(255,255,255,0.9);
+    }
+    .ovulation-aura {
+      background: radial-gradient(circle, rgba(16,185,129,0.22) 0%, rgba(216,27,96,0.28) 45%, rgba(254,193,214,0.0) 75%);
+    }
+  </style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-full flex flex-col relative selection:bg-secondary-container selection:text-on-secondary-container overflow-x-hidden"><div class="fixed inset-0 pointer-events-none topographic-pattern z-0"></div><!-- Particle Sparkle Canvas Layer --><canvas class="fixed inset-0 pointer-events-none z-50" id="pollen-canvas"></canvas><header class="fixed top-0 w-full z-40 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_4px_20px_-4px_rgba(216,27,96,0.08)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="relative w-11 h-11 rounded-full bg-surface-container flex items-center justify-center text-primary shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_3px_8px_rgba(176,0,74,0.12)]"><span class="material-symbols-outlined text-[22px] animate-botanical">spa</span><span class="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-gradient-to-tr from-amber-300 to-amber-400 border-2 border-surface shadow-[0_0_8px_rgba(251,191,36,0.8)]"></span></div><div class="flex flex-col"><div class="flex items-center gap-1.5"><h1 class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold">Döngü</h1><span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60 shadow-sm flex items-center gap-0.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>Bahar</span></div></div></div><div class="flex items-center gap-space-xs"><button aria-label="Bildirimler" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors relative"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-primary ring-2 ring-surface"></span></button><div class="w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-primary-container flex items-center justify-center shadow-[0_3px_10px_rgba(176,0,74,0.32),inset_0_1px_2px_rgba(255,255,255,0.6)] text-on-primary"><span class="material-symbols-outlined text-[20px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-32 bg-transparent z-10"><div class="flex flex-col w-full px-margin pb-6 gap-space-lg select-none">
+<!-- Top Navigation & Header Controls -->
+<div class="flex items-center justify-between pt-2 relative">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-amber-500 animate-sparkle">sparkles</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Aylık Biyo-Ritim Bakışı</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+<span class="text-[11px] font-semibold text-emerald-600 bg-emerald-100/70 px-2 py-0.2 rounded-full flex items-center gap-1"><span class="text-[10px]">🌸</span> Aktif</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-extrabold tracking-tight truncate flex items-center gap-2">Nisan &amp; Mayıs 2025</h2>
+</div>
+<button class="cal-interactive group flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-surface-container-lowest text-primary shadow-[0_6px_18px_rgba(216,27,96,0.14),inset_0_1px_2px_rgba(255,255,255,0.9)] active:scale-95 transition-all border border-pink-100/60" id="today-btn" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary group-hover:rotate-12 transition-transform" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="font-label-md text-label-md font-bold">Bugün</span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+</button>
+</div>
+<!-- Interactive Legend Pills with Tactile Clay Glow & Botanical Accents -->
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+<div class="cal-interactive flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-lowest shadow-[0_4px_12px_rgba(216,27,96,0.08),inset_0_1px_1px_rgba(255,255,255,0.9)] shrink-0 border border-primary-fixed/40">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container shadow-[0_0_10px_rgba(216,27,96,0.7)]"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Regl (1-5 Nis)</span>
+<span class="text-[11px]">🌺</span>
+</div>
+<div class="cal-interactive flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-lowest shadow-[0_4px_12px_rgba(216,27,96,0.08),inset_0_1px_1px_rgba(255,255,255,0.9)] shrink-0 border border-emerald-200/70">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.7)]"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Doğurgan (11-15 Nis)</span>
+<span class="text-[11px]">🌱</span>
+</div>
+<div class="cal-interactive flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-secondary-fixed via-pink-100 to-emerald-100/60 text-on-secondary-fixed shadow-[0_6px_16px_rgba(128,80,98,0.18),inset_0_1px_2px_rgba(255,255,255,0.9)] shrink-0 border border-pink-200">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse shadow-[0_0_10px_rgba(176,0,74,0.8)]"></span>
+<span class="font-label-sm text-label-sm font-extrabold flex items-center gap-1">14 Nis • Zirve Ovülasyon <span class="material-symbols-outlined text-[13px] text-amber-500">sparkles</span></span>
+</div>
+</div>
+<!-- Main Calendar Card (Nisan 2025) with Ultra Aesthetic Claymorphic Finish & Botanical Sparks -->
+<div class="w-full bg-surface-container-lowest rounded-3xl p-5 clay-card flex flex-col gap-4 relative overflow-hidden border border-pink-100/50">
+<!-- Ambient organic blush corner tint and soft aura -->
+<div class="absolute -right-14 -top-14 w-44 h-44 rounded-full bg-gradient-to-br from-primary-fixed/40 via-emerald-100/30 to-amber-100/30 blur-2xl pointer-events-none"></div>
+<div class="absolute -left-12 -bottom-12 w-40 h-40 rounded-full bg-secondary-fixed/30 blur-2xl pointer-events-none"></div>
+<!-- Floating Botanical Mikro Süsler Köşelerde -->
+<div class="absolute top-3.5 right-14 flex items-center gap-1 opacity-75 pointer-events-none">
+<span class="material-symbols-outlined text-[16px] text-emerald-500 animate-botanical">eco</span>
+<span class="material-symbols-outlined text-[13px] text-amber-400 animate-sparkle">sparkles</span>
+</div>
+<div class="flex items-center justify-between z-10">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-extrabold text-on-surface tracking-tight">Nisan 2025</span>
+<span class="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-surface-container to-pink-50 text-secondary font-label-sm text-label-sm font-bold border border-pink-100 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> 28 Gün Döngü
+</span>
+</div>
+<div class="flex items-center gap-1.5">
+<button aria-label="Önceki Ay" class="cal-interactive w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant active:scale-90 transition-transform shadow-sm hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button aria-label="Sonraki Ay" class="cal-interactive w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary active:scale-90 transition-transform shadow-sm hover:bg-primary-fixed" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Day Headers with Delicate Pastel Tint -->
+<div class="grid grid-cols-7 text-center font-label-md text-label-md text-on-surface-variant/80 font-bold z-10 py-1 bg-surface-container-low/50 rounded-2xl">
+<span>Pt</span><span>Sa</span><span>Ça</span><span>Pe</span><span>Cu</span><span class="text-secondary font-extrabold">Ct</span><span class="text-primary font-extrabold">Pz</span>
+</div>
+<!-- Calendar Grid with Tactile Clay Aesthetics & Botanical Auras -->
+<div class="grid grid-cols-7 gap-y-3.5 justify-items-center z-10 text-center font-label-lg text-label-lg">
+<!-- March overflow days -->
+<span class="w-10 h-10 flex items-center justify-center text-outline-variant/50 text-[13px]">31</span>
+<!-- 1-5 Nisan: Regl Günleri (Kabartmalı Gül Kurusu & Çiçek Parıltısı) -->
+<button class="cal-day cal-interactive w-10 h-10 rounded-full bg-gradient-to-b from-primary-fixed to-rose-100 text-primary font-bold shadow-[0_4px_10px_rgba(216,27,96,0.22),inset_0_1px_1px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center active:scale-95 transition-all border border-pink-200/70" type="button">
+<span class="text-[13px]">1</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary mt-0.5 shadow-[0_0_4px_rgba(176,0,74,0.6)]"></span>
+</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full bg-gradient-to-b from-primary-fixed to-rose-100 text-primary font-bold shadow-[0_4px_10px_rgba(216,27,96,0.22),inset_0_1px_1px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center active:scale-95 transition-all border border-pink-200/70" type="button">
+<span class="text-[13px]">2</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary mt-0.5 shadow-[0_0_4px_rgba(176,0,74,0.6)]"></span>
+</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full bg-gradient-to-b from-primary-fixed to-rose-100 text-primary font-bold shadow-[0_4px_10px_rgba(216,27,96,0.22),inset_0_1px_1px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center active:scale-95 transition-all border border-pink-200/70" type="button">
+<span class="text-[13px]">3</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary mt-0.5 shadow-[0_0_4px_rgba(176,0,74,0.6)]"></span>
+</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full bg-gradient-to-b from-primary-fixed to-rose-100 text-primary font-bold shadow-[0_4px_10px_rgba(216,27,96,0.22),inset_0_1px_1px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center active:scale-95 transition-all border border-pink-200/70" type="button">
+<span class="text-[13px]">4</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary mt-0.5 shadow-[0_0_4px_rgba(176,0,74,0.6)]"></span>
+</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full bg-gradient-to-b from-primary-fixed to-rose-100 text-primary font-bold shadow-[0_4px_10px_rgba(216,27,96,0.22),inset_0_1px_1px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center active:scale-95 transition-all border border-pink-200/70" type="button">
+<span class="text-[13px]">5</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary mt-0.5 shadow-[0_0_4px_rgba(176,0,74,0.6)]"></span>
+</button>
+<!-- 6-10 Nisan: Normal Foliküler Faz -->
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">6</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">7</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">8</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">9</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">10</button>
+<!-- 11-13 Nisan: Doğurgan Pencere (Yumuşak Pembe-Zümrüt Yeşil İpeksi Aura) -->
+<button class="cal-day cal-interactive relative w-10 h-10 rounded-full bg-gradient-to-br from-emerald-50 via-secondary-fixed to-pink-100 text-on-secondary-fixed shadow-[0_3px_10px_rgba(16,185,129,0.18),inset_0_1px_1px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center active:scale-95 transition-all border border-emerald-200/60" type="button">
+<span class="font-bold text-[13px]">11</span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-0.5 shadow-[0_0_4px_rgba(16,185,129,0.8)]"></span>
+</button>
+<button class="cal-day cal-interactive relative w-10 h-10 rounded-full bg-gradient-to-br from-emerald-50 via-secondary-fixed to-pink-100 text-on-secondary-fixed shadow-[0_3px_10px_rgba(16,185,129,0.18),inset_0_1px_1px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center active:scale-95 transition-all border border-emerald-200/60" type="button">
+<span class="font-bold text-[13px]">12</span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-0.5 shadow-[0_0_4px_rgba(16,185,129,0.8)]"></span>
+</button>
+<button class="cal-day cal-interactive relative w-10 h-10 rounded-full bg-gradient-to-br from-emerald-50 via-secondary-fixed to-pink-100 text-on-secondary-fixed shadow-[0_3px_10px_rgba(16,185,129,0.18),inset_0_1px_1px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center active:scale-95 transition-all border border-emerald-200/60" type="button">
+<span class="font-bold text-[13px]">13</span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-0.5 shadow-[0_0_4px_rgba(16,185,129,0.8)]"></span>
+</button>
+<!-- 14 Nisan (ZİRVE OVÜLASYON GÜNÜ): Canlı Pembe-Yeşil Nefes Alan İpeksi Glowing Aura & Altın Parıltı -->
+<div class="relative flex items-center justify-center">
+<div class="absolute -inset-2.5 rounded-full ovulation-aura animate-pulse-glow pointer-events-none"></div>
+<button class="cal-day cal-interactive relative w-11 h-11 rounded-full bg-gradient-to-tr from-primary via-primary-container to-rose-500 text-on-primary font-extrabold shadow-[0_10px_24px_rgba(216,27,96,0.55),inset_0_1.5px_2px_rgba(255,255,255,0.8)] flex flex-col items-center justify-center transform scale-110 active:scale-100 transition-all z-20 border-2 border-white/70" type="button">
+<span class="text-[13px] leading-none font-bold">14</span>
+<span class="flex items-center gap-0.5 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-300 shadow-[0_0_6px_rgba(253,224,71,0.9)]"></span>
+<span class="w-1 h-1 rounded-full bg-emerald-300"></span>
+</span>
+</button>
+</div>
+<!-- 15 Nisan: Doğurgan Pencere Sonu -->
+<button class="cal-day cal-interactive relative w-10 h-10 rounded-full bg-gradient-to-br from-emerald-50 via-secondary-fixed to-pink-100 text-on-secondary-fixed shadow-[0_3px_10px_rgba(16,185,129,0.18),inset_0_1px_1px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center active:scale-95 transition-all border border-emerald-200/60" type="button">
+<span class="font-bold text-[13px]">15</span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-0.5 shadow-[0_0_4px_rgba(16,185,129,0.8)]"></span>
+</button>
+<!-- 16-24 Nisan: Luteal Faz -->
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">16</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">17</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">18</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">19</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">20</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">21</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">22</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">23</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">24</button>
+<!-- 25 Nisan: PMS Uyarısı (Zarif Lavanta Parıltılı) -->
+<button class="cal-day cal-interactive w-10 h-10 rounded-full bg-gradient-to-b from-purple-100 to-tertiary-fixed text-on-tertiary-fixed shadow-[0_3px_10px_rgba(135,64,97,0.2),inset_0_1px_1px_rgba(255,255,255,0.9)] flex flex-col items-center justify-center active:scale-95 transition-all border border-purple-200" type="button">
+<span class="font-bold text-[13px]">25</span>
+<span class="text-[8px] font-extrabold text-tertiary leading-none tracking-tight">PMS</span>
+</button>
+<!-- 26-28 Nisan -->
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">26</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">27</button>
+<button class="cal-day cal-interactive w-10 h-10 rounded-full text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center font-medium" type="button">28</button>
+<!-- 29-30 Nisan: Gelecek Regl Tahmini (Narin Kesikli & İpeksi Işıltı) -->
+<button class="cal-day cal-interactive relative w-10 h-10 rounded-full bg-surface-container-low text-primary font-bold flex items-center justify-center shadow-inner active:scale-95 transition-all border border-dashed border-primary/40" type="button">
+<span class="absolute inset-0 rounded-full bg-primary/10 opacity-70"></span>
+<span class="relative z-10 text-[13px]">29</span>
+</button>
+<button class="cal-day cal-interactive relative w-10 h-10 rounded-full bg-surface-container-low text-primary font-bold flex items-center justify-center shadow-inner active:scale-95 transition-all border border-dashed border-primary/40" type="button">
+<span class="absolute inset-0 rounded-full bg-primary/10 opacity-70"></span>
+<span class="relative z-10 text-[13px]">30</span>
+</button>
+</div>
+</div>
+<!-- Selected Day Detail Card (14 Nisan - Zirve Ovülasyon) Claymorphic 3D & Canlı Botanik Detaylar -->
+<div class="w-full bg-surface-container-lowest rounded-3xl p-5 clay-card flex flex-col gap-4 relative overflow-hidden border border-pink-100/60">
+<!-- Köşe Salınan Çiçek İkonu -->
+<div class="absolute -right-3 -top-3 w-16 h-16 rounded-full bg-gradient-to-br from-pink-100 to-emerald-100/40 flex items-center justify-center opacity-60 pointer-events-none animate-botanical">
+<span class="text-2xl">🌸</span>
+</div>
+<div class="flex items-center justify-between z-10">
+<div class="flex items-center gap-3">
+<div class="relative w-13 h-13 p-3 rounded-2xl bg-gradient-to-tr from-primary via-primary-container to-rose-400 flex items-center justify-center text-on-primary shadow-[0_8px_20px_rgba(216,27,96,0.38),inset_0_1.5px_2px_rgba(255,255,255,0.7)]">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">egg</span>
+<span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-amber-300 border-2 border-white flex items-center justify-center shadow-[0_0_8px_rgba(251,191,36,0.9)]"><span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span></span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline-sm text-headline-sm font-extrabold text-on-surface">14 Nisan Pazartesi</h3>
+<span class="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-secondary-fixed to-pink-100 text-on-secondary-fixed font-label-sm text-label-sm font-bold border border-pink-200/60 shadow-sm">Döngü Günü 14</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="text-emerald-600 font-bold">🌿 Zirve Doğurganlık</span>
+<span>(Pik LH Hormonu)</span>
+</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-secondary font-bold block flex items-center justify-end gap-0.5">
+<span class="material-symbols-outlined text-[12px] text-amber-500">hotel_class</span> Şans
+</span>
+<span class="font-headline-sm text-headline-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-rose-500">%85</span>
+</div>
+</div>
+<!-- Probability Gauge Bar with Multi-Color Emerald/Gold/Fuchsia Gradient Glow -->
+<div class="w-full bg-surface-container-high h-3 rounded-full overflow-hidden p-0.5 shadow-inner">
+<div class="bg-gradient-to-r from-emerald-400 via-amber-300 to-primary h-full rounded-full shadow-[0_0_12px_rgba(216,27,96,0.7)]" style="width: 85%;"></div>
+</div>
+<!-- Logged Biometrics Chips (Claymorphic / Soft tactile pills) -->
+<div class="flex flex-col gap-2 pt-1 z-10">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-on-surface flex items-center gap-1.5">
+<span>Kaydedilen Biyometrik Belirtiler</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</span>
+<span class="text-[11px] font-bold text-secondary">3 Doğrulandı</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="cal-interactive flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm font-semibold border border-pink-100 shadow-[0_3px_10px_rgba(216,27,96,0.06),inset_0_1px_1px_rgba(255,255,255,0.9)] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[17px] text-primary" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+  Şeffaf Akıntı (Yüksek)
+</span>
+<span class="cal-interactive flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm font-semibold border border-pink-100 shadow-[0_3px_10px_rgba(216,27,96,0.06),inset_0_1px_1px_rgba(255,255,255,0.9)] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[17px] text-tertiary" style="font-variation-settings: 'FILL' 1;">device_thermostat</span>
+  36.8°C Bazal Isı
+</span>
+<span class="cal-interactive flex items-center gap-1.5 px-3.5 py-2 rounded-2xl bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm font-semibold border border-pink-100 shadow-[0_3px_10px_rgba(216,27,96,0.06),inset_0_1px_1px_rgba(255,255,255,0.9)] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[17px] text-emerald-600" style="font-variation-settings: 'FILL' 1;">sentiment_very_satisfied</span>
+  Yüksek Enerji &amp; Canlılık
+</span>
+</div>
+</div>
+<!-- 3D Tactile Add Log Button with Particle Burst -->
+<button class="cal-interactive relative w-full py-4 px-4 rounded-full bg-gradient-to-r from-primary via-primary-container to-rose-500 text-on-primary font-label-lg text-label-lg font-bold shadow-[0_10px_24px_rgba(216,27,96,0.38),inset_0_1.5px_2px_rgba(255,255,255,0.7)] flex items-center justify-center gap-2 active:scale-[0.98] transition-all overflow-hidden" type="button">
+<span class="absolute inset-0 bg-gradient-to-b from-white/25 to-transparent pointer-events-none"></span>
+<span class="material-symbols-outlined text-[20px] text-amber-200">add_circle</span>
+<span>Bu Güne Belirti veya Not Ekle</span>
+<span class="material-symbols-outlined text-[17px] text-amber-300 animate-sparkle">auto_awesome</span>
+</button>
+</div>
+<!-- Smart Cycle Forecast Engine Card (Deep Plum Velvet & Glowing Botanical Highlights) -->
+<div class="w-full bg-gradient-to-br from-[#4a152e] via-[#612440] to-[#250d18] rounded-3xl p-6 text-on-tertiary shadow-[0_20px_42px_rgba(37,13,24,0.38),inset_0_1.5px_2px_rgba(255,255,255,0.2)] flex flex-col gap-4 relative overflow-hidden border border-white/10">
+<!-- Decorative organic background waves & botanical glow -->
+<div class="absolute -right-10 -bottom-10 w-48 h-48 rounded-full bg-gradient-to-tr from-pink-500/25 to-emerald-400/20 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-6 -top-6 w-32 h-32 rounded-full bg-amber-400/15 blur-2xl pointer-events-none"></div>
+<div class="flex items-center justify-between z-10">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-white/15 backdrop-blur-md flex items-center justify-center text-secondary-fixed shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)]">
+<span class="material-symbols-outlined text-[22px] text-secondary-fixed" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-extrabold tracking-tight">Akıllı Tahmin Motoru</h3>
+</div>
+<span class="px-3 py-1 rounded-full bg-white/15 backdrop-blur-md font-label-sm text-label-sm text-amber-300 font-bold tracking-wide border border-amber-300/30 flex items-center gap-1 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
+  %96 Hassasiyet
+</span>
+</div>
+<p class="font-body-sm text-body-sm text-pink-100/85 z-10 leading-relaxed">
+  Geçmiş 6 döngünüzün derin biyo-analizi ve hormonal eğrileriyle oluşturulan yüksek doğruluklu takvim projeksiyonu:
+</p>
+<div class="grid grid-cols-1 gap-3 z-10 pt-1">
+<div class="cal-interactive flex items-center justify-between p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 shadow-sm active:scale-[0.99] transition-all">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-fixed/20 flex items-center justify-center text-primary-fixed shadow-inner">
+<span class="material-symbols-outlined text-[19px]">bloodtype</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-pink-200/90 block font-medium">Gelecek Regl Başlangıcı</span>
+<span class="font-label-lg text-label-lg font-extrabold text-on-tertiary">29 Nisan 2025</span>
+</div>
+</div>
+<span class="px-3 py-1 rounded-full bg-gradient-to-r from-primary-container to-rose-600 text-on-primary-container font-label-sm text-label-sm font-extrabold shadow-[0_3px_10px_rgba(216,27,96,0.4)]">15 Gün Kaldı</span>
+</div>
+<div class="cal-interactive flex items-center justify-between p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 shadow-sm active:scale-[0.99] transition-all">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-purple-300/20 flex items-center justify-center text-purple-200 shadow-inner">
+<span class="material-symbols-outlined text-[19px]">psychology_alt</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-pink-200/90 block font-medium">PMS Başlangıç Tahmini</span>
+<span class="font-label-lg text-label-lg font-extrabold text-on-tertiary">25 Nisan Cuma</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-pink-100 font-semibold bg-white/10 px-2.5 py-1 rounded-full border border-white/15">Hafif kramp uyarısı</span>
+</div>
+<div class="cal-interactive flex items-center justify-between p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 shadow-sm active:scale-[0.99] transition-all">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-emerald-400/20 flex items-center justify-center text-emerald-300 shadow-inner">
+<span class="material-symbols-outlined text-[19px]">spa</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-pink-200/90 block font-medium">Sonraki Yumurtlama</span>
+<span class="font-label-lg text-label-lg font-extrabold text-on-tertiary">12 Mayıs Pazartesi</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-emerald-300 font-bold bg-emerald-500/20 px-2.5 py-1 rounded-full border border-emerald-400/30 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> 28 Gün Düzenli
+</span>
+</div>
+</div>
+</div>
+<!-- Next 3 Months Projection (Mayıs, Haziran, Temmuz) with Botanical Micro Badges -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between px-1">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface flex items-center gap-1.5">
+<span>Gelecek 3 Ayın Planlaması</span>
+<span class="text-base">🌿</span>
+</h3>
+<span class="font-label-sm text-label-sm text-secondary font-bold bg-secondary-fixed/50 px-2.5 py-0.5 rounded-full">Dinamik Tahmin</span>
+</div>
+<!-- Mini Calendar Forecast Cards Slider -->
+<div class="grid grid-cols-3 gap-3">
+<!-- Mayıs -->
+<div class="cal-interactive bg-surface-container-lowest rounded-2xl p-3 clay-pill flex flex-col gap-2 text-center border border-pink-100/60 active:scale-95 transition-transform">
+<div class="flex items-center justify-center gap-1">
+<span class="font-label-lg text-label-lg font-extrabold text-on-surface">Mayıs</span>
+<span class="text-[10px]">🌸</span>
+</div>
+<div class="flex flex-col gap-1 items-center bg-surface-container-low rounded-xl py-2 px-1 border border-pink-100/40">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Regl</span>
+<span class="px-2 py-0.5 rounded-full bg-gradient-to-r from-primary-fixed to-rose-200 text-primary font-label-sm text-label-sm font-extrabold shadow-sm">27-31</span>
+</div>
+<div class="flex flex-col gap-1 items-center bg-emerald-50/60 rounded-xl py-2 px-1 border border-emerald-100">
+<span class="font-label-sm text-label-sm text-emerald-800 font-medium">Ovülasyon</span>
+<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-label-sm text-label-sm font-extrabold shadow-sm">12 May</span>
+</div>
+</div>
+<!-- Haziran -->
+<div class="cal-interactive bg-surface-container-lowest rounded-2xl p-3 clay-pill flex flex-col gap-2 text-center border border-pink-100/60 active:scale-95 transition-transform">
+<div class="flex items-center justify-center gap-1">
+<span class="font-label-lg text-label-lg font-extrabold text-on-surface">Haziran</span>
+<span class="text-[10px]">🌿</span>
+</div>
+<div class="flex flex-col gap-1 items-center bg-surface-container-low rounded-xl py-2 px-1 border border-pink-100/40">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Regl</span>
+<span class="px-2 py-0.5 rounded-full bg-gradient-to-r from-primary-fixed to-rose-200 text-primary font-label-sm text-label-sm font-extrabold shadow-sm">24-28</span>
+</div>
+<div class="flex flex-col gap-1 items-center bg-emerald-50/60 rounded-xl py-2 px-1 border border-emerald-100">
+<span class="font-label-sm text-label-sm text-emerald-800 font-medium">Ovülasyon</span>
+<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-label-sm text-label-sm font-extrabold shadow-sm">9 Haz</span>
+</div>
+</div>
+<!-- Temmuz -->
+<div class="cal-interactive bg-surface-container-lowest rounded-2xl p-3 clay-pill flex flex-col gap-2 text-center border border-pink-100/60 active:scale-95 transition-transform">
+<div class="flex items-center justify-center gap-1">
+<span class="font-label-lg text-label-lg font-extrabold text-on-surface">Temmuz</span>
+<span class="text-[10px]">🌻</span>
+</div>
+<div class="flex flex-col gap-1 items-center bg-surface-container-low rounded-xl py-2 px-1 border border-pink-100/40">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Regl</span>
+<span class="px-2 py-0.5 rounded-full bg-gradient-to-r from-primary-fixed to-rose-200 text-primary font-label-sm text-label-sm font-extrabold shadow-sm">22-26</span>
+</div>
+<div class="flex flex-col gap-1 items-center bg-emerald-50/60 rounded-xl py-2 px-1 border border-emerald-100">
+<span class="font-label-sm text-label-sm text-emerald-800 font-medium">Ovülasyon</span>
+<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-label-sm text-label-sm font-extrabold shadow-sm">7 Tem</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Web Audio API for delicate crystal water droplet sound
+  let audioCtx = null;
+  function playCrystalChime() {
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!audioCtx) audioCtx = new AudioContext();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      
+      // Sweet harmonic bell / water droplet pitch
+      const baseFreq = 784 + Math.random() * 220; // G5 - A5 range
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(baseFreq, now);
+      osc.frequency.exponentialRampToValueAtTime(baseFreq * 1.5, now + 0.08);
+
+      gain.gain.setValueAtTime(0.22, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.35);
+    } catch(e) {
+      // Audio fallback silent
+    }
+  }
+
+  // Canvas Particle Burst Simulation for Pollen & Botanical Sparkles
+  const canvas = document.getElementById('pollen-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  const particleColors = [
+    '#fbbf24', // Gold
+    '#d81b60', // Fuchsia / Rose
+    '#10b981', // Emerald
+    '#a855f7', // Lavender
+    '#f43f5e', // Coral Rose
+    '#ffffff'  // Crystal White
+  ];
+
+  class PollenParticle {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 4.5 + 2;
+      this.vx = Math.cos(angle) * speed;
+      this.vy = Math.sin(angle) * speed - 1.5;
+      this.gravity = 0.12;
+      this.size = Math.random() * 4.5 + 2.5;
+      this.color = particleColors[Math.floor(Math.random() * particleColors.length)];
+      this.alpha = 1;
+      this.decay = Math.random() * 0.025 + 0.015;
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotSpeed = (Math.random() - 0.5) * 0.18;
+      this.type = Math.random() > 0.4 ? 'petal' : 'sparkle';
+    }
+
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.vy += this.gravity;
+      this.vx *= 0.96;
+      this.rotation += this.rotSpeed;
+      this.alpha -= this.decay;
+    }
+
+    draw(ctx) {
+      if (this.alpha <= 0) return;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, this.alpha);
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+      ctx.fillStyle = this.color;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 6;
+
+      if (this.type === 'petal') {
+        // Draw soft botanical petal
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.size * 1.5, this.size * 0.75, 0, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        // Draw 4-point sparkle star
+        ctx.beginPath();
+        const s = this.size * 1.2;
+        ctx.moveTo(0, -s);
+        ctx.quadraticCurveTo(0, 0, s, 0);
+        ctx.quadraticCurveTo(0, 0, 0, s);
+        ctx.quadraticCurveTo(0, 0, -s, 0);
+        ctx.quadraticCurveTo(0, 0, 0, -s);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  function spawnBurst(x, y, count = 22) {
+    for (let i = 0; i < count; i++) {
+      particles.push(new PollenParticle(x, y));
+    }
+    playCrystalChime();
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = particles.length - 1; i >= 0; i--) {
+      particles[i].update();
+      particles[i].draw(ctx);
+      if (particles[i].alpha <= 0) {
+        particles.splice(i, 1);
+      }
+    }
+    requestAnimationFrame(animateParticles);
+  }
+  animateParticles();
+
+  // Micro-interaction for calendar days & tactile items
+  document.querySelectorAll('.cal-day, .cal-interactive').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX || (rect.left + rect.width / 2);
+      const y = e.clientY || (rect.top + rect.height / 2);
+      spawnBurst(x, y, 18);
+
+      if (btn.classList.contains('cal-day')) {
+        document.querySelectorAll('.cal-day').forEach(b => b.classList.remove('ring-4', 'ring-primary-container/30', 'ring-emerald-400/30'));
+        btn.classList.add('ring-4', 'ring-primary-container/30');
+      }
+    });
+  });
+
+  const todayBtn = document.getElementById('today-btn');
+  if (todayBtn) {
+    todayBtn.addEventListener('click', (e) => {
+      const peakDay = document.querySelector('.cal-day.scale-110');
+      if (peakDay) {
+        peakDay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const rect = peakDay.getBoundingClientRect();
+        spawnBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 32);
+        peakDay.classList.add('ring-4', 'ring-amber-300');
+        setTimeout(() => peakDay.classList.remove('ring-4', 'ring-amber-300'), 1500);
+      }
+    });
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe pointer-events-none" data-active-classes="bg-gradient-to-tr from-primary to-primary-container text-on-primary shadow-[0_8px_20px_rgba(216,27,96,0.38)] scale-105"><div class="mx-4 mb-4 pointer-events-auto"><div class="h-20 px-3 bg-surface-container-lowest/95 backdrop-blur-2xl rounded-full shadow-[0_16px_36px_rgba(128,80,98,0.18),inset_0_1.5px_2px_rgba(255,255,255,0.95)] flex items-center justify-around border border-pink-100/60"><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[52px] rounded-full px-3 py-1.5 text-on-surface-variant transition-all duration-300 hover:text-primary group" data-path="bugun" href="#"><span class="material-symbols-outlined text-[24px] mb-0.5 group-hover:scale-110 transition-transform">favorite</span><span class="font-label-sm text-label-sm tracking-normal">Bugün</span></a><!-- Aktif 3D Yükseltilmiş Döngü / Takvim Sekmesi --><a class="flex flex-col items-center justify-center min-w-[62px] min-h-[56px] rounded-full px-3.5 py-1.5 bg-gradient-to-tr from-primary via-primary-container to-rose-500 text-on-primary shadow-[0_10px_24px_rgba(216,27,96,0.48),inset_0_1.5px_2px_rgba(255,255,255,0.7)] scale-105 transition-all duration-300 group border border-white/40" data-path="dongu" href="#"><span class="material-symbols-outlined text-[24px] mb-0.5 group-hover:rotate-12 transition-transform" style="font-variation-settings: 'FILL' 1;">calendar_month</span><span class="font-label-sm text-label-sm tracking-normal font-bold">Döngü</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[52px] rounded-full px-3 py-1.5 text-on-surface-variant transition-all duration-300 hover:text-primary group" data-path="raporlar" href="#"><span class="material-symbols-outlined text-[24px] mb-0.5 group-hover:scale-110 transition-transform">bar_chart_4_bars</span><span class="font-label-sm text-label-sm tracking-normal">Raporlar</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[52px] rounded-full px-3 py-1.5 text-on-surface-variant transition-all duration-300 hover:text-primary group" data-path="profil" href="#"><span class="material-symbols-outlined text-[24px] mb-0.5 group-hover:scale-110 transition-transform">person</span><span class="font-label-sm text-label-sm tracking-normal">Profil</span></a></div></div></nav></body></html>

@@ -1,0 +1,6 @@
+{
+  "name": "Flora Cycle - Regl & Döngü Takipçisi",
+  "description": "Kadın biyolojisine özel biyo-ritmik döngü, doğurganlık takvimi, akıllı su bildirimleri ve hormonal sağlık rehberi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

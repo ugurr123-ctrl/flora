@@ -1,0 +1,1235 @@
+<!DOCTYPE html><html class="h-full" lang="tr"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+<meta content="mobile_tab" name="shell-type">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#b0004a",
+            "primary-container": "#d81b60",
+            "primary-fixed": "#ffd9de",
+            "secondary": "#805062",
+            "secondary-container": "#fec1d6",
+            "secondary-fixed": "#ffd9e4",
+            "surface": "#fff8f8",
+            "surface-dim": "#e2d7d9",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#fcf1f3",
+            "surface-container": "#f6ebed",
+            "surface-container-high": "#f0e6e8",
+            "on-surface": "#1f1a1c",
+            "on-surface-variant": "#5a4044",
+            "on-primary": "#ffffff"
+          },
+          fontFamily: {
+            body: ["Plus Jakarta Sans", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+      overflow-x: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      background-color: #fff8f8;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    ::-webkit-scrollbar { display: none; }
+    .topographic-pattern {
+      background-image: radial-gradient(#e3bdc3 0.6px, transparent 0.6px), radial-gradient(#ffd9de 0.6px, #fff8f8 0.6px);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+      opacity: 0.35;
+    }
+
+    /* Long-Press Rumble & Progress Animations */
+    @keyframes cardRumbleVibration {
+      0% { transform: scale(0.97) translate(0, 0); }
+      20% { transform: scale(0.968) translate(-1px, 1px); }
+      40% { transform: scale(0.97) translate(1px, -1px); }
+      60% { transform: scale(0.966) translate(-1px, -0.5px); }
+      80% { transform: scale(0.969) translate(1px, 1px); }
+      100% { transform: scale(0.97) translate(0, 0); }
+    }
+    .card-pressing {
+      animation: cardRumbleVibration 0.12s linear infinite !important;
+      box-shadow: 0 4px 12px rgba(216, 27, 96, 0.25), inset 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+    }
+    @keyframes resetDispersePoof {
+      0% { transform: scale(0.95); filter: drop-shadow(0 0 0 rgba(78, 168, 245, 0)); }
+      40% { transform: scale(1.05); filter: drop-shadow(0 0 16px rgba(78, 168, 245, 0.8)) brightness(1.2); }
+      100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(78, 168, 245, 0)); }
+    }
+    .reset-poof {
+      animation: resetDispersePoof 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+    @keyframes dropletBurst {
+      0% { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
+      100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.4); opacity: 0; }
+    }
+    .droplet-particle {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, #60a5fa, #d81b60);
+      pointer-events: none;
+      animation: dropletBurst 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      z-index: 30;
+    }
+
+    /* Meditative Breathing */
+    @keyframes ringBreathe {
+      0% { transform: scale(1); box-shadow: 0 12px 28px rgba(216, 27, 96, 0.13); }
+      50% { transform: scale(1.03); box-shadow: 0 18px 38px rgba(216, 27, 96, 0.24); }
+      100% { transform: scale(1); box-shadow: 0 12px 28px rgba(216, 27, 96, 0.13); }
+    }
+    .animate-ring-breathe {
+      animation: ringBreathe 4.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    }
+
+    /* Tactile Spring Pop */
+    @keyframes springBounce {
+      0% { transform: scale(1); }
+      35% { transform: scale(0.86); }
+      65% { transform: scale(1.12); }
+      85% { transform: scale(0.96); }
+      100% { transform: scale(1); }
+    }
+    .spring-pop {
+      animation: springBounce 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    /* Screen Transitions */
+    .tab-screen {
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+    .screen-active {
+      display: flex !important;
+      opacity: 1 !important;
+      transform: translateX(0) scale(1) !important;
+      pointer-events: auto !important;
+    }
+    .screen-hidden {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    /* 3D Tactile Switch Styles */
+    .toggle-track-active {
+      background: linear-gradient(135deg, #b0004a, #d81b60) !important;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(216, 27, 96, 0.35) !important;
+    }
+    .toggle-track-inactive {
+      background: #e2d7d9 !important;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12) !important;
+    }
+    .toggle-thumb-active {
+      transform: translateX(1.35rem) !important;
+      box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(255, 255, 255, 0.8) inset !important;
+    }
+    .toggle-thumb-inactive {
+      transform: translateX(0) !important;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.18), 0 1px 2px rgba(255, 255, 255, 0.8) inset !important;
+    }
+
+    /* 3D Organic Liquid Slider Styles */
+    .liquid-track-glow {
+      box-shadow: inset 0 2px 5px rgba(176, 0, 74, 0.25), inset 0 -2px 4px rgba(255, 255, 255, 0.6), 0 3px 10px rgba(216, 27, 96, 0.18);
+    }
+    @keyframes liquidBubbleDrift {
+      0% { transform: translateY(0) scale(0.85); opacity: 0.4; }
+      50% { transform: translateY(-3px) scale(1.1); opacity: 0.85; }
+      100% { transform: translateY(0) scale(0.85); opacity: 0.4; }
+    }
+    .liquid-bubble {
+      animation: liquidBubbleDrift 2.4s ease-in-out infinite;
+    }
+    .liquid-bubble-delayed {
+      animation: liquidBubbleDrift 3.1s ease-in-out infinite 0.7s;
+    }
+    .liquid-thumb-3d {
+      box-shadow: 0 4px 12px rgba(176, 0, 74, 0.35), 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.85), inset 0 -2px 5px rgba(176, 0, 74, 0.5);
+    }
+    .liquid-thumb-dragging {
+      transform: translate(-50%, -50%) scale(1.18) !important;
+      box-shadow: 0 8px 22px rgba(216, 27, 96, 0.48), 0 2px 6px rgba(0, 0, 0, 0.15), inset 0 2px 5px rgba(255, 255, 255, 0.95), inset 0 -3px 6px rgba(176, 0, 74, 0.6) !important;
+    }
+  </style>
+<script id="symptom-popover-controller" class="">const symptomBackdrop = document.getElementById('symptom-card-backdrop'); const symptomContainer = document.getElementById('symptom-card-container'); const closeSymptomX = document.getElementById('close-symptom-card-x'); const closeSymptomBtn = document.getElementById('btn-close-symptom-sheet'); const editSymptomsBtn = document.getElementById('btn-edit-symptoms-action'); const symptomModalTitle = document.getElementById('symptom-modal-title'); const symptomModalSubtitle = document.getElementById('symptom-modal-subtitle'); function openSymptomCard(dayText = '14. Gün • Cuma 14 Mayıs', phaseText = 'Yumurtlama (Ovülasyon) Fazı') { if (symptomModalTitle) symptomModalTitle.textContent = dayText; if (symptomModalSubtitle) symptomModalSubtitle.textContent = phaseText; if (symptomBackdrop && symptomContainer) { symptomBackdrop.classList.remove('opacity-0', 'pointer-events-none'); symptomBackdrop.classList.add('opacity-100', 'pointer-events-auto'); symptomContainer.classList.remove('translate-y-full', 'sm:scale-90'); symptomContainer.classList.add('translate-y-0', 'sm:scale-100'); } if (typeof playDropletSound === 'function') playDropletSound(); if (typeof triggerHaptic === 'function') triggerHaptic([20, 30]); } function closeSymptomCard() { if (symptomBackdrop && symptomContainer) { symptomContainer.classList.remove('translate-y-0', 'sm:scale-100'); symptomContainer.classList.add('translate-y-full', 'sm:scale-90'); symptomBackdrop.classList.remove('opacity-100', 'pointer-events-auto'); symptomBackdrop.classList.add('opacity-0', 'pointer-events-none'); } } closeSymptomX?.addEventListener('click', closeSymptomCard); closeSymptomBtn?.addEventListener('click', closeSymptomCard); symptomBackdrop?.addEventListener('click', (e) => { if (e.target === symptomBackdrop) closeSymptomCard(); }); editSymptomsBtn?.addEventListener('click', () => { closeSymptomCard(); showToast('🌸 Belirti düzenleme ekranı açılıyor...', 'edit_note'); }); document.getElementById('cycle-ring')?.addEventListener('click', () => { openSymptomCard('14. Gün • 14 Mayıs', 'Ovülasyon Zirvesi & Yüksek Doğurganlık'); }); document.querySelectorAll('.day-chip').forEach(chip => { chip.addEventListener('click', () => { const text = chip.querySelector('span:nth-child(2)')?.textContent || '14'; openSymptomCard(text + ' Mayıs • Döngü Günü', 'Döngü Fazı & Semptom Öngörüsü'); }); }); document.querySelectorAll('.cycle-day-cell').forEach(cell => { cell.addEventListener('click', () => { const day = cell.getAttribute('data-day') || '14'; const phase = cell.getAttribute('data-phase') || 'Döngü Günü'; openSymptomCard(day + ' Mayıs • Döngü Takvimi', phase + ' Fazı ve Semptomları'); }); }); document.getElementById('calendar-banner-symptom-trigger')?.addEventListener('click', () => { openSymptomCard('14 Mayıs Ovülasyon Zirvesi', 'Hormon & Biyometri Zirvesi'); });</script></head>
+<body class="bg-surface text-on-surface min-h-full flex flex-col relative selection:bg-secondary-container">
+<style id="vibrant-ring-animations">@keyframes orbitClockwise { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } } @keyframes orbitCounterClockwise { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } } .animate-orbit-ring-cw { animation: orbitClockwise 16s linear infinite !important; } .animate-orbit-ring-ccw { animation: orbitCounterClockwise 20s linear infinite !important; } @keyframes multiColorGlowPulse { 0%, 100% { transform: scale(0.9) rotate(0deg); filter: drop-shadow(0 0 6px currentColor) brightness(1.2); opacity: 0.85; } 50% { transform: scale(1.35) rotate(18deg); filter: drop-shadow(0 0 16px currentColor) drop-shadow(0 0 24px currentColor) brightness(1.7); opacity: 1; } } .vibrant-particle { animation: multiColorGlowPulse 2.2s ease-in-out infinite; display: inline-block; } .vibrant-particle-fast { animation: multiColorGlowPulse 1.5s ease-in-out infinite; display: inline-block; } .vibrant-particle-slow { animation: multiColorGlowPulse 3.2s ease-in-out infinite; display: inline-block; }</style><div class="fixed inset-0 pointer-events-none topographic-pattern z-0"></div>
+<!-- Toast Notification -->
+<div class="fixed top-5 left-1/2 -translate-x-1/2 z-[100] flex flex-col items-center gap-2 pointer-events-none w-[90%] max-w-sm" id="toast-container"></div>
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl border-b border-primary-fixed/30">
+<div class="h-16 px-5 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[22px]">spa</span>
+</div>
+<h1 class="font-bold text-lg text-on-surface" id="header-page-title">Bugün</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-transform" id="btn-notifications">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xs shadow-sm cursor-pointer" id="btn-profile">
+          Z
+        </div>
+</div>
+</div>
+</header>
+<!-- Main Views Container -->
+<main class="flex-1 flex flex-col relative w-full pt-20 pb-28 px-4 max-w-md mx-auto z-10" id="main-content">
+<!-- TAB 1: BUGÜN -->
+<div class="tab-screen screen-active flex flex-col gap-5 w-full" id="screen-bugun">
+<!-- Greeting & Phase Badges -->
+<section class="flex flex-col gap-2 pt-1">
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xs font-semibold text-secondary uppercase tracking-wider">Bugün • 14 Mayıs</span>
+<h2 class="text-2xl font-extrabold text-on-surface tracking-tight">Merhaba Zeynep ✨</h2>
+</div>
+<button class="w-11 h-11 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center text-primary active:scale-90 transition-transform" id="fav-btn">
+<span class="material-symbols-outlined text-[22px]">favorite</span>
+</button>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="px-3 py-1 rounded-full bg-surface-container-lowest text-primary text-xs font-bold shadow-sm flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+            Yumurtlama Dönemi
+          </span>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-surface text-xs font-bold shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-primary">bolt</span>
+            Yüksek Doğurganlık
+          </span>
+</div>
+</section><div class="p-3.5 rounded-3xl bg-gradient-to-r from-surface-container-lowest via-surface-container-low to-primary-fixed/30 border border-primary-fixed/40 shadow-[0_8px_20px_rgba(216,27,96,0.08)] flex flex-col gap-2.5 transition-all relative overflow-hidden" id="daily-recap-banner"><div class="absolute -top-1 -right-1 pointer-events-none flex items-center gap-0.5 opacity-80 z-0"><span class="material-symbols-outlined text-[16px] botanical-glow-petal animate-botanic-sway">potted_plant</span><span class="material-symbols-outlined text-[13px] botanical-glow-petal animate-botanic-sway-delayed -ml-1">eco</span></div><div class="absolute -bottom-1.5 left-2 pointer-events-none flex items-center gap-1 opacity-70 z-0"><span class="material-symbols-outlined text-[14px] botanical-glow-petal animate-botanic-sway-delayed">spa</span><span class="material-symbols-outlined text-[10px] botanical-sparkle">auto_awesome</span></div><div class="flex items-center justify-between"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-gradient-to-tr from-primary to-primary-container text-white flex items-center justify-center shadow-xs"><span class="material-symbols-outlined text-[16px]">nightlight</span></div><div><div class="flex items-center gap-1.5"><h4 class="text-xs font-bold text-on-surface">🌙 Gün Sonu Özeti Hazır</h4><span class="text-[9px] font-extrabold px-1.5 py-0.2 rounded-full bg-primary-fixed text-primary">Bugün</span></div><span class="text-[10px] text-secondary font-medium">14. Gün Ovülasyon Tamamlanıyor</span></div></div><button class="text-[10.5px] font-bold text-primary hover:underline flex items-center gap-0.5 cursor-pointer" id="btn-quick-recap-details">Detay <span class="material-symbols-outlined text-[12px]">chevron_right</span></button></div><div class="grid grid-cols-3 gap-1.5 text-center"><div class="p-2 rounded-xl bg-surface-container-lowest border border-primary-fixed/20 shadow-xs"><span class="text-[9.5px] text-secondary block">Ruh Hali</span><span class="text-[11px] font-bold text-on-surface" id="recap-mood-val">🥰 Canlı</span></div><div class="p-2 rounded-xl bg-surface-container-lowest border border-primary-fixed/20 shadow-xs"><span class="text-[9.5px] text-secondary block">Enerji</span><span class="text-[11px] font-bold text-primary" id="recap-energy-val">%85 Zirve</span></div><div class="p-2 rounded-xl bg-surface-container-lowest border border-primary-fixed/20 shadow-xs"><span class="text-[9.5px] text-secondary block">Tüketilen Su</span><span class="text-[11px] font-bold text-on-surface" id="recap-water-val">1.80 L / 2.5 L</span></div></div><div class="flex items-center gap-2 pt-0.5"><button class="flex-1 py-2 px-3 rounded-full bg-gradient-to-r from-primary to-primary-container text-white text-xs font-bold shadow-xs active:scale-95 transition-transform flex items-center justify-center gap-1.5 cursor-pointer" id="btn-complete-day-action"><span class="material-symbols-outlined text-[15px]">task_alt</span><span class="">Günü Kapat &amp; Kaydet</span></button><button class="px-3 py-2 rounded-full bg-surface-container text-secondary text-xs font-semibold active:scale-95 transition-transform cursor-pointer" id="btn-dismiss-recap">Gizle</button></div></div>
+<!-- Hero 14th Day Card with Breathing Animation -->
+<section class="relative w-full rounded-3xl bg-surface-container-lowest p-6 shadow-[0_16px_36px_rgba(216,27,96,0.1)] flex flex-col items-center text-center overflow-hidden">
+<div class="inline-flex items-center gap-1 px-3.5 py-1 rounded-full bg-primary-fixed text-primary text-xs font-bold mb-3">
+<span class="material-symbols-outlined text-[15px]">auto_awesome</span>
+<span class="">Yumurtlama Günü</span>
+</div>
+<!-- Meditative Breathing Cycle Ring -->
+<div class="relative w-48 h-48 flex items-center justify-center my-1 cursor-pointer active:scale-95 transition-transform select-none group" id="cycle-ring"><div class="absolute -inset-3 rounded-full bg-gradient-to-tr from-rose-500/25 via-fuchsia-400/25 to-amber-300/20 blur-2xl animate-ring-breathe pointer-events-none opacity-90"></div><div class="absolute -inset-1 rounded-full border border-primary-fixed/60 pointer-events-none opacity-80"></div><div class="absolute inset-0 pointer-events-none z-20 overflow-visible animate-orbit-ring-cw" id="ambient-ring-sparkles"><span class="material-symbols-outlined text-[17px] vibrant-particle-fast absolute -top-3 left-6 text-amber-300" style="filter: drop-shadow(0 0 14px #facc15) brightness(1.8);">local_florist</span><span class="material-symbols-outlined text-[16px] vibrant-particle absolute top-3 right-0 text-emerald-400" style="filter: drop-shadow(0 0 14px #10b981) brightness(1.7); animation-delay: 0.3s;">filter_vintage</span><span class="material-symbols-outlined text-[15px] vibrant-particle-slow absolute top-12 -right-3 text-pink-500" style="filter: drop-shadow(0 0 14px #ec4899) brightness(1.7); animation-delay: 0.7s;">eco</span><span class="material-symbols-outlined text-[17px] vibrant-particle absolute bottom-3 right-1 text-cyan-300" style="filter: drop-shadow(0 0 14px #22d3ee) brightness(1.8); animation-delay: 1.1s;">spa</span><span class="material-symbols-outlined text-[16px] vibrant-particle-fast absolute -bottom-3 right-10 text-purple-400" style="filter: drop-shadow(0 0 14px #c084fc) brightness(1.7); animation-delay: 1.4s;">local_florist</span><span class="material-symbols-outlined text-[16px] vibrant-particle absolute -bottom-3 left-9 text-rose-400" style="filter: drop-shadow(0 0 14px #fb7185) brightness(1.7); animation-delay: 1.9s;">yard</span><span class="material-symbols-outlined text-[15px] vibrant-particle-slow absolute bottom-5 -left-2 text-amber-300" style="filter: drop-shadow(0 0 14px #facc15) brightness(1.8); animation-delay: 2.2s;">spa</span><span class="material-symbols-outlined text-[16px] vibrant-particle absolute top-5 left-0 text-emerald-400" style="filter: drop-shadow(0 0 14px #10b981) brightness(1.7); animation-delay: 2.6s;">nature</span><span class="material-symbols-outlined text-[13px] vibrant-particle-fast absolute top-0 right-9 text-amber-300" style="filter: drop-shadow(0 0 14px #facc15) brightness(1.9); animation-delay: 0.5s;">auto_awesome</span><span class="material-symbols-outlined text-[13px] vibrant-particle absolute bottom-8 right-5 text-cyan-300" style="filter: drop-shadow(0 0 14px #22d3ee) brightness(1.8); animation-delay: 1.3s;">auto_awesome</span><span class="material-symbols-outlined text-[14px] vibrant-particle-fast absolute top-14 -left-1 text-pink-500" style="filter: drop-shadow(0 0 14px #ec4899) brightness(1.8); animation-delay: 2.1s;">auto_awesome</span></div><div class="absolute inset-0 pointer-events-none z-20 overflow-visible animate-orbit-ring-ccw"><span class="material-symbols-outlined text-[14px] vibrant-particle-slow absolute -top-2 left-1/2 -translate-x-1/2 text-cyan-300" style="filter: drop-shadow(0 0 14px #22d3ee) brightness(1.8); animation-delay: 0.2s;">auto_awesome</span><span class="material-symbols-outlined text-[16px] vibrant-particle absolute top-7 right-3 text-purple-400" style="filter: drop-shadow(0 0 14px #c084fc) brightness(1.7); animation-delay: 0.8s;">local_florist</span><span class="material-symbols-outlined text-[15px] vibrant-particle-fast absolute top-1/2 -right-3 -translate-y-1/2 text-emerald-400" style="filter: drop-shadow(0 0 14px #10b981) brightness(1.7); animation-delay: 1.2s;">eco</span><span class="material-symbols-outlined text-[16px] vibrant-particle absolute bottom-2 right-7 text-rose-400" style="filter: drop-shadow(0 0 14px #fb7185) brightness(1.7); animation-delay: 1.7s;">filter_vintage</span><span class="material-symbols-outlined text-[14px] vibrant-particle-slow absolute -bottom-2 left-1/2 -translate-x-1/2 text-amber-300" style="filter: drop-shadow(0 0 14px #facc15) brightness(1.9); animation-delay: 2.3s;">auto_awesome</span><span class="material-symbols-outlined text-[16px] vibrant-particle-fast absolute bottom-3 left-5 text-pink-500" style="filter: drop-shadow(0 0 14px #ec4899) brightness(1.7); animation-delay: 2.7s;">spa</span><span class="material-symbols-outlined text-[15px] vibrant-particle absolute top-1/2 -left-3 -translate-y-1/2 text-cyan-300" style="filter: drop-shadow(0 0 14px #22d3ee) brightness(1.8); animation-delay: 3.1s;">eco</span><span class="material-symbols-outlined text-[16px] vibrant-particle-slow absolute top-3 left-6 text-purple-400" style="filter: drop-shadow(0 0 14px #c084fc) brightness(1.7); animation-delay: 3.5s;">filter_vintage</span></div><div class="relative w-44 h-44 rounded-full bg-gradient-to-br from-surface-container-low via-surface-container-lowest to-surface-container flex items-center justify-center p-3 shadow-[0_12px_32px_rgba(216,27,96,0.18),inset_0_2px_4px_rgba(255,255,255,0.9)]"><svg class="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 120 120"><circle cx="60" cy="60" fill="none" opacity="0.55" r="50" stroke="#ffd9de" stroke-linecap="round" stroke-width="7"></circle><circle class="drop-shadow-[0_2px_8px_rgba(216,27,96,0.45)]" cx="60" cy="60" fill="none" r="50" stroke="url(#progressGlowGradient)" stroke-dasharray="314" stroke-dashoffset="157" stroke-linecap="round" stroke-width="8"></circle><defs><linearGradient id="progressGlowGradient" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#ec4899"></stop><stop offset="50%" stop-color="#d81b60"></stop><stop offset="100%" stop-color="#b0004a"></stop></linearGradient></defs><circle cx="60" cy="10" fill="#ffffff" r="4.5" stroke="#b0004a" stroke-width="2.5" style="filter: drop-shadow(0 0 6px #d81b60);"></circle></svg><div class="w-32 h-32 rounded-full bg-gradient-to-b from-surface-container-lowest via-white to-surface-container-low flex flex-col items-center justify-center shadow-[inset_0_3px_8px_rgba(176,0,74,0.06),0_4px_14px_rgba(128,80,98,0.08)] border border-white relative overflow-hidden select-none"><div class="absolute top-1.5 right-6 w-3 h-3 rounded-full bg-primary-fixed flex items-center justify-center shadow-xs"><span class="material-symbols-outlined text-[10px] text-primary">auto_awesome</span></div><span class="text-[10px] font-bold text-secondary uppercase tracking-widest flex items-center gap-1 mb-0.5"><span class="material-symbols-outlined text-[11px] text-primary">spa</span>DÖNGÜNÜN</span><div class="flex items-baseline justify-center gap-0.5 leading-none my-0.5"><span class="text-4xl font-black text-primary tracking-tight">14</span><span class="text-lg font-black text-primary-container">.</span></div><span class="text-[11px] font-bold text-on-surface leading-tight">Gün</span><div class="mt-1 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-primary-fixed/60 to-secondary-container/40 text-primary border border-primary-fixed/50 shadow-xs flex items-center gap-1"><span class="material-symbols-outlined text-[10.5px]">local_florist</span><span class="text-[9.5px] font-extrabold tracking-tight">Zirve Doğurganlık</span></div></div></div></div>
+<!-- Metrics Strip -->
+<div class="grid grid-cols-2 gap-2.5 w-full mt-4">
+<div class="p-3 rounded-2xl bg-surface-container-low flex flex-col items-center">
+<span class="text-[11px] font-medium text-secondary">Gelecek Adet</span>
+<span class="text-base font-extrabold text-on-surface mt-0.5">14 Gün</span>
+</div>
+<div class="p-3 rounded-2xl bg-secondary-fixed/60 flex flex-col items-center">
+<span class="text-[11px] font-medium text-on-surface-variant">Gebe Kalma İhtimali</span>
+<span class="text-base font-extrabold text-primary mt-0.5">%85 Çok Yüksek</span>
+</div>
+</div>
+<button class="w-full mt-4 py-3.5 px-4 rounded-full bg-gradient-to-r from-primary to-primary-container text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-[0_8px_20px_rgba(216,27,96,0.3)] active:scale-98 transition-transform" id="open-record-sheet">
+<span class="material-symbols-outlined text-[18px]">local_florist</span>
+<span class="">🌸 Belirti &amp; Adet Kaydet +</span>
+</button>
+</section>
+<!-- 5-Day Mini Calendar Strip -->
+<section class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-bold text-sm text-on-surface"><span class="inline-flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px] botanical-glow-petal animate-botanic-sway">nature</span><span class="">Mayıs 2025</span><span class="material-symbols-outlined text-[13px] botanical-glow-petal animate-botanic-sway-delayed">eco</span></span></span>
+<button class="text-xs font-semibold text-primary flex items-center gap-0.5" id="go-to-calendar-tab">
+<span class="">Tüm Takvim</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-5 gap-2" id="days-strip"><button class="day-chip py-2.5 px-1 rounded-2xl bg-surface-container-lowest flex flex-col items-center shadow-sm active:scale-90 transition-transform relative group border border-surface-container/60 hover:border-primary-fixed/40"><div class="flex items-center gap-0.5 text-[10px] text-secondary font-medium"><span class="material-symbols-outlined text-[10px] text-secondary/60 group-hover:text-primary transition-colors">potted_plant</span><span class="">Çar</span></div><span class="font-bold text-sm mt-0.5 text-on-surface">12</span><div class="flex items-center gap-0.5 mt-1"><span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span><span class="material-symbols-outlined text-[9px] text-secondary/60">spa</span></div></button><button class="day-chip py-2.5 px-1 rounded-2xl bg-surface-container-lowest flex flex-col items-center shadow-sm active:scale-90 transition-transform relative group border border-surface-container/60 hover:border-primary-fixed/40"><div class="flex items-center gap-0.5 text-[10px] text-secondary font-medium"><span class="material-symbols-outlined text-[10px] text-primary-fixed-variant group-hover:text-primary transition-colors">eco</span><span class="">Per</span></div><span class="font-bold text-sm mt-0.5 text-on-surface">13</span><div class="flex items-center gap-0.5 mt-1"><span class="w-1.5 h-1.5 rounded-full bg-primary-fixed"></span><span class="material-symbols-outlined text-[9.5px] text-primary">local_florist</span></div></button><button class="day-chip py-2 px-1 rounded-2xl bg-gradient-to-b from-primary via-primary-container to-primary text-white flex flex-col items-center shadow-[0_8px_18px_rgba(216,27,96,0.38),inset_0_1px_1px_rgba(255,255,255,0.6)] -translate-y-1 active:scale-90 transition-transform relative group border border-white/40"><div class="absolute -top-2 left-1/2 -translate-x-1/2 flex items-center gap-0.5 px-1.5 py-0.2 rounded-full bg-gradient-to-r from-amber-200 via-primary-fixed to-rose-200 text-primary border border-white shadow-xs z-10 botanical-sparkle"><span class="material-symbols-outlined text-[9px] text-primary">filter_vintage</span><span class="text-[7.5px] font-black tracking-tight uppercase text-primary">Pik</span></div><div class="flex items-center gap-0.5 text-[10px] font-semibold text-white/95 mt-1"><span class="material-symbols-outlined text-[11px] text-primary-fixed botanical-glow-petal animate-botanic-sway">spa</span><span class="">Cuma</span></div><span class="font-black text-[15px] mt-0.5 tracking-tight text-white">14</span><div class="flex items-center gap-0.5 mt-0.5 px-1.5 py-0.2 rounded-full bg-white/20 backdrop-blur-xs"><span class="w-1.5 h-1.5 rounded-full bg-white shadow-xs animate-ping"></span><span class="text-[8.5px] font-extrabold text-primary-fixed uppercase tracking-tighter">Zirve Tomurcuk</span></div></button><button class="day-chip py-2.5 px-1 rounded-2xl bg-surface-container-lowest flex flex-col items-center shadow-sm active:scale-90 transition-transform relative group border border-surface-container/60 hover:border-primary-fixed/40"><div class="flex items-center gap-0.5 text-[10px] text-secondary font-medium"><span class="material-symbols-outlined text-[10px] text-secondary/60 group-hover:text-primary transition-colors">yard</span><span class="">Cmt</span></div><span class="font-bold text-sm mt-0.5 text-on-surface">15</span><div class="flex items-center gap-0.5 mt-1"><span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed"></span><span class="material-symbols-outlined text-[9px] text-secondary/70">nature</span></div></button><button class="day-chip py-2.5 px-1 rounded-2xl bg-surface-container-lowest flex flex-col items-center shadow-sm active:scale-90 transition-transform relative group border border-surface-container/60 hover:border-primary-fixed/40"><div class="flex items-center gap-0.5 text-[10px] text-secondary font-medium"><span class="material-symbols-outlined text-[10px] text-secondary/60 group-hover:text-primary transition-colors">psychology_alt</span><span class="">Paz</span></div><span class="font-bold text-sm mt-0.5 text-on-surface">16</span><div class="flex items-center gap-0.5 mt-1"><span class="w-1.5 h-1.5 rounded-full bg-surface-container-high"></span><span class="material-symbols-outlined text-[9px] text-secondary/50">nest_cam_iq_outdoor</span></div></button></div>
+</section>
+<!-- Biometrics & Habits Bento Grid (Includes Tactile Long-Press to Reset Water Card & 3D Auto-Reset Badge) -->
+<section class="flex flex-col gap-2.5">
+<h3 class="font-bold text-sm text-on-surface">Biyometri &amp; Alışkanlıklar</h3>
+<div class="grid grid-cols-2 gap-3">
+<!-- Tile 1: BBT -->
+<div class="p-4 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">device_thermostat</span>
+</div>
+<span class="text-xs font-bold text-primary">+0.3°C</span>
+</div>
+<div class="mt-2.5">
+<span class="text-[11px] text-secondary">Bazal Isı (BBT)</span>
+<div class="text-lg font-black text-on-surface">36.8°C</div>
+</div>
+<span class="text-[10px] text-on-surface-variant mt-1">Yumurtlama termal sıçraması</span>
+</div>
+<!-- Tile 2: Uyku -->
+<div class="p-4 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">bedtime</span>
+</div>
+<span class="text-xs font-bold text-secondary">%94 Kalite</span>
+</div>
+<div class="mt-2.5">
+<span class="text-[11px] text-secondary">Uyku Süresi</span>
+<div class="text-lg font-black text-on-surface">7s 40dk</div>
+</div>
+<span class="text-[10px] text-on-surface-variant mt-1">1s 25dk Derin Uyku</span>
+</div><div class="p-4 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col justify-between col-span-2 cursor-pointer active:scale-98 transition-all border border-transparent hover:border-primary-fixed/40 group energy-aura-glow" id="energy-vitality-card"><div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-emerald-100/30 via-primary-fixed/20 to-teal-100/30 blur-md pointer-events-none opacity-80 z-0"></div><div class="flex items-center justify-between"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-gradient-to-tr from-secondary-container to-primary-fixed flex items-center justify-center text-primary shadow-xs"><span class="material-symbols-outlined text-[19px]">bolt</span></div><div><div class="flex items-center gap-1.5"><span class="text-[11px] font-semibold text-secondary">Enerji &amp; Vitalite</span><span class="text-[9.5px] font-extrabold px-1.5 py-0.2 rounded-full bg-primary-fixed/50 text-primary">LH Uyumu</span></div><div class="text-base font-black text-on-surface flex items-baseline gap-1 mt-0.5"><span id="card-energy-val" class="">%85</span><span class="text-xs font-bold text-primary tracking-tight" id="card-energy-status">• Zirve Enerji</span></div></div></div><div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-low border border-primary-fixed/30 text-xs font-bold shadow-xs" id="card-mood-pill"><span class="text-[15px]" id="card-mood-emoji">🥰</span><span class="text-[10.5px] text-primary font-bold" id="card-mood-label">Canlı &amp; Pozitif</span></div></div><div class="mt-3"><div class="w-full bg-surface-container rounded-full h-2 overflow-hidden relative"><div class="h-full rounded-full bg-gradient-to-r from-secondary-container via-primary-container to-primary transition-all duration-300" id="card-energy-bar" style="width: 85%;"></div></div><div class="flex items-center justify-between text-[9.5px] text-secondary font-medium mt-1"><span class="">Ovülasyon fazında östrojen artışı ile yüksek canlılık</span><span class="text-primary font-semibold flex items-center gap-0.5">Düzenle <span class="material-symbols-outlined text-[11px]">tune</span></span></div></div></div><div class="col-span-2 p-4 rounded-3xl bg-surface-container-lowest shadow-sm border border-primary-fixed/30 flex flex-col gap-3 transition-all duration-300 relative overflow-hidden group" id="energy-recommendation-card"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-primary-fixed/60 flex items-center justify-center text-primary shadow-xs"><span class="material-symbols-outlined text-[18px]" id="recom-icon">fitness_center</span></div><div><div class="flex items-center gap-1.5"><h4 class="text-xs font-bold text-on-surface">Enerjiye Göre Günlük Öneri</h4><span class="text-[9px] font-extrabold px-1.5 py-0.2 rounded-full bg-gradient-to-r from-primary-fixed to-secondary-container text-primary" id="recom-badge">Zirve Fazı</span></div><p class="text-[10px] text-secondary">LH &amp; Hormon Ritminize Uyumlu</p></div></div><span class="text-[10px] font-bold text-primary bg-surface-container-low px-2 py-0.5 rounded-full border border-primary-fixed/30" id="recom-phase-tag">Ovülasyon Zirvesi</span></div><div class="grid grid-cols-2 gap-2 pt-0.5"><div class="p-2.5 rounded-2xl bg-surface-container-low/70 border border-primary-fixed/20 flex flex-col gap-1 transition-all"><div class="flex items-center gap-1.5 text-primary text-xs font-bold"><span class="material-symbols-outlined text-[15px]">directions_run</span><span class="text-[11px] font-bold text-on-surface">Egzersiz &amp; Hareket</span></div><p class="text-[10.5px] text-on-surface-variant font-medium leading-tight" id="recom-exercise-text">🏃‍♀️ <strong>HIIT veya Güç Antrenmanı:</strong> Yüksek östrojen ve enerjiyi kardiyo/direnç ile değerlendirin.</p></div><div class="p-2.5 rounded-2xl bg-surface-container-low/70 border border-secondary-fixed flex flex-col gap-1 transition-all"><div class="flex items-center gap-1.5 text-secondary text-xs font-bold"><span class="material-symbols-outlined text-[15px] text-primary">restaurant_menu</span><span class="text-[11px] font-bold text-on-surface">Beslenme Desteği</span></div><p class="text-[10.5px] text-on-surface-variant font-medium leading-tight" id="recom-nutrition-text">🥗 <strong>Yüksek Protein &amp; Bol Lif:</strong> Yeşil yapraklı sebzeler, antioksidan smoothie ve bol hidrasyon.</p></div></div></div><div class="col-span-2 p-4 rounded-3xl bg-surface-container-lowest shadow-sm border border-primary-fixed/30 flex flex-col gap-3" id="weekly-trend-card"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary shadow-xs"><span class="material-symbols-outlined text-[18px]">insights</span></div><div><h4 class="text-xs font-bold text-on-surface">Haftalık Enerji &amp; Mod Trendi</h4><p class="text-[10px] text-secondary">7 Günlük Canlı Ritim Dalgalanması</p></div></div><span class="text-[10px] font-extrabold text-primary bg-primary-fixed/50 px-2 py-0.5 rounded-full" id="weekly-trend-today-status">Bugün: %85 Zirve</span></div><div class="grid grid-cols-7 gap-1.5 items-end h-28 pt-3 pb-1 px-1 bg-surface-container-low/50 rounded-2xl border border-primary-fixed/20 relative"><div class="flex flex-col items-center gap-1 h-full justify-end group/bar cursor-pointer"><span class="text-[11px] leading-none mb-0.5">😌</span><div class="w-full max-w-[20px] bg-secondary-container rounded-full transition-all duration-300 flex items-center justify-center" style="height: 45%;" title="Pzt: %45 Enerji"><span class="text-[8.5px] font-bold text-primary opacity-0 group-hover/bar:opacity-100 transition-opacity">45</span></div><span class="text-[9.5px] font-medium text-secondary mt-1">Pzt</span></div><div class="flex flex-col items-center gap-1 h-full justify-end group/bar cursor-pointer"><span class="text-[11px] leading-none mb-0.5">🙂</span><div class="w-full max-w-[20px] bg-secondary-container rounded-full transition-all duration-300 flex items-center justify-center" style="height: 60%;" title="Sal: %60 Enerji"><span class="text-[8.5px] font-bold text-primary opacity-0 group-hover/bar:opacity-100 transition-opacity">60</span></div><span class="text-[9.5px] font-medium text-secondary mt-1">Sal</span></div><div class="flex flex-col items-center gap-1 h-full justify-end group/bar cursor-pointer"><span class="text-[11px] leading-none mb-0.5">🥰</span><div class="w-full max-w-[20px] bg-primary-fixed rounded-full transition-all duration-300 flex items-center justify-center" style="height: 75%;" title="Çar: %75 Enerji"><span class="text-[8.5px] font-bold text-primary opacity-0 group-hover/bar:opacity-100 transition-opacity">75</span></div><span class="text-[9.5px] font-medium text-secondary mt-1">Çar</span></div><div class="flex flex-col items-center gap-1 h-full justify-end group/bar cursor-pointer"><span class="text-[11px] leading-none mb-0.5">🥰</span><div class="w-full max-w-[20px] bg-primary-fixed rounded-full transition-all duration-300 flex items-center justify-center" style="height: 80%;" title="Per: %80 Enerji"><span class="text-[8.5px] font-bold text-primary opacity-0 group-hover/bar:opacity-100 transition-opacity">80</span></div><span class="text-[9.5px] font-medium text-secondary mt-1">Per</span></div><div class="flex flex-col items-center gap-1 h-full justify-end group/bar cursor-pointer relative"><div class="absolute -top-1 w-1.5 h-1.5 rounded-full bg-primary animate-ping"></div><span class="text-[12px] leading-none mb-0.5" id="trend-today-emoji">🥰</span><div class="w-full max-w-[20px] bg-gradient-to-t from-primary via-primary-container to-primary-fixed rounded-full shadow-[0_2px_8px_rgba(216,27,96,0.35)] ring-2 ring-white transition-all duration-300 flex items-center justify-center" id="trend-today-bar" style="height: 85%;" title="Bugün (Cuma): %85 Enerji"><span class="text-[8.5px] font-bold text-white leading-none" id="trend-today-pct">85</span></div><span class="text-[9.5px] font-extrabold text-primary mt-1">Cum</span></div><div class="flex flex-col items-center gap-1 h-full justify-end group/bar cursor-pointer"><span class="text-[11px] leading-none mb-0.5">😌</span><div class="w-full max-w-[20px] bg-secondary-fixed rounded-full transition-all duration-300 flex items-center justify-center" style="height: 80%;" title="Cmt: %80 Beklenen Enerji"><span class="text-[8.5px] font-bold text-secondary opacity-0 group-hover/bar:opacity-100 transition-opacity">80</span></div><span class="text-[9.5px] font-medium text-secondary mt-1">Cmt</span></div><div class="flex flex-col items-center gap-1 h-full justify-end group/bar cursor-pointer"><span class="text-[11px] leading-none mb-0.5">🥱</span><div class="w-full max-w-[20px] bg-surface-container rounded-full transition-all duration-300 flex items-center justify-center" style="height: 70%;" title="Paz: %70 Beklenen Enerji"><span class="text-[8.5px] font-bold text-secondary opacity-0 group-hover/bar:opacity-100 transition-opacity">70</span></div><span class="text-[9.5px] font-medium text-secondary mt-1">Paz</span></div></div><div class="flex items-center justify-between text-[10px] text-secondary px-1"><span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary"></span>Bugün ovülasyon pik günü</span><span class="font-semibold text-primary">Tüm Haftayı Gör ›</span></div></div>
+<!-- Tile 3: SU TÜKETİMİ (TACTILE LONG-PRESS & 3D GECE SIFIRLAMA ROZETİ VE MODAL ENTEGRE EDİLDİ) -->
+<div class="p-4 rounded-3xl bg-surface-container-lowest shadow-[0_8px_20px_rgba(128,80,98,0.06)] flex flex-col justify-between relative overflow-hidden transition-all duration-200 select-none col-span-2 sm:col-span-1" id="water-card">
+<!-- Üst Başlık Satırı: İkon, 3D Gece Rozeti ve Litre -->
+<div class="flex items-center justify-between gap-1.5">
+<!-- Water Icon with Circular Long-Press Progress SVG Meter -->
+<div class="relative w-10 h-10 flex-shrink-0 flex items-center justify-center cursor-pointer group" id="water-icon-wrap" title="Sıfırlamak için 1.2 sn basılı tutun">
+<svg class="absolute inset-0 w-10 h-10 -rotate-90 pointer-events-none" viewBox="0 0 36 36">
+<path class="text-surface-container" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="2.5"></path>
+<path class="text-primary transition-all duration-75" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" id="water-longpress-ring" stroke="currentColor" stroke-dasharray="100, 100" stroke-dashoffset="100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary group-hover:scale-105 transition-transform" id="water-icon-inner">
+<span class="material-symbols-outlined text-[19px]">water_drop</span>
+</div>
+</div>
+<!-- Hızlı Gece Sıfırlama Rozeti (3D Kabartmalı, Dokunsal Buton) -->
+<button class="flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border border-primary-fixed/60 shadow-[0_2px_6px_rgba(216,27,96,0.12),inset_0_1px_1px_rgba(255,255,255,0.8)] bg-gradient-to-r from-surface-container-low to-primary-fixed/40 text-primary active:scale-95 transition-all cursor-pointer group" id="water-auto-reset-badge" title="Gece 00:00 Sıfırlama Tercihi">
+<span class="material-symbols-outlined text-[13px] text-primary group-hover:rotate-12 transition-transform" id="badge-icon">dark_mode</span>
+<span class="tracking-tight" id="badge-text">00:00 Otomatik</span>
+</button>
+<div class="flex flex-col items-end flex-shrink-0">
+<span class="text-xs font-bold text-primary" id="water-text">1.80 / 2.50 L</span>
+<span class="text-[9.5px] font-semibold text-secondary tracking-tight flex items-center gap-0.5" id="water-reset-hint">
+<span class="material-symbols-outlined text-[11px]">touch_app</span>
+<span class="">Basılı tut: Sıfırla</span>
+</span>
+</div>
+</div>
+<div class="mt-3">
+<div class="flex items-center justify-between"><div class="flex items-center gap-1.5"><span class="text-[11px] font-medium text-secondary">Su Tüketimi</span><div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary-fixed/40 text-primary border border-primary-fixed/60 text-[9.5px] font-bold shadow-sm transition-all" id="water-reminder-live-pill"><span class="material-symbols-outlined text-[11px]">notifications_active</span><span id="water-reminder-live-text" class="">2 Saatte Bir • Uyku koruması</span></div></div><span class="text-[10px] font-bold text-primary opacity-0 transition-opacity duration-200" id="reset-charging-label">Sıfırlanıyor...</span></div>
+<div class="w-full bg-surface-container rounded-full h-2 my-2 overflow-hidden relative">
+<div class="bg-primary h-full rounded-full transition-all duration-500 ease-out" id="water-progress-bar" style="width: 72%;"></div>
+<div class="absolute inset-0 bg-white/40 pointer-events-none opacity-0 transition-opacity" id="water-drain-overlay"></div>
+</div>
+</div>
+<!-- Dual Action: +250ml Button & Dedicated Tactile Long-Press Button -->
+<div class="flex items-center gap-1.5 w-full mt-1">
+<button class="flex-1 py-1.5 px-2.5 rounded-full bg-surface-container text-primary text-xs font-bold flex items-center justify-center gap-1 active:scale-95 transition-transform cursor-pointer relative overflow-hidden shadow-sm" id="add-water-btn">
+<span class="material-symbols-outlined text-[16px] pointer-events-none">add</span>
+<span class="pointer-events-none">250 ml Ekle</span>
+</button>
+<button class="relative w-8 h-8 rounded-full bg-surface-container-low border border-surface-container hover:border-primary/40 flex items-center justify-center text-secondary active:text-primary transition-all cursor-pointer group shadow-sm" id="water-reset-btn" title="Sıfırlamak için 1.2 sn basılı tutun">
+<svg class="absolute inset-0 w-8 h-8 -rotate-90 pointer-events-none" viewBox="0 0 32 32">
+<circle class="text-surface-container" cx="16" cy="16" fill="none" r="13" stroke="currentColor" stroke-width="2.5"></circle>
+<circle class="text-primary transition-all duration-75" cx="16" cy="16" fill="none" id="btn-longpress-ring" r="13" stroke="currentColor" stroke-dasharray="82" stroke-dashoffset="82" stroke-linecap="round" stroke-width="2.5"></circle>
+</svg>
+<span class="material-symbols-outlined text-[15px] pointer-events-none transition-transform group-active:scale-90" id="reset-btn-icon">restart_alt</span>
+</button>
+</div>
+</div>
+<!-- Tile 4: Takviyeler -->
+<div class="p-4 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col justify-between col-span-2 sm:col-span-1">
+<div class="flex items-center justify-between">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">pill</span>
+</div>
+<span class="text-xs font-bold text-secondary">2/2 Alındı</span>
+</div>
+<div class="mt-2.5">
+<span class="text-[11px] text-secondary">Takviyeler</span>
+<div class="flex flex-col gap-1 mt-1 text-xs font-semibold">
+<div class="flex items-center gap-1.5 text-primary"><span class="material-symbols-outlined text-[15px]">check_circle</span> Folik Asit</div>
+<div class="flex items-center gap-1.5 text-primary"><span class="material-symbols-outlined text-[15px]">check_circle</span> Magnezyum</div>
+</div>
+</div>
+<span class="text-[10px] text-secondary mt-1">Yarın 09:00 Hatırlatıcı</span>
+</div>
+</div>
+</section>
+</div>
+<!-- TAB 2: DÖNGÜ TAKVİMİ -->
+<div class="tab-screen screen-hidden flex flex-col gap-4 w-full" id="screen-dongu"><div class="flex items-center justify-between"><h2 class="text-xl font-extrabold text-on-surface">Aylık Döngü Takvimi</h2><span class="text-xs font-bold text-primary bg-primary-fixed px-3 py-1 rounded-full shadow-xs flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>28 Günlük Düzen</span></div><div class="p-3 rounded-2xl bg-surface-container-lowest border border-primary-fixed/40 shadow-sm flex items-center justify-between text-[11px]"><div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-primary/70 shadow-xs"></span><span class="font-medium text-secondary">Regl (1-5)</span></div><div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed shadow-xs"></span><span class="font-medium text-secondary">Foliküler</span></div><div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-primary-fixed shadow-xs"></span><span class="font-bold text-primary">Ovülasyon (14)</span></div><div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-surface-container-high shadow-xs"></span><span class="font-medium text-secondary">Luteal</span></div></div><div class="rounded-3xl bg-surface-container-lowest p-5 shadow-sm flex flex-col gap-3 relative"><div class="flex items-center justify-between font-bold text-sm"><div class="flex items-center gap-2"><button class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-secondary hover:text-primary active:scale-90 transition-transform"><span class="material-symbols-outlined text-[16px]">chevron_left</span></button><span class="">Mayıs 2025</span><button class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-secondary hover:text-primary active:scale-90 transition-transform"><span class="material-symbols-outlined text-[16px]">chevron_right</span></button></div><span class="text-xs text-primary font-bold bg-primary-fixed/50 px-2.5 py-0.5 rounded-full">Zirve: 14 Mayıs</span></div><div class="grid grid-cols-7 gap-1 text-center text-xs font-semibold text-secondary py-2 border-y border-surface-container"><span class="">Pt</span><span class="">Sa</span><span class="">Ça</span><span class="">Pe</span><span class="">Cu</span><span class="">Ct</span><span class="">Pz</span></div><div class="grid grid-cols-7 gap-1.5 text-center text-xs font-bold py-1" id="calendar-grid-cells"><button class="cycle-day-cell py-2 rounded-xl text-secondary/40" data-day="28" data-phase="Geçmiş">28</button><button class="cycle-day-cell py-2 rounded-xl text-secondary/40" data-day="29" data-phase="Geçmiş">29</button><button class="cycle-day-cell py-2 rounded-xl text-secondary/40" data-day="30" data-phase="Geçmiş">30</button><button class="cycle-day-cell py-2 rounded-xl bg-primary/10 text-primary border border-primary/20 hover:scale-105" data-day="1" data-phase="Regl">1<span class="block mx-auto mt-0.5 w-1 h-1 rounded-full bg-primary"></span></button><button class="cycle-day-cell py-2 rounded-xl bg-primary/15 text-primary border border-primary/20 hover:scale-105" data-day="2" data-phase="Regl">2<span class="block mx-auto mt-0.5 w-1 h-1 rounded-full bg-primary"></span></button><button class="cycle-day-cell py-2 rounded-xl bg-primary/20 text-primary border border-primary/25 hover:scale-105" data-day="3" data-phase="Regl">3<span class="block mx-auto mt-0.5 w-1 h-1 rounded-full bg-primary"></span></button><button class="cycle-day-cell py-2 rounded-xl bg-primary/15 text-primary border border-primary/20 hover:scale-105" data-day="4" data-phase="Regl">4<span class="block mx-auto mt-0.5 w-1 h-1 rounded-full bg-primary"></span></button><button class="cycle-day-cell py-2 rounded-xl bg-primary/10 text-primary border border-primary/20 hover:scale-105" data-day="5" data-phase="Regl">5<span class="block mx-auto mt-0.5 w-1 h-1 rounded-full bg-primary"></span></button><button class="cycle-day-cell py-2 rounded-xl hover:bg-surface-container-low" data-day="6" data-phase="Foliküler">6</button><button class="cycle-day-cell py-2 rounded-xl hover:bg-surface-container-low" data-day="7" data-phase="Foliküler">7</button><button class="cycle-day-cell py-2 rounded-xl hover:bg-surface-container-low" data-day="8" data-phase="Foliküler">8</button><button class="cycle-day-cell py-2 rounded-xl hover:bg-surface-container-low" data-day="9" data-phase="Foliküler">9</button><button class="cycle-day-cell py-2 rounded-xl bg-secondary-fixed text-secondary hover:scale-105" data-day="10" data-phase="Foliküler">10<span class="block mx-auto mt-0.5 w-1 h-1 rounded-full bg-secondary"></span></button><button class="cycle-day-cell py-2 rounded-xl bg-secondary-fixed text-secondary hover:scale-105" data-day="11" data-phase="Foliküler">11<span class="block mx-auto mt-0.5 w-1 h-1 rounded-full bg-secondary"></span></button><button class="cycle-day-cell py-2 rounded-xl bg-secondary-container text-on-secondary hover:scale-105" data-day="12" data-phase="Doğurgan">12<span class="block mx-auto mt-0.5 w-1.5 h-1.5 rounded-full bg-primary"></span></button><button class="cycle-day-cell py-2 rounded-xl bg-primary-fixed text-primary hover:scale-105 border border-primary-fixed" data-day="13" data-phase="Doğurgan">13<span class="block mx-auto mt-0.5 w-1.5 h-1.5 rounded-full bg-primary-container"></span></button><button class="cycle-day-cell py-2 rounded-xl bg-gradient-to-tr from-primary to-primary-container text-white scale-105 shadow-[0_4px_12px_rgba(216,27,96,0.38)] relative font-extrabold ring-2 ring-white" data-day="14" data-phase="Yumurtlama Zirvesi">14<span class="block mx-auto mt-0.5 w-1.5 h-1.5 rounded-full bg-white animate-ping"></span></button><button class="cycle-day-cell py-2 rounded-xl bg-primary-fixed text-primary hover:scale-105 border border-primary-fixed" data-day="15" data-phase="Doğurgan">15<span class="block mx-auto mt-0.5 w-1.5 h-1.5 rounded-full bg-primary-container"></span></button><button class="cycle-day-cell py-2 rounded-xl hover:bg-surface-container-low" data-day="16" data-phase="Luteal">16</button><button class="cycle-day-cell py-2 rounded-xl hover:bg-surface-container-low" data-day="17" data-phase="Luteal">17</button><button class="cycle-day-cell py-2 rounded-xl hover:bg-surface-container-low" data-day="18" data-phase="Luteal">18</button><button class="cycle-day-cell py-2 rounded-xl hover:bg-surface-container-low" data-day="19" data-phase="Luteal">19</button><button class="cycle-day-cell py-2 rounded-xl hover:bg-surface-container-low" data-day="20" data-phase="Luteal">20</button></div></div><div class="p-4 rounded-3xl bg-gradient-to-r from-primary-fixed/40 via-secondary-container/20 to-surface-container-low border border-primary-fixed/40 flex items-center justify-between cursor-pointer active:scale-98 transition-transform" id="calendar-banner-symptom-trigger"><div class="flex items-center gap-2.5"><div class="w-10 h-10 rounded-2xl bg-white shadow-xs flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[20px]">vital_signs</span></div><div><div class="text-xs font-bold text-on-surface">14 Mayıs Semptom &amp; Hormon Analizi</div><p class="text-[10.5px] text-secondary">LH ve Östrojen Zirvede • 36.8°C BBT</p></div></div><span class="material-symbols-outlined text-primary text-[20px]">read_more</span></div></div>
+<!-- TAB 3: RAPORLAR -->
+<div class="tab-screen screen-hidden flex flex-col gap-4 w-full" id="screen-raporlar">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-extrabold text-on-surface">Döngü Raporları</h2>
+<span class="text-xs font-bold text-white bg-primary px-3 py-1 rounded-full">%98 Düzenli</span>
+</div>
+<div class="rounded-3xl bg-gradient-to-br from-primary to-primary-container text-white p-5 shadow-lg">
+<span class="text-xs uppercase font-bold tracking-wider opacity-85">Ortalama Döngü</span>
+<div class="text-3xl font-black mt-1">28.2 Gün</div>
+<p class="text-xs opacity-90 mt-1">Son 6 döngüde dalgalanma ±1 gün. Vücut ritminiz harika bir dengede.</p>
+</div>
+</div>
+<!-- TAB 4: PROFİL (ALIŞKANLIK & SU TÜKETİMİ TERCİHLERİ, 3D ORGANİK SIVI SLIDER VE TOGGLE ENTEGRELİ) -->
+<div class="tab-screen screen-hidden flex flex-col gap-4 w-full" id="screen-profil">
+<div class="flex items-center gap-3">
+<div class="w-16 h-16 rounded-full bg-gradient-to-tr from-primary to-primary-container text-white flex items-center justify-center text-2xl font-black shadow-md">Z</div>
+<div>
+<h2 class="text-lg font-bold text-on-surface">Zeynep Kaya</h2>
+<span class="text-xs text-secondary">zeynep.kaya@email.com</span>
+<span class="block mt-1 text-[11px] font-bold text-primary bg-primary-fixed px-2.5 py-0.5 rounded-full w-fit">Premium Üye ✨</span>
+</div>
+</div>
+<!-- Alışkanlık & Su Tüketimi Tercihleri (Organik 3D Sıvı Kaydırıcı Dahil) -->
+<section class="rounded-3xl bg-surface-container-lowest p-5 shadow-sm flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-fixed/50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">water_drop</span>
+</div>
+<div>
+<h3 class="font-bold text-xs text-on-surface">Alışkanlık &amp; Su Tüketimi Tercihleri</h3>
+<p class="text-[11px] text-secondary">Günlük sayaç döngü ayarları &amp; hedef</p>
+</div>
+</div>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-surface-container text-secondary">Sağlık</span>
+</div>
+<!-- ORGANİK 3D SIVI KAYDIRICI (SLIDER) KARTI -->
+<div class="p-4 rounded-2xl bg-surface-container-low/80 border border-primary-fixed/40 flex flex-col gap-3 shadow-inner">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[17px] text-primary">tune</span>
+<span class="font-bold text-xs text-on-surface">Günlük Su Hedefi</span>
+</div>
+<!-- 3D Sıvı Damlası Hedef Rozeti -->
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-primary to-primary-container text-white shadow-[0_3px_10px_rgba(216,27,96,0.35),inset_0_1px_1px_rgba(255,255,255,0.7)] text-xs font-black tracking-tight" id="goal-badge">
+<span class="material-symbols-outlined text-[14px]">water_drop</span>
+<span id="slider-val-label" class="">2.50 L / gün</span>
+</div>
+</div>
+<!-- Sıvı İhtiyacı & Bardak Bilgi İpucu -->
+<div class="flex items-center justify-between text-[11px] px-0.5">
+<span class="font-semibold text-secondary flex items-center gap-1" id="goal-glasses-text"><span class="material-symbols-outlined text-[13px] text-primary">local_drink</span><span class="">Yaklaşık 10 Bardak</span></span>
+<span class="font-bold px-2 py-0.5 rounded-full text-[10px] transition-colors bg-primary-fixed text-primary" id="goal-advice-pill">Döngü İçin İdeal ✨</span>
+</div>
+<!-- Organik 3D Sıvı Track & Thumb -->
+<div class="relative w-full py-3 cursor-pointer touch-none select-none" id="liquid-slider-wrap">
+<!-- Alt Şeffaf Yiv / Ray -->
+<div class="relative w-full h-4 rounded-full bg-surface-container-high/90 overflow-hidden liquid-track-glow border border-primary-fixed/30" id="liquid-track">
+<!-- Fuşya-Pembe Canlı Sıvı Dolgusu -->
+<div class="h-full rounded-full bg-gradient-to-r from-secondary-container via-primary-container to-primary transition-all duration-75 relative overflow-hidden" id="liquid-fill" style="width: 50%;">
+<!-- Sıvı Parıltısı Üst Çizgi -->
+<div class="absolute inset-x-0 top-0 h-[2px] bg-white/60 pointer-events-none"></div>
+<!-- Canlı Sıvı Kabarcıkları -->
+<div class="absolute left-1/4 top-1 w-1.5 h-1.5 rounded-full bg-white/70 liquid-bubble pointer-events-none"></div>
+<div class="absolute left-2/3 top-1.5 w-1 h-1 rounded-full bg-white/80 liquid-bubble-delayed pointer-events-none"></div>
+<div class="absolute right-4 top-1 w-2 h-2 rounded-full bg-white/50 liquid-bubble pointer-events-none"></div>
+</div>
+</div>
+<!-- 3D Organik Sıvı Thumb (Damla / Küre) -->
+<div class="absolute top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-gradient-to-b from-white via-surface-container-lowest to-primary-fixed border-2 border-white liquid-thumb-3d flex items-center justify-center cursor-grab active:cursor-grabbing transition-transform duration-100 z-10" id="liquid-thumb" style="left: 50%;">
+<div class="w-3.5 h-3.5 rounded-full bg-gradient-to-br from-primary-container to-primary flex items-center justify-center shadow-inner">
+<div class="w-1 h-1 rounded-full bg-white/90"></div>
+</div>
+</div>
+</div>
+<!-- Hızlı Rehber Etiketleri (Hızlı Dokunmatik Seçim) -->
+<div class="grid grid-cols-5 gap-1 text-center pt-0.5">
+<button class="goal-step-btn py-1 rounded-lg text-[10px] font-semibold text-secondary hover:text-primary hover:bg-surface-container transition-all" data-val="1.0">1.0 L</button>
+<button class="goal-step-btn py-1 rounded-lg text-[10px] font-semibold text-secondary hover:text-primary hover:bg-surface-container transition-all" data-val="2.0">2.0 L</button>
+<button class="goal-step-btn py-1 rounded-lg text-[10px] font-bold text-primary bg-primary-fixed/50 shadow-sm transition-all scale-105" data-val="2.5">2.5 L ★</button>
+<button class="goal-step-btn py-1 rounded-lg text-[10px] font-semibold text-secondary hover:text-primary hover:bg-surface-container transition-all" data-val="3.0">3.0 L</button>
+<button class="goal-step-btn py-1 rounded-lg text-[10px] font-semibold text-secondary hover:text-primary hover:bg-surface-container transition-all" data-val="4.0">4.0 L</button>
+</div>
+</div>
+<!-- 3D Kabartmalı Dokunsal Gece Sıfırlama Switch Satırı -->
+<div class="p-3.5 rounded-2xl bg-surface-container-low/70 border border-primary-fixed/30 flex items-center justify-between">
+<div class="flex flex-col gap-0.5 max-w-[210px]">
+<div class="flex items-center gap-1.5 font-bold text-xs text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-primary">dark_mode</span>
+<span class="">Gece 00:00'da Otomatik Sıfırla</span>
+</div>
+<p class="text-[10.5px] text-on-surface-variant leading-tight">
+              Her gece yarısı su tüketimi sayacını otomatik olarak sıfırlar ve yeni güne hazırlar.
+            </p>
+</div>
+<!-- 3D Tactile Neumorphic Switch Button -->
+<button aria-checked="true" class="relative w-12 h-6 rounded-full transition-all duration-300 p-0.5 flex items-center cursor-pointer outline-none toggle-track-active" id="profile-auto-reset-toggle" role="switch">
+<span class="w-5 h-5 rounded-full bg-white transition-all duration-300 transform toggle-thumb-active flex items-center justify-center text-[11px] text-primary" id="profile-toggle-thumb">
+<span class="material-symbols-outlined text-[13px] font-bold" id="profile-toggle-icon">done</span>
+</span>
+</button>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl bg-surface-container-low text-xs">
+<span class="font-semibold text-secondary">Eşzamanlı Durum</span>
+<span class="text-primary font-bold" id="profile-summary-text">2.50 Litre (10 Bardak)</span>
+</div>
+<div class="p-4 rounded-2xl bg-surface-container-low/70 border border-primary-fixed/40 flex flex-col gap-3.5 shadow-sm" id="water-reminder-settings-card"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-gradient-to-br from-primary-fixed to-secondary-container flex items-center justify-center text-primary shadow-sm"><span class="material-symbols-outlined text-[16px]">notifications_active</span></div><div><div class="font-bold text-xs text-on-surface flex items-center gap-1.5"><span class="">Su Hatırlatıcı Bildirimleri</span><span class="text-[9.5px] font-bold px-1.5 py-0.5 rounded-full bg-primary text-white shadow-xs">Akıllı</span></div><p class="text-[10.5px] text-secondary">Düzenli hidrasyon &amp; döngü desteği</p></div></div><button aria-checked="true" class="relative w-12 h-6 rounded-full transition-all duration-300 p-0.5 flex items-center cursor-pointer outline-none toggle-track-active" id="reminder-master-toggle" role="switch"><span class="w-5 h-5 rounded-full bg-white transition-all duration-300 transform toggle-thumb-active flex items-center justify-center text-[11px] text-primary" id="reminder-toggle-thumb"><span class="material-symbols-outlined text-[13px] font-bold" id="reminder-toggle-icon">done</span></span></button></div><div class="flex flex-col gap-2 transition-all duration-300" id="reminder-details-panel" style="opacity: 1; pointer-events: auto;"><span class="text-[11px] font-bold text-secondary uppercase tracking-wider">Hatırlatma Aralığı</span><div class="grid grid-cols-2 gap-1.5" id="reminder-interval-group"><button class="reminder-chip py-2 px-2.5 rounded-xl border text-[11px] font-semibold text-secondary border-surface-container bg-surface-container-lowest hover:border-primary/40 active:scale-95 transition-all text-left flex items-center justify-between" data-interval="1s"><span class="tracking-tight">1 Saatte Bir</span><span class="material-symbols-outlined text-[13px] opacity-0">check</span></button><button class="reminder-chip active-reminder-chip py-2 px-2.5 rounded-xl border text-[11px] font-bold text-primary border-primary-fixed bg-gradient-to-r from-primary-fixed/50 to-surface-container-low shadow-[0_2px_6px_rgba(216,27,96,0.12),inset_0_1px_1px_rgba(255,255,255,0.8)] active:scale-95 transition-all text-left flex items-center justify-between" data-interval="2s"><span class="tracking-tight">2 Saatte Bir (Önerilen)</span><span class="material-symbols-outlined text-[13px] text-primary">check</span></button><button class="reminder-chip py-2 px-2.5 rounded-xl border text-[11px] font-semibold text-secondary border-surface-container bg-surface-container-lowest hover:border-primary/40 active:scale-95 transition-all text-left flex items-center justify-between" data-interval="3s"><span class="tracking-tight">3 Saatte Bir</span><span class="material-symbols-outlined text-[13px] opacity-0">check</span></button><button class="reminder-chip py-2 px-2.5 rounded-xl border text-[11px] font-semibold text-secondary border-surface-container bg-surface-container-lowest hover:border-primary/40 active:scale-95 transition-all text-left flex items-center justify-between" data-interval="smart"><span class="tracking-tight">🌸 Fazına Özel</span><span class="material-symbols-outlined text-[13px] opacity-0">check</span></button></div><div class="p-3 rounded-xl bg-surface-container-lowest border border-primary-fixed/30 flex flex-col gap-2 mt-0.5 shadow-sm"><div class="flex items-center justify-between"><div class="flex items-center gap-1.5 text-xs font-bold text-on-surface"><span class="material-symbols-outlined text-[16px] text-primary">bedtime</span><span class="">Uyku Saati Koruması (DND)</span></div><span class="text-[10px] font-bold text-primary bg-primary-fixed/40 px-2 py-0.5 rounded-full">Sessiz Mod</span></div><p class="text-[10.5px] text-secondary leading-tight">Uykunuz bölünmesin diye seçilen saatler arasında hatırlatıcı bildirimler otomatik olarak duraklatılır.</p><div class="flex items-center gap-2 pt-1"><div class="flex-1 flex items-center justify-between px-3 py-1.5 rounded-lg bg-surface-container-low border border-surface-container text-xs font-bold text-on-surface cursor-pointer hover:border-primary/40 transition-colors" id="sleep-start-btn"><span class="text-[10.5px] font-medium text-secondary">Başlangıç</span><span class="text-primary font-bold">22:30</span></div><span class="text-secondary text-xs font-bold">—</span><div class="flex-1 flex items-center justify-between px-3 py-1.5 rounded-lg bg-surface-container-low border border-surface-container text-xs font-bold text-on-surface cursor-pointer hover:border-primary/40 transition-colors" id="sleep-end-btn"><span class="text-[10.5px] font-medium text-secondary">Uyanış</span><span class="text-primary font-bold">08:30</span></div></div></div><div class="flex flex-col gap-2 p-3 rounded-xl bg-surface-container-lowest border border-primary-fixed/30 shadow-sm"><div class="flex items-center justify-between"><div class="flex flex-col gap-0.5 max-w-[200px]"><div class="flex items-center gap-1.5 text-xs font-bold text-on-surface"><span class="material-symbols-outlined text-[16px] text-primary">graphic_eq</span><span class="">Narin Su Damlası Sesi</span></div><p class="text-[10px] text-secondary leading-tight">Hatırlatmalarda ve su eklemede meditatif kristal damla tonu çalar.</p></div><div class="flex items-center gap-2"><button type="button" class="flex items-center gap-1 px-2 py-1 rounded-full bg-primary-fixed/50 hover:bg-primary-fixed text-primary text-[10.5px] font-bold active:scale-90 transition-all cursor-pointer shadow-xs" id="btn-test-droplet-sound" title="Sesi Test Et"><span class="material-symbols-outlined text-[13px] pointer-events-none">play_arrow</span><span class="pointer-events-none">Test Et</span></button><button aria-checked="true" class="relative w-12 h-6 rounded-full transition-all duration-300 p-0.5 flex items-center cursor-pointer outline-none toggle-track-active" id="sound-droplet-toggle" role="switch"><span class="w-5 h-5 rounded-full bg-white transition-all duration-300 transform toggle-thumb-active flex items-center justify-center text-[11px] text-primary" id="sound-droplet-thumb"><span class="material-symbols-outlined text-[13px] font-bold" id="sound-droplet-icon">done</span></span></button></div></div><div class="h-[1px] bg-surface-container my-0.5"></div><div class="flex items-center justify-between"><div class="flex flex-col gap-0.5 max-w-[210px]"><div class="flex items-center gap-1.5 text-xs font-bold text-on-surface"><span class="material-symbols-outlined text-[16px] text-primary">vibration</span><span class="">Dokunsal Titreşim</span></div><p class="text-[10px] text-secondary leading-tight">Damla eklerken ve bildirimlerde hafif dokunsal haptik titreşim sağlar.</p></div><button aria-checked="true" class="relative w-12 h-6 rounded-full transition-all duration-300 p-0.5 flex items-center cursor-pointer outline-none toggle-track-active" id="haptic-vibe-toggle" role="switch"><span class="w-5 h-5 rounded-full bg-white transition-all duration-300 transform toggle-thumb-active flex items-center justify-center text-[11px] text-primary" id="haptic-vibe-thumb"><span class="material-symbols-outlined text-[13px] font-bold" id="haptic-vibe-icon">done</span></span></button></div></div><div class="p-2.5 rounded-xl bg-gradient-to-r from-primary-fixed/30 via-secondary-container/20 to-primary-fixed/20 border border-primary-fixed/40 flex items-start gap-2 shadow-xs"><span class="material-symbols-outlined text-[16px] text-primary flex-shrink-0 mt-0.5">local_florist</span><p class="text-[11px] text-on-surface-variant leading-snug"><strong class="text-primary font-bold">Döngü İpucu:</strong> Yumurtlama dönemindesin; her 2 saatte bir 250ml su tüketmek hormonal dengeyi ve hücresel yenilenmeyi destekler.</p></div></div></div></section>
+<div class="rounded-3xl bg-surface-container-lowest p-4 shadow-sm flex flex-col gap-2 text-xs font-semibold">
+<h4 class="text-[11px] text-secondary uppercase font-bold tracking-wider mb-0.5">Döngü Parametreleri</h4>
+<div class="flex items-center justify-between p-2.5 rounded-xl hover:bg-surface-container-low">
+<span class="">Döngü Süresi</span>
+<span class="text-primary font-bold">28 Gün</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-xl hover:bg-surface-container-low">
+<span class="">Adet Süresi (Kanama)</span>
+<span class="text-primary font-bold">5 Gün</span>
+</div>
+</div>
+</div>
+</main>
+<!-- MİKRO-POPUP / MODAL: SU TÜKETİMİ GECE SIFIRLAMA AYARLARI -->
+<!-- MINI SEMPTOM ÖZETİ KARTI (DELICATE FLOATING POPOVER BOTTOM CARD) --><div class="fixed inset-0 z-[95] flex items-end sm:items-center justify-center p-0 sm:p-4 bg-on-surface/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300" id="symptom-card-backdrop"><div class="w-full max-w-md bg-surface-container-lowest rounded-t-[2.5rem] sm:rounded-3xl p-6 shadow-[0_24px_48px_rgba(216,27,96,0.25)] border border-primary-fixed/40 flex flex-col gap-4 transform translate-y-full sm:translate-y-0 sm:scale-90 transition-all duration-300" id="symptom-card-container"><div class="w-12 h-1.5 bg-surface-container rounded-full mx-auto -mt-1 sm:hidden"></div><div class="flex items-center justify-between"><div class="flex items-center gap-2.5"><div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary-fixed to-secondary-container text-primary flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-[22px]">local_florist</span></div><div><div class="flex items-center gap-1.5"><h3 class="font-black text-sm text-on-surface" id="symptom-modal-title">14. Gün • Cuma 14 Mayıs</h3><span class="text-[9.5px] font-extrabold px-2 py-0.5 rounded-full bg-primary-fixed text-primary">Zirve</span></div><span class="text-[11px] text-secondary font-medium" id="symptom-modal-subtitle">Yumurtlama (Ovülasyon) Fazı</span></div></div><button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-transform cursor-pointer" id="close-symptom-card-x"><span class="material-symbols-outlined text-[18px]">close</span></button></div><!-- Biometrics & Hormone Hormone Pill Strip --><div class="grid grid-cols-2 gap-2.5"><div class="p-3 rounded-2xl bg-surface-container-low flex items-center gap-2.5 border border-primary-fixed/20"><div class="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-primary shadow-xs"><span class="material-symbols-outlined text-[18px]">device_thermostat</span></div><div><span class="text-[10px] text-secondary font-medium block">Vücut Sıcaklığı</span><span class="text-xs font-black text-on-surface">36.8°C (Termal Sıçrama)</span></div></div><div class="p-3 rounded-2xl bg-secondary-fixed/50 flex items-center gap-2.5 border border-secondary-fixed"><div class="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-secondary shadow-xs"><span class="material-symbols-outlined text-[18px]">vital_signs</span></div><div><span class="text-[10px] text-on-surface-variant font-medium block">Hormon Seviyesi</span><span class="text-xs font-black text-primary">LH &amp; Östrojen Zirvesi</span></div></div></div><!-- Expected Symptoms Tags --><div class="p-3.5 rounded-2xl bg-surface-container-low/70 border border-primary-fixed/40 flex flex-col gap-3 shadow-inner"><div class="flex items-center justify-between"><span class="text-xs font-bold text-on-surface flex items-center gap-1"><span class="material-symbols-outlined text-[15px] text-primary">sentiment_satisfied</span>Ruh Hali &amp; Zindelik</span><span class="text-[10px] font-bold text-primary bg-primary-fixed/40 px-2 py-0.5 rounded-full" id="modal-active-mood-name">🥰 Canlı &amp; Pozitif</span></div><div class="grid grid-cols-5 gap-1.5" id="mood-selector-strip"><button type="button" class="mood-option-btn p-2 rounded-xl flex flex-col items-center justify-center gap-0.5 border text-center transition-all bg-gradient-to-b from-white to-primary-fixed/40 border-primary-fixed shadow-[0_2px_8px_rgba(216,27,96,0.18)] scale-105" data-mood="energetic" data-emoji="🥰" data-label="Canlı &amp; Pozitif"><span class="text-[19px] leading-none pointer-events-none">🥰</span><span class="text-[8.5px] font-bold text-primary pointer-events-none">Enerjik</span></button><button type="button" class="mood-option-btn p-2 rounded-xl flex flex-col items-center justify-center gap-0.5 border text-center transition-all bg-surface-container-lowest border-surface-container text-secondary hover:border-primary-fixed/50 hover:scale-105 active:scale-95" data-mood="calm" data-emoji="😌" data-label="Sakin &amp; Dingin"><span class="text-[19px] leading-none pointer-events-none">😌</span><span class="text-[8.5px] font-semibold pointer-events-none">Sakin</span></button><button type="button" class="mood-option-btn p-2 rounded-xl flex flex-col items-center justify-center gap-0.5 border text-center transition-all bg-surface-container-lowest border-surface-container text-secondary hover:border-primary-fixed/50 hover:scale-105 active:scale-95" data-mood="sensitive" data-emoji="🥺" data-label="Duygusal"><span class="text-[19px] leading-none pointer-events-none">🥺</span><span class="text-[8.5px] font-semibold pointer-events-none">Hassas</span></button><button type="button" class="mood-option-btn p-2 rounded-xl flex flex-col items-center justify-center gap-0.5 border text-center transition-all bg-surface-container-lowest border-surface-container text-secondary hover:border-primary-fixed/50 hover:scale-105 active:scale-95" data-mood="tired" data-emoji="🥱" data-label="Yorgun"><span class="text-[19px] leading-none pointer-events-none">🥱</span><span class="text-[8.5px] font-semibold pointer-events-none">Yorgun</span></button><button type="button" class="mood-option-btn p-2 rounded-xl flex flex-col items-center justify-center gap-0.5 border text-center transition-all bg-surface-container-lowest border-surface-container text-secondary hover:border-primary-fixed/50 hover:scale-105 active:scale-95" data-mood="cramps" data-emoji="😣" data-label="Kramplı"><span class="text-[19px] leading-none pointer-events-none">😣</span><span class="text-[8.5px] font-semibold pointer-events-none">Kramplı</span></button></div><div class="flex flex-col gap-1.5 pt-1"><div class="flex items-center justify-between text-xs"><span class="font-bold text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-primary">bolt</span>Enerji Seviyesi</span><span class="font-black text-primary px-2 py-0.5 rounded-full bg-primary-fixed/50 shadow-xs" id="modal-energy-label">%85 (Zirve)</span></div><div class="relative w-full py-2 cursor-pointer touch-none select-none" id="modal-energy-slider"><div class="relative w-full h-3.5 rounded-full bg-surface-container-high overflow-hidden liquid-track-glow border border-primary-fixed/30"><div class="h-full rounded-full bg-gradient-to-r from-secondary-container via-primary-container to-primary transition-all duration-75 relative" id="modal-energy-fill" style="width: 85%;"><div class="absolute inset-x-0 top-0 h-[1.5px] bg-white/70 pointer-events-none"></div></div></div><div class="absolute top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-gradient-to-b from-white via-surface-container-lowest to-primary-fixed border-2 border-white liquid-thumb-3d flex items-center justify-center cursor-grab active:cursor-grabbing z-10" id="modal-energy-thumb" style="left: 85%;"><div class="w-2.5 h-2.5 rounded-full bg-primary flex items-center justify-center"><div class="w-1 h-1 rounded-full bg-white"></div></div></div></div></div></div><div class="flex flex-col gap-2"><div class="flex items-center justify-between text-xs font-bold text-secondary"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-primary">checklist</span>Beklenen Döngü Semptomları</span><span class="text-[10.5px] text-primary font-semibold">4 Tespit Edildi</span></div><div class="grid grid-cols-2 gap-2"><div class="p-2.5 rounded-xl bg-surface-container-low/70 border border-surface-container flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary"></span><div><span class="text-xs font-bold text-on-surface block leading-tight">Hafif Kramp</span><span class="text-[9.5px] text-secondary">Sağ alt kasık (Mittelschmerz)</span></div></div><div class="p-2.5 rounded-xl bg-surface-container-low/70 border border-surface-container flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-container"></span><div><span class="text-xs font-bold text-on-surface block leading-tight">Yüksek Enerji</span><span class="text-[9.5px] text-secondary">Pozitif &amp; Canlı Ruh Hali</span></div></div><div class="p-2.5 rounded-xl bg-surface-container-low/70 border border-surface-container flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-secondary"></span><div><span class="text-xs font-bold text-on-surface block leading-tight">Berrak Akıntı</span><span class="text-[9.5px] text-secondary">Yumurta akı kıvamında</span></div></div><div class="p-2.5 rounded-xl bg-surface-container-low/70 border border-surface-container flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-secondary-container"></span><div><span class="text-xs font-bold text-on-surface block leading-tight">Duygusal Hassasiyet</span><span class="text-[9.5px] text-secondary">Empati ve duyusal artış</span></div></div></div></div><!-- Action Buttons --><div class="flex items-center gap-2 pt-1"><button class="flex-1 py-3 rounded-full bg-surface-container text-secondary text-xs font-bold active:scale-95 transition-transform flex items-center justify-center gap-1" id="btn-close-symptom-sheet"><span class="material-symbols-outlined text-[16px]">check</span><span class="">Kapat</span></button><button class="flex-1 py-3 rounded-full bg-gradient-to-r from-primary to-primary-container text-white text-xs font-bold shadow-[0_6px_18px_rgba(216,27,96,0.3)] active:scale-95 transition-transform flex items-center justify-center gap-1.5" id="btn-edit-symptoms-action"><span class="material-symbols-outlined text-[17px]">done_all</span><span class="">Kaydet &amp; Tamamla</span></button></div></div></div><div class="fixed inset-0 z-[90] flex items-center justify-center p-4 bg-on-surface/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300" id="water-modal-backdrop">
+<div class="w-full max-w-xs bg-surface-container-lowest rounded-3xl p-5 shadow-[0_20px_40px_rgba(216,27,96,0.22)] border border-primary-fixed/40 flex flex-col gap-4 transform scale-90 transition-transform duration-300" id="water-modal-card">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-9 h-9 rounded-2xl bg-primary-fixed/60 text-primary flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-[20px]">nightlight</span>
+</div>
+<div>
+<h3 class="font-bold text-sm text-on-surface">Gece Sıfırlama</h3>
+<span class="text-[10px] text-secondary font-medium">Akıllı Döngü Otomasyonu</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 transition-transform" id="close-modal-x">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+        Bu seçenek aktif olduğunda, su sayacınız her gece saat tam <strong>00:00</strong>'da sıfırlanarak yeni gün için taze bir başlangıç sunar. İstediğiniz an kart üzerindeki butondan manuel olarak da sıfırlayabilirsiniz.
+      </p>
+<!-- Modal İçi 3D Toggle Satırı -->
+<div class="p-3 rounded-2xl bg-surface-container-low flex items-center justify-between shadow-inner">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary" id="modal-status-icon">schedule</span>
+<span class="text-xs font-bold text-on-surface" id="modal-status-text">00:00'da Otomatik Sıfırla</span>
+</div>
+<button aria-checked="true" class="relative w-12 h-6 rounded-full transition-all duration-300 p-0.5 flex items-center cursor-pointer outline-none toggle-track-active" id="modal-auto-reset-toggle" role="switch">
+<span class="w-5 h-5 rounded-full bg-white transition-all duration-300 transform toggle-thumb-active flex items-center justify-center text-[11px] text-primary" id="modal-toggle-thumb">
+<span class="material-symbols-outlined text-[13px] font-bold" id="modal-toggle-icon">done</span>
+</span>
+</button>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 py-2.5 rounded-full bg-surface-container text-secondary text-xs font-bold active:scale-95 transition-transform" id="modal-cancel-btn">
+          Vazgeç
+        </button>
+<button class="flex-1 py-2.5 rounded-full bg-gradient-to-r from-primary to-primary-container text-white text-xs font-bold shadow-md shadow-primary/25 active:scale-95 transition-transform flex items-center justify-center gap-1" id="modal-save-btn">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span class="">Kaydet</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bottom Floating Tab Bar -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe">
+<div class="mx-4 mb-3">
+<div class="h-16 px-3 bg-surface-container-lowest/90 backdrop-blur-xl rounded-full shadow-[0_12px_32px_rgba(128,80,98,0.12)] flex items-center justify-around" id="bottom-tabs">
+<button class="nav-tab active-tab flex flex-col items-center justify-center px-4 py-1.5 rounded-full bg-gradient-to-tr from-primary to-primary-container text-white shadow-md active:scale-95 transition-all" data-tab="bugun" data-title="Bugün">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+<span class="text-[10px] font-bold">Bugün</span>
+</button>
+<button class="nav-tab flex flex-col items-center justify-center px-4 py-1.5 rounded-full text-secondary hover:text-primary active:scale-95 transition-all" data-tab="dongu" data-title="Döngü Takvimi">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+<span class="text-[10px] font-semibold">Döngü</span>
+</button>
+<button class="nav-tab flex flex-col items-center justify-center px-4 py-1.5 rounded-full text-secondary hover:text-primary active:scale-95 transition-all" data-tab="raporlar" data-title="Raporlar &amp; Analizler">
+<span class="material-symbols-outlined text-[20px]">bar_chart_4_bars</span>
+<span class="text-[10px] font-semibold">Raporlar</span>
+</button>
+<button class="nav-tab flex flex-col items-center justify-center px-4 py-1.5 rounded-full text-secondary hover:text-primary active:scale-95 transition-all" data-tab="profil" data-title="Profilim">
+<span class="material-symbols-outlined text-[20px]">person</span>
+<span class="text-[10px] font-semibold">Profil</span>
+</button>
+</div>
+</div>
+</nav>
+<script>
+    // Toast Notification helper
+    function showToast(message, icon = 'check_circle') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'flex items-center gap-2 px-4 py-2.5 rounded-full bg-on-surface text-surface shadow-xl text-xs font-semibold backdrop-blur-md pointer-events-auto transform transition-all duration-300 opacity-0 translate-y-[-10px] scale-95';
+      toast.innerHTML = `<span class="material-symbols-outlined text-[18px] text-primary-fixed">${icon}</span><span>${message}</span>`;
+      container.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove('opacity-0', 'translate-y-[-10px]', 'scale-95');
+        toast.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'scale-95', 'translate-y-[-8px]');
+        setTimeout(() => toast.remove(), 300);
+      }, 2600);
+    }
+
+    function triggerSpringPop(el) {
+      if (!el) return;
+      el.classList.remove('spring-pop');
+      void el.offsetWidth;
+      el.classList.add('spring-pop');
+      setTimeout(() => el.classList.remove('spring-pop'), 450);
+    }
+
+    // 1. Navigation Tab Switching
+    const navTabs = document.querySelectorAll('.nav-tab');
+    const tabScreens = {
+      bugun: document.getElementById('screen-bugun'),
+      dongu: document.getElementById('screen-dongu'),
+      raporlar: document.getElementById('screen-raporlar'),
+      profil: document.getElementById('screen-profil')
+    };
+    const pageTitle = document.getElementById('header-page-title');
+
+    function switchTab(tabKey, titleText) {
+      Object.keys(tabScreens).forEach(key => {
+        if (key === tabKey) {
+          tabScreens[key].classList.remove('screen-hidden');
+          tabScreens[key].classList.add('screen-active');
+        } else {
+          tabScreens[key].classList.remove('screen-active');
+          tabScreens[key].classList.add('screen-hidden');
+        }
+      });
+
+      navTabs.forEach(tab => {
+        if (tab.getAttribute('data-tab') === tabKey) {
+          tab.className = 'nav-tab active-tab flex flex-col items-center justify-center px-4 py-1.5 rounded-full bg-gradient-to-tr from-primary to-primary-container text-white shadow-md active:scale-95 transition-all';
+          tab.querySelector('span:last-child').className = 'text-[10px] font-bold';
+        } else {
+          tab.className = 'nav-tab flex flex-col items-center justify-center px-4 py-1.5 rounded-full text-secondary hover:text-primary active:scale-95 transition-all';
+          tab.querySelector('span:last-child').className = 'text-[10px] font-semibold';
+        }
+      });
+
+      if (pageTitle) pageTitle.textContent = titleText;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    navTabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        switchTab(btn.getAttribute('data-tab'), btn.getAttribute('data-title'));
+      });
+    });
+
+    document.getElementById('btn-profile')?.addEventListener('click', () => {
+      switchTab('profil', 'Profilim');
+    });
+
+    document.getElementById('go-to-calendar-tab')?.addEventListener('click', () => {
+      switchTab('dongu', 'Döngü Takvimi');
+    });
+
+    // 2. Day Chips Click Spring
+    document.querySelectorAll('.day-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        triggerSpringPop(chip);
+        showToast('Tarih güncellendi', 'calendar_today');
+      });
+    });
+
+    // 3. SYNCHRONIZED AUTO-RESET STATE (SU KARTI & PROFİL & MODAL SENKRONİZASYONU)
+    let isAutoResetActive = true;
+
+    const waterAutoResetBadge = document.getElementById('water-auto-reset-badge');
+    const badgeIcon = document.getElementById('badge-icon');
+    const badgeText = document.getElementById('badge-text');
+
+    const profileAutoResetToggle = document.getElementById('profile-auto-reset-toggle');
+    const profileToggleThumb = document.getElementById('profile-toggle-thumb');
+    const profileToggleIcon = document.getElementById('profile-toggle-icon');
+
+    const waterModalBackdrop = document.getElementById('water-modal-backdrop');
+    const waterModalCard = document.getElementById('water-modal-card');
+    const closeModalX = document.getElementById('close-modal-x');
+    const modalCancelBtn = document.getElementById('modal-cancel-btn');
+    const modalSaveBtn = document.getElementById('modal-save-btn');
+    const modalAutoResetToggle = document.getElementById('modal-auto-reset-toggle');
+    const modalToggleThumb = document.getElementById('modal-toggle-thumb');
+    const modalToggleIcon = document.getElementById('modal-toggle-icon');
+    const modalStatusIcon = document.getElementById('modal-status-icon');
+    const modalStatusText = document.getElementById('modal-status-text');
+
+    let modalTempState = true;
+
+    function applyAutoResetUI() {
+      // 1. Water Card Badge Sync
+      if (waterAutoResetBadge) {
+        if (isAutoResetActive) {
+          waterAutoResetBadge.className = 'flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border border-primary-fixed/60 shadow-[0_2px_6px_rgba(216,27,96,0.12),inset_0_1px_1px_rgba(255,255,255,0.8)] bg-gradient-to-r from-surface-container-low to-primary-fixed/40 text-primary active:scale-95 transition-all cursor-pointer group';
+          badgeIcon.textContent = 'dark_mode';
+          badgeIcon.className = 'material-symbols-outlined text-[13px] text-primary group-hover:rotate-12 transition-transform';
+          badgeText.textContent = '00:00 Otomatik';
+        } else {
+          waterAutoResetBadge.className = 'flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold border border-surface-container shadow-sm bg-surface-container-high/60 text-secondary active:scale-95 transition-all cursor-pointer group';
+          badgeIcon.textContent = 'touch_app';
+          badgeIcon.className = 'material-symbols-outlined text-[13px] text-secondary group-hover:rotate-12 transition-transform';
+          badgeText.textContent = 'Manuel Sıfırlama';
+        }
+      }
+
+      // 2. Profile Screen 3D Toggle Sync
+      if (profileAutoResetToggle) {
+        profileAutoResetToggle.setAttribute('aria-checked', isAutoResetActive ? 'true' : 'false');
+        if (isAutoResetActive) {
+          profileAutoResetToggle.classList.remove('toggle-track-inactive');
+          profileAutoResetToggle.classList.add('toggle-track-active');
+          profileToggleThumb.classList.remove('toggle-thumb-inactive');
+          profileToggleThumb.classList.add('toggle-thumb-active');
+          profileToggleThumb.classList.add('text-primary');
+          profileToggleThumb.classList.remove('text-secondary');
+          profileToggleIcon.textContent = 'done';
+        } else {
+          profileAutoResetToggle.classList.remove('toggle-track-active');
+          profileAutoResetToggle.classList.add('toggle-track-inactive');
+          profileToggleThumb.classList.remove('toggle-thumb-active');
+          profileToggleThumb.classList.add('toggle-thumb-inactive');
+          profileToggleThumb.classList.remove('text-primary');
+          profileToggleThumb.classList.add('text-secondary');
+          profileToggleIcon.textContent = 'remove';
+        }
+      }
+    }
+
+    function syncModalToggleUI() {
+      if (modalAutoResetToggle) {
+        modalAutoResetToggle.setAttribute('aria-checked', modalTempState ? 'true' : 'false');
+        if (modalTempState) {
+          modalAutoResetToggle.classList.remove('toggle-track-inactive');
+          modalAutoResetToggle.classList.add('toggle-track-active');
+          modalToggleThumb.classList.remove('toggle-thumb-inactive');
+          modalToggleThumb.classList.add('toggle-thumb-active');
+          modalToggleThumb.classList.add('text-primary');
+          modalToggleThumb.classList.remove('text-secondary');
+          modalToggleIcon.textContent = 'done';
+          modalStatusIcon.textContent = 'schedule';
+          modalStatusIcon.className = 'material-symbols-outlined text-[18px] text-primary';
+          modalStatusText.textContent = "00:00'da Otomatik Sıfırla";
+        } else {
+          modalAutoResetToggle.classList.remove('toggle-track-active');
+          modalAutoResetToggle.classList.add('toggle-track-inactive');
+          modalToggleThumb.classList.remove('toggle-thumb-active');
+          modalToggleThumb.classList.add('toggle-thumb-inactive');
+          modalToggleThumb.classList.remove('text-primary');
+          modalToggleThumb.classList.add('text-secondary');
+          modalToggleIcon.textContent = 'remove';
+          modalStatusIcon.textContent = 'touch_app';
+          modalStatusIcon.className = 'material-symbols-outlined text-[18px] text-secondary';
+          modalStatusText.textContent = "Manuel Sıfırlama Aktif";
+        }
+      }
+    }
+
+    function openWaterSettingsModal() {
+      modalTempState = isAutoResetActive;
+      syncModalToggleUI();
+      waterModalBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+      waterModalBackdrop.classList.add('opacity-100', 'pointer-events-auto');
+      waterModalCard.classList.remove('scale-90');
+      waterModalCard.classList.add('scale-100');
+      triggerSpringPop(waterModalCard);
+    }
+
+    function closeWaterSettingsModal() {
+      waterModalCard.classList.remove('scale-100');
+      waterModalCard.classList.add('scale-90');
+      waterModalBackdrop.classList.remove('opacity-100', 'pointer-events-auto');
+      waterModalBackdrop.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    // Modal Events
+    waterAutoResetBadge?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openWaterSettingsModal();
+    });
+
+    closeModalX?.addEventListener('click', closeWaterSettingsModal);
+    modalCancelBtn?.addEventListener('click', closeWaterSettingsModal);
+
+    modalAutoResetToggle?.addEventListener('click', () => {
+      modalTempState = !modalTempState;
+      syncModalToggleUI();
+      triggerSpringPop(modalAutoResetToggle);
+    });
+
+    modalSaveBtn?.addEventListener('click', () => {
+      isAutoResetActive = modalTempState;
+      applyAutoResetUI();
+      closeWaterSettingsModal();
+      triggerSpringPop(waterAutoResetBadge);
+      if (isAutoResetActive) {
+        showToast('🌙 Gece 00:00 otomatik sıfırlama aktif!', 'dark_mode');
+      } else {
+        showToast('Manuel sıfırlama moduna geçildi', 'touch_app');
+      }
+    });
+
+    waterModalBackdrop?.addEventListener('click', (e) => {
+      if (e.target === waterModalBackdrop) {
+        closeWaterSettingsModal();
+      }
+    });
+
+    // Profile Screen 3D Switch Event (Direct Toggle & Sync)
+    profileAutoResetToggle?.addEventListener('click', () => {
+      isAutoResetActive = !isAutoResetActive;
+      applyAutoResetUI();
+      triggerSpringPop(profileAutoResetToggle);
+      if (isAutoResetActive) {
+        showToast('🌙 Gece 00:00 otomatik sıfırlama açıldı', 'dark_mode');
+      } else {
+        showToast('Otomatik sıfırlama kapatıldı (Manuel mod)', 'touch_app');
+      }
+    });
+
+    // Initialize toggle state
+    applyAutoResetUI();
+
+    // 4. WATER TRACKER WITH TACTILE LONG-PRESS TO RESET LOGIC & TARGET SYNC
+    const addWaterBtn = document.getElementById('add-water-btn');
+    const waterCard = document.getElementById('water-card');
+    const waterText = document.getElementById('water-text');
+    const waterProgressBar = document.getElementById('water-progress-bar');
+    const waterIconWrap = document.getElementById('water-icon-wrap');
+    const waterResetBtn = document.getElementById('water-reset-btn');
+    const waterLongpressRing = document.getElementById('water-longpress-ring');
+    const btnLongpressRing = document.getElementById('btn-longpress-ring');
+    const resetChargingLabel = document.getElementById('reset-charging-label');
+    const waterDrainOverlay = document.getElementById('water-drain-overlay');
+
+    let currentWaterMl = 1800;
+    let targetWaterMl = 2500; // Canlı güncellenebilir hedef
+
+    function updateWaterUI(animateSurge = true) {
+      const currentL = (currentWaterMl / 1000).toFixed(currentWaterMl % 1000 === 0 ? 1 : 2);
+      const targetL = (targetWaterMl / 1000).toFixed(targetWaterMl % 1000 === 0 ? 1 : 2);
+      
+      if (waterText) {
+        waterText.textContent = `${currentL} / ${targetL} L`;
+      }
+      
+      const percentage = Math.min(100, Math.round((currentWaterMl / targetWaterMl) * 100));
+      if (waterProgressBar) {
+        waterProgressBar.style.width = `${percentage}%`;
+      }
+    }
+
+    // Normal Click: +250ml
+    addWaterBtn?.addEventListener('click', function() {
+      const prev = currentWaterMl;
+      currentWaterMl = Math.min(targetWaterMl + 1000, currentWaterMl + 250);
+      updateWaterUI(true);
+      triggerSpringPop(addWaterBtn);
+
+      const currentL = (currentWaterMl / 1000).toFixed(currentWaterMl % 1000 === 0 ? 1 : 2);
+      showToast(`250 ml su eklendi. Toplam: ${currentL} L 💧`, 'water_drop');
+
+      if (prev < targetWaterMl && currentWaterMl >= targetWaterMl) {
+        setTimeout(() => {
+          showToast(`Tebrikler! Günlük ${(targetWaterMl/1000).toFixed(1)}L su hedefinize ulaştınız! 🏆🎉`, 'celebration');
+          triggerSpringPop(waterCard);
+        }, 500);
+      }
+    });
+
+    // Tactile Long-Press to Reset Mechanics (1.2 seconds duration)
+    let pressTimer = null;
+    let chargeInterval = null;
+    let pressStartTime = 0;
+    const LONG_PRESS_DURATION = 1200;
+    let isResetCompleted = false;
+
+    function setChargeRings(progressRatio) {
+      const iconCircumference = 100;
+      const btnCircumference = 82;
+      const iconOffset = iconCircumference - (iconCircumference * progressRatio);
+      const btnOffset = btnCircumference - (btnCircumference * progressRatio);
+
+      if (waterLongpressRing) waterLongpressRing.style.strokeDashoffset = iconOffset;
+      if (btnLongpressRing) btnLongpressRing.style.strokeDashoffset = btnOffset;
+    }
+
+    function spawnDropletExplosion(sourceEl) {
+      if (!waterCard) return;
+      const cardRect = waterCard.getBoundingClientRect();
+      const sourceRect = sourceEl ? sourceEl.getBoundingClientRect() : cardRect;
+      const centerX = (sourceRect.left + sourceRect.width / 2) - cardRect.left;
+      const centerY = (sourceRect.top + sourceRect.height / 2) - cardRect.top;
+
+      for (let i = 0; i < 10; i++) {
+        const drop = document.createElement('span');
+        drop.className = 'droplet-particle';
+        drop.style.left = `${centerX}px`;
+        drop.style.top = `${centerY}px`;
+        const angle = (i / 10) * Math.PI * 2;
+        const distance = 35 + Math.random() * 40;
+        const dx = `${Math.cos(angle) * distance}px`;
+        const dy = `${Math.sin(angle) * distance}px`;
+        drop.style.setProperty('--dx', dx);
+        drop.style.setProperty('--dy', dy);
+        waterCard.appendChild(drop);
+        setTimeout(() => drop.remove(), 700);
+      }
+    }
+
+    function startLongPress(e, targetEl) {
+      if (e.type === 'mousedown' && e.button !== 0) return;
+      isResetCompleted = false;
+      pressStartTime = Date.now();
+
+      if (waterCard) waterCard.classList.add('card-pressing');
+      if (resetChargingLabel) {
+        resetChargingLabel.classList.remove('opacity-0');
+        resetChargingLabel.textContent = 'Basılı tutun...';
+      }
+
+      chargeInterval = setInterval(() => {
+        const elapsed = Date.now() - pressStartTime;
+        const progress = Math.min(1, elapsed / LONG_PRESS_DURATION);
+        setChargeRings(progress);
+      }, 20);
+
+      pressTimer = setTimeout(() => {
+        executeReset(targetEl);
+      }, LONG_PRESS_DURATION);
+    }
+
+    function executeReset(sourceEl) {
+      isResetCompleted = true;
+      clearInterval(chargeInterval);
+      setChargeRings(1);
+
+      if (waterCard) {
+        waterCard.classList.remove('card-pressing');
+        waterCard.classList.add('reset-poof');
+        setTimeout(() => waterCard.classList.remove('reset-poof'), 600);
+      }
+
+      if (waterDrainOverlay) {
+        waterDrainOverlay.classList.remove('opacity-0');
+        setTimeout(() => waterDrainOverlay.classList.add('opacity-0'), 400);
+      }
+
+      spawnDropletExplosion(sourceEl);
+
+      currentWaterMl = 0;
+      updateWaterUI(false);
+
+      if (resetChargingLabel) {
+        resetChargingLabel.textContent = 'Sıfırlandı!';
+        setTimeout(() => resetChargingLabel.classList.add('opacity-0'), 900);
+      }
+
+      if (waterResetBtn) triggerSpringPop(waterResetBtn);
+      const targetL = (targetWaterMl / 1000).toFixed(targetWaterMl % 1000 === 0 ? 1 : 2);
+      showToast(`💧 Su sayacı sıfırlandı! (0 / ${targetL} L)`, 'restart_alt');
+
+      setTimeout(() => setChargeRings(0), 300);
+    }
+
+    function cancelLongPress() {
+      if (isResetCompleted) return;
+      clearTimeout(pressTimer);
+      clearInterval(chargeInterval);
+      pressTimer = null;
+      chargeInterval = null;
+
+      if (waterCard) waterCard.classList.remove('card-pressing');
+      if (resetChargingLabel) resetChargingLabel.classList.add('opacity-0');
+      setChargeRings(0);
+    }
+
+    [waterResetBtn, waterIconWrap].forEach(el => {
+      if (!el) return;
+      el.addEventListener('mousedown', (e) => startLongPress(e, el));
+      el.addEventListener('mouseup', cancelLongPress);
+      el.addEventListener('mouseleave', cancelLongPress);
+
+      el.addEventListener('touchstart', (e) => startLongPress(e, el), { passive: true });
+      el.addEventListener('touchend', cancelLongPress);
+      el.addEventListener('touchcancel', cancelLongPress);
+    });
+
+    waterResetBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!isResetCompleted) {
+        showToast('Sıfırlamak için 1.2 sn basılı tutun ⏱️', 'touch_app');
+      }
+    });
+
+    document.getElementById('fav-btn')?.addEventListener('click', function() {
+      triggerSpringPop(this);
+      showToast('Favorilere eklendi ❤️', 'favorite');
+    });
+
+    // 5. ORGANIC 3D LIQUID SLIDER CONTROLLER & CROSS-SCREEN SYNC
+    const sliderWrap = document.getElementById('liquid-slider-wrap');
+    const liquidFill = document.getElementById('liquid-fill');
+    const liquidThumb = document.getElementById('liquid-thumb');
+    const sliderValLabel = document.getElementById('slider-val-label');
+    const goalBadge = document.getElementById('goal-badge');
+    const goalGlassesText = document.getElementById('goal-glasses-text');
+    const goalAdvicePill = document.getElementById('goal-advice-pill');
+    const profileSummaryText = document.getElementById('profile-summary-text');
+    const goalStepButtons = document.querySelectorAll('.goal-step-btn');
+
+    const MIN_GOAL = 1.0;
+    const MAX_GOAL = 4.0;
+    const STEP_GOAL = 0.25;
+
+    let currentGoalValue = 2.5; // varsayılan Litre
+    let isDraggingSlider = false;
+
+    function getAdviceForGoal(val) {
+      if (val <= 1.5) {
+        return {
+          advice: 'Hafif Tempoda Yeterli',
+          pillBg: 'bg-secondary-fixed text-secondary'
+        };
+      } else if (val <= 2.25) {
+        return {
+          advice: 'Dengeli Rutin 🌸',
+          pillBg: 'bg-secondary-container text-on-surface'
+        };
+      } else if (val <= 2.75) {
+        return {
+          advice: 'Döngü İçin İdeal ✨',
+          pillBg: 'bg-primary-fixed text-primary'
+        };
+      } else if (val <= 3.25) {
+        return {
+          advice: 'Yüksek Hidrasyon 💧',
+          pillBg: 'bg-gradient-to-r from-primary-fixed to-secondary-container text-primary'
+        };
+      } else {
+        return {
+          advice: 'Yoğun Aktivite / Spor ⚡',
+          pillBg: 'bg-primary text-white'
+        };
+      }
+    }
+
+    function setGoalValue(val, triggerFeedback = true) {
+      // Değeri 1.0 ile 4.0 arasına sınırla ve 0.25 katına yuvarla
+      let clamped = Math.max(MIN_GOAL, Math.min(MAX_GOAL, val));
+      clamped = Math.round(clamped / STEP_GOAL) * STEP_GOAL;
+      currentGoalValue = parseFloat(clamped.toFixed(2));
+
+      // Global su hedefi ml senkronizasyonu
+      targetWaterMl = Math.round(currentGoalValue * 1000);
+
+      // Yüzde hesabı
+      const percent = ((currentGoalValue - MIN_GOAL) / (MAX_GOAL - MIN_GOAL)) * 100;
+
+      // Track dolgusu & thumb pozisyonu
+      if (liquidFill) liquidFill.style.width = `${percent}%`;
+      if (liquidThumb) liquidThumb.style.left = `${percent}%`;
+
+      // Rozet & Etiketler
+      const formattedVal = currentGoalValue.toFixed(currentGoalValue % 1 === 0 ? 1 : 2);
+      if (sliderValLabel) sliderValLabel.textContent = `${formattedVal} L / gün`;
+
+      const glasses = Math.round((currentGoalValue * 1000) / 250);
+      if (goalGlassesText) {
+        goalGlassesText.innerHTML = `<span class="material-symbols-outlined text-[13px] text-primary">local_drink</span><span>Yaklaşık ${glasses} Bardak</span>`;
+      }
+
+      const adviceObj = getAdviceForGoal(currentGoalValue);
+      if (goalAdvicePill) {
+        goalAdvicePill.textContent = adviceObj.advice;
+        goalAdvicePill.className = `font-bold px-2 py-0.5 rounded-full text-[10px] transition-colors ${adviceObj.pillBg}`;
+      }
+
+      if (profileSummaryText) {
+        profileSummaryText.textContent = `${formattedVal} Litre (${glasses} Bardak)`;
+      }
+
+      // Adım butonları durum güncellemesi
+      goalStepButtons.forEach(btn => {
+        const btnVal = parseFloat(btn.getAttribute('data-val'));
+        if (Math.abs(btnVal - currentGoalValue) < 0.05) {
+          btn.className = 'goal-step-btn py-1 rounded-lg text-[10px] font-bold text-primary bg-primary-fixed/50 shadow-sm transition-all scale-105';
+        } else {
+          btn.className = 'goal-step-btn py-1 rounded-lg text-[10px] font-semibold text-secondary hover:text-primary hover:bg-surface-container transition-all';
+        }
+      });
+
+      // Ana Ekran Su Tüketimi Kartı canlı senkronizasyonu
+      updateWaterUI(false);
+
+      if (triggerFeedback && goalBadge) {
+        triggerSpringPop(goalBadge);
+      }
+    }
+
+    function calculateValueFromClientX(clientX) {
+      if (!sliderWrap) return;
+      const rect = sliderWrap.getBoundingClientRect();
+      let clickX = clientX - rect.left;
+      clickX = Math.max(0, Math.min(rect.width, clickX));
+      const ratio = clickX / rect.width;
+      const rawVal = MIN_GOAL + ratio * (MAX_GOAL - MIN_GOAL);
+      setGoalValue(rawVal, false);
+    }
+
+    // Slider Event Listeners
+    if (sliderWrap) {
+      const handlePointerDown = (e) => {
+        isDraggingSlider = true;
+        if (liquidThumb) liquidThumb.classList.add('liquid-thumb-dragging');
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        calculateValueFromClientX(clientX);
+      };
+
+      const handlePointerMove = (e) => {
+        if (!isDraggingSlider) return;
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        calculateValueFromClientX(clientX);
+      };
+
+      const handlePointerUp = () => {
+        if (isDraggingSlider) {
+          isDraggingSlider = false;
+          if (liquidThumb) liquidThumb.classList.remove('liquid-thumb-dragging');
+          triggerSpringPop(goalBadge);
+          showToast(`Günlük hedef ${currentGoalValue.toFixed(1)} L olarak güncellendi 💧`, 'water_drop');
+        }
+      };
+
+      sliderWrap.addEventListener('mousedown', handlePointerDown);
+      window.addEventListener('mousemove', handlePointerMove);
+      window.addEventListener('mouseup', handlePointerUp);
+
+      sliderWrap.addEventListener('touchstart', handlePointerDown, { passive: true });
+      window.addEventListener('touchmove', handlePointerMove, { passive: true });
+      window.addEventListener('touchend', handlePointerUp);
+    }
+
+    // Hızlı rehber etiketleri tıklama etkileşimi
+    goalStepButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const val = parseFloat(btn.getAttribute('data-val'));
+        setGoalValue(val, true);
+        showToast(`Hedef ${val.toFixed(1)} L seçildi 💧`, 'water_drop');
+      });
+    });
+
+    // Başlangıç hedefi ve UI senkronizasyonu
+    setGoalValue(2.5, false);
+  </script>
+<script>
+  // 6. SMART WATER REMINDER & SLEEP PROTECTION LOGIC
+  let isReminderActive = true;
+  let currentReminderInterval = '2s'; // '1s', '2s', '3s', 'smart'
+  
+  const reminderMasterToggle = document.getElementById('reminder-master-toggle');
+  const reminderToggleThumb = document.getElementById('reminder-toggle-thumb');
+  const reminderToggleIcon = document.getElementById('reminder-toggle-icon');
+  const reminderDetailsPanel = document.getElementById('reminder-details-panel');
+  const reminderChips = document.querySelectorAll('.reminder-chip');
+  const liveReminderPill = document.getElementById('water-reminder-live-pill');
+  const liveReminderText = document.getElementById('water-reminder-live-text');
+
+  const intervalLabels = {
+    '1s': '1 Saatte Bir',
+    '2s': '2 Saatte Bir',
+    '3s': '3 Saatte Bir',
+    'smart': 'Döngü Fazı (Akıllı)'
+  };
+
+  function updateReminderUI() {
+    if (reminderMasterToggle) {
+      reminderMasterToggle.setAttribute('aria-checked', isReminderActive ? 'true' : 'false');
+      if (isReminderActive) {
+        reminderMasterToggle.classList.remove('toggle-track-inactive');
+        reminderMasterToggle.classList.add('toggle-track-active');
+        reminderToggleThumb.classList.remove('toggle-thumb-inactive');
+        reminderToggleThumb.classList.add('toggle-thumb-active');
+        reminderToggleThumb.classList.add('text-primary');
+        reminderToggleThumb.classList.remove('text-secondary');
+        reminderToggleIcon.textContent = 'done';
+        if (reminderDetailsPanel) {
+          reminderDetailsPanel.style.opacity = '1';
+          reminderDetailsPanel.style.pointerEvents = 'auto';
+        }
+      } else {
+        reminderMasterToggle.classList.remove('toggle-track-active');
+        reminderMasterToggle.classList.add('toggle-track-inactive');
+        reminderToggleThumb.classList.remove('toggle-thumb-active');
+        reminderToggleThumb.classList.add('toggle-thumb-inactive');
+        reminderToggleThumb.classList.remove('text-primary');
+        reminderToggleThumb.classList.add('text-secondary');
+        reminderToggleIcon.textContent = 'remove';
+        if (reminderDetailsPanel) {
+          reminderDetailsPanel.style.opacity = '0.45';
+          reminderDetailsPanel.style.pointerEvents = 'none';
+        }
+      }
+    }
+
+    if (liveReminderPill && liveReminderText) {
+      if (isReminderActive) {
+        liveReminderPill.className = 'flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary-fixed/40 text-primary border border-primary-fixed/60 text-[9.5px] font-bold shadow-sm transition-all';
+        liveReminderPill.innerHTML = '<span class="material-symbols-outlined text-[11px]">notifications_active</span><span id="water-reminder-live-text">' + intervalLabels[currentReminderInterval] + ' • Uyku koruması</span>';
+      } else {
+        liveReminderPill.className = 'flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-secondary border border-surface-container text-[9.5px] font-medium shadow-sm transition-all';
+        liveReminderPill.innerHTML = '<span class="material-symbols-outlined text-[11px]">notifications_off</span><span id="water-reminder-live-text">Bildirimler kapalı</span>';
+      }
+    }
+  }
+
+  reminderMasterToggle?.addEventListener('click', () => {
+    isReminderActive = !isReminderActive;
+    updateReminderUI();
+    triggerSpringPop(reminderMasterToggle);
+    if (isReminderActive) {
+      showToast('🔔 Su hatırlatıcıları aktif (Uyku korumalı: 22:30-08:30)', 'notifications_active');
+    } else {
+      showToast('Su hatırlatıcı bildirimleri duraklatıldı', 'notifications_off');
+    }
+  });
+
+  reminderChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      if (!isReminderActive) return;
+      currentReminderInterval = chip.getAttribute('data-interval');
+      reminderChips.forEach(c => {
+        c.className = 'reminder-chip py-2 px-2.5 rounded-xl border text-[11px] font-semibold text-secondary border-surface-container bg-surface-container-lowest hover:border-primary/40 active:scale-95 transition-all text-left flex items-center justify-between';
+        const icon = c.querySelector('.material-symbols-outlined');
+        if (icon) icon.classList.add('opacity-0');
+      });
+      chip.className = 'reminder-chip active-reminder-chip py-2 px-2.5 rounded-xl border text-[11px] font-bold text-primary border-primary-fixed bg-gradient-to-r from-primary-fixed/50 to-surface-container-low shadow-[0_2px_6px_rgba(216,27,96,0.12),inset_0_1px_1px_rgba(255,255,255,0.8)] active:scale-95 transition-all text-left flex items-center justify-between';
+      const checkIcon = chip.querySelector('.material-symbols-outlined');
+      if (checkIcon) {
+        checkIcon.classList.remove('opacity-0');
+        checkIcon.classList.add('text-primary');
+      }
+      triggerSpringPop(chip);
+      updateReminderUI();
+      showToast('Aralık güncellendi: ' + intervalLabels[currentReminderInterval], 'schedule');
+    });
+  });
+
+  document.getElementById('sleep-start-btn')?.addEventListener('click', () => {
+    showToast('🌙 Gece uyku sessiz modu 22:30 olarak ayarlı', 'bedtime');
+  });
+  document.getElementById('sleep-end-btn')?.addEventListener('click', () => {
+    showToast('☀️ Sabah uyanış bildirim saati 08:30 olarak ayarlı', 'wb_sunny');
+  });
+
+  updateReminderUI();
+</script>
+
+<script id="audio-haptics-script" class="">let isDropletSoundEnabled = true; let isHapticEnabled = true; let audioCtx = null; function getAudioContext() { if (!audioCtx) { const AudioContextClass = window.AudioContext || window.webkitAudioContext; if (AudioContextClass) { audioCtx = new AudioContextClass(); } } if (audioCtx && audioCtx.state === 'suspended') { audioCtx.resume(); } return audioCtx; } function playDropletSound() { if (!isDropletSoundEnabled) return; try { const ctx = getAudioContext(); if (!ctx) return; const now = ctx.currentTime; const osc = ctx.createOscillator(); const gain = ctx.createGain(); const filter = ctx.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.setValueAtTime(2200, now); osc.type = 'sine'; osc.frequency.setValueAtTime(1250, now); osc.frequency.exponentialRampToValueAtTime(580, now + 0.14); gain.gain.setValueAtTime(0, now); gain.gain.linearRampToValueAtTime(0.35, now + 0.015); gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22); osc.connect(filter); filter.connect(gain); gain.connect(ctx.destination); osc.start(now); osc.stop(now + 0.23); } catch (e) { console.error('Audio play error:', e); } } function triggerHaptic(pattern = [18]) { if (!isHapticEnabled) return; if (typeof navigator !== 'undefined' && navigator.vibrate) { try { navigator.vibrate(pattern); } catch (e) {} } } const btnTestDropletSound = document.getElementById('btn-test-droplet-sound'); const soundDropletToggle = document.getElementById('sound-droplet-toggle'); const soundDropletThumb = document.getElementById('sound-droplet-thumb'); const soundDropletIcon = document.getElementById('sound-droplet-icon'); const hapticVibeToggle = document.getElementById('haptic-vibe-toggle'); const hapticVibeThumb = document.getElementById('haptic-vibe-thumb'); const hapticVibeIcon = document.getElementById('haptic-vibe-icon'); btnTestDropletSound?.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); playDropletSound(); triggerHaptic([25, 30, 20]); triggerSpringPop(btnTestDropletSound); showToast('💧 Kristal su damlası sesi çalındı', 'graphic_eq'); }); soundDropletToggle?.addEventListener('click', () => { isDropletSoundEnabled = !isDropletSoundEnabled; soundDropletToggle.setAttribute('aria-checked', isDropletSoundEnabled ? 'true' : 'false'); if (isDropletSoundEnabled) { soundDropletToggle.classList.remove('toggle-track-inactive'); soundDropletToggle.classList.add('toggle-track-active'); soundDropletThumb.classList.remove('toggle-thumb-inactive'); soundDropletThumb.classList.add('toggle-thumb-active'); soundDropletThumb.classList.add('text-primary'); soundDropletThumb.classList.remove('text-secondary'); soundDropletIcon.textContent = 'done'; playDropletSound(); showToast('Su damlası sesi açıldı 💧', 'volume_up'); } else { soundDropletToggle.classList.remove('toggle-track-active'); soundDropletToggle.classList.add('toggle-track-inactive'); soundDropletThumb.classList.remove('toggle-thumb-active'); soundDropletThumb.classList.add('toggle-thumb-inactive'); soundDropletThumb.classList.remove('text-primary'); soundDropletThumb.classList.add('text-secondary'); soundDropletIcon.textContent = 'remove'; showToast('Su damlası sesi kapatıldı', 'volume_off'); } triggerSpringPop(soundDropletToggle); }); hapticVibeToggle?.addEventListener('click', () => { isHapticEnabled = !isHapticEnabled; hapticVibeToggle.setAttribute('aria-checked', isHapticEnabled ? 'true' : 'false'); if (isHapticEnabled) { hapticVibeToggle.classList.remove('toggle-track-inactive'); hapticVibeToggle.classList.add('toggle-track-active'); hapticVibeThumb.classList.remove('toggle-thumb-inactive'); hapticVibeThumb.classList.add('toggle-thumb-active'); hapticVibeThumb.classList.add('text-primary'); hapticVibeThumb.classList.remove('text-secondary'); hapticVibeIcon.textContent = 'done'; triggerHaptic([35]); showToast('Dokunsal titreşim açıldı ✨', 'vibration'); } else { hapticVibeToggle.classList.remove('toggle-track-active'); hapticVibeToggle.classList.add('toggle-track-inactive'); hapticVibeThumb.classList.remove('toggle-thumb-active'); hapticVibeThumb.classList.add('toggle-thumb-inactive'); hapticVibeThumb.classList.remove('text-primary'); hapticVibeThumb.classList.add('text-secondary'); hapticVibeIcon.textContent = 'remove'; showToast('Dokunsal titreşim kapatıldı', 'do_not_disturb_on'); } triggerSpringPop(hapticVibeToggle); }); document.getElementById('add-water-btn')?.addEventListener('click', () => { playDropletSound(); triggerHaptic([20, 25, 20]); });</script><script class="">
+  document.getElementById('cycle-ring')?.addEventListener('click', function() {
+    if (typeof playDropletSound === 'function') playDropletSound();
+    if (typeof triggerHaptic === 'function') triggerHaptic([30, 40, 20]);
+    if (typeof triggerSpringPop === 'function') triggerSpringPop(this);
+    if (typeof showToast === 'function') showToast('🌸 14. Gün: Ovülasyon Zirvesi & Yüksek Doğurganlık Dönemi', 'local_florist');
+  });
+</script><script id="nutrition-movement-trend-recap-engine">document.addEventListener('DOMContentLoaded', () => {}); (function() { const recomExercise = document.getElementById('recom-exercise-text'); const recomNutrition = document.getElementById('recom-nutrition-text'); const recomBadge = document.getElementById('recom-badge'); const recomIcon = document.getElementById('recom-icon'); const recomPhaseTag = document.getElementById('recom-phase-tag'); const trendTodayBar = document.getElementById('trend-today-bar'); const trendTodayPct = document.getElementById('trend-today-pct'); const trendTodayEmoji = document.getElementById('trend-today-emoji'); const weeklyTrendTodayStatus = document.getElementById('weekly-trend-today-status'); const recapEnergyVal = document.getElementById('recap-energy-val'); const recapMoodVal = document.getElementById('recap-mood-val'); const recapWaterVal = document.getElementById('recap-water-val'); const cardEnergyVal = document.getElementById('card-energy-val'); const cardEnergyStatus = document.getElementById('card-energy-status'); const cardEnergyBar = document.getElementById('card-energy-bar'); const cardMoodEmoji = document.getElementById('card-mood-emoji'); const cardMoodLabel = document.getElementById('card-mood-label'); const modalEnergySlider = document.getElementById('modal-energy-slider'); const modalEnergyFill = document.getElementById('modal-energy-fill'); const modalEnergyThumb = document.getElementById('modal-energy-thumb'); const modalEnergyLabel = document.getElementById('modal-energy-label'); const modalActiveMoodName = document.getElementById('modal-active-mood-name'); const moodOptionBtns = document.querySelectorAll('.mood-option-btn'); let currentEnergyLevel = 85; let currentMood = { emoji: '🥰', label: 'Canlı & Pozitif' }; function updateRecommendations(energy) { if (energy >= 70) { if (recomBadge) recomBadge.textContent = 'Zirve Fazı'; if (recomIcon) recomIcon.textContent = 'fitness_center'; if (recomPhaseTag) recomPhaseTag.textContent = 'Ovülasyon Zirvesi'; if (recomExercise) recomExercise.innerHTML = '🏃‍♀️ <strong>HIIT veya Güç Antrenmanı:</strong> Yüksek östrojen ve enerjiyi kardiyo/direnç ile değerlendirin.'; if (recomNutrition) recomNutrition.innerHTML = '🥗 <strong>Yüksek Protein & Bol Lif:</strong> Yeşil yapraklı sebzeler, antioksidan smoothie ve bol hidrasyon.'; } else if (energy >= 40) { if (recomBadge) recomBadge.textContent = 'Dengeli Faz'; if (recomIcon) recomIcon.textContent = 'self_improvement'; if (recomPhaseTag) recomPhaseTag.textContent = 'Orta Enerji'; if (recomExercise) recomExercise.innerHTML = '🧘‍♀️ <strong>Pilates & Vinyasa Yoga:</strong> Tempolu yürüyüş ve postür odaklı esneme hareketleri.'; if (recomNutrition) recomNutrition.innerHTML = '🥑 <strong>Sağlıklı Yağlar & Kuruyemiş:</strong> Avokado, ceviz ve kompleks karbonhidratlarla kan şekeri dengesi.'; } else { if (recomBadge) recomBadge.textContent = 'Dinlenme Fazı'; if (recomIcon) recomIcon.textContent = 'spa'; if (recomPhaseTag) recomPhaseTag.textContent = 'Hafif Tempoda'; if (recomExercise) recomExercise.innerHTML = '🌸 <strong>Hafif Esneme & Nefes:</strong> Meditatif nefes egzersizleri, yavaş yürüyüş ve gevşeme.'; if (recomNutrition) recomNutrition.innerHTML = '🍵 <strong>Magnezyum & Sıcak Çorbalar:</strong> Bitki çayları, kemik sulu ılık çorbalar & dinlendirici besinler.'; } } function applyEnergyState(energy) { currentEnergyLevel = energy; if (cardEnergyVal) cardEnergyVal.textContent = '%' + energy; if (cardEnergyBar) cardEnergyBar.style.width = energy + '%'; if (modalEnergyFill) modalEnergyFill.style.width = energy + '%'; if (modalEnergyThumb) modalEnergyThumb.style.left = energy + '%'; const statusText = energy >= 70 ? '• Zirve Enerji' : (energy >= 40 ? '• Dengeli Ritim' : '• Dinlenme İhtiyacı'); if (cardEnergyStatus) cardEnergyStatus.textContent = statusText; if (modalEnergyLabel) modalEnergyLabel.textContent = '%' + energy + ' (' + (energy >= 70 ? 'Zirve' : (energy >= 40 ? 'Dengeli' : 'Düşük')) + ')'; if (trendTodayBar) trendTodayBar.style.height = energy + '%'; if (trendTodayPct) trendTodayPct.textContent = energy; if (weeklyTrendTodayStatus) weeklyTrendTodayStatus.textContent = 'Bugün: %' + energy + ' ' + (energy >= 70 ? 'Zirve' : (energy >= 40 ? 'Dengeli' : 'Sakin')); if (recapEnergyVal) recapEnergyVal.textContent = '%' + energy + ' ' + (energy >= 70 ? 'Zirve' : (energy >= 40 ? 'Dengeli' : 'Sakin')); updateRecommendations(energy); } function applyMoodState(emoji, label) { currentMood = { emoji, label }; if (cardMoodEmoji) cardMoodEmoji.textContent = emoji; if (cardMoodLabel) cardMoodLabel.textContent = label; if (modalActiveMoodName) modalActiveMoodName.textContent = emoji + ' ' + label; if (trendTodayEmoji) trendTodayEmoji.textContent = emoji; if (recapMoodVal) recapMoodVal.textContent = emoji + ' ' + label.split(' ')[0]; } moodOptionBtns.forEach(btn => { btn.addEventListener('click', () => { moodOptionBtns.forEach(b => { b.className = 'mood-option-btn p-2 rounded-xl flex flex-col items-center justify-center gap-0.5 border text-center transition-all bg-surface-container-lowest border-surface-container text-secondary hover:border-primary-fixed/50 hover:scale-105 active:scale-95'; const span = b.querySelector('span:last-child'); if (span) { span.classList.remove('font-bold', 'text-primary'); span.classList.add('font-semibold'); } }); btn.className = 'mood-option-btn p-2 rounded-xl flex flex-col items-center justify-center gap-0.5 border text-center transition-all bg-gradient-to-b from-white to-primary-fixed/40 border-primary-fixed shadow-[0_2px_8px_rgba(216,27,96,0.18)] scale-105'; const activeSpan = btn.querySelector('span:last-child'); if (activeSpan) { activeSpan.classList.add('font-bold', 'text-primary'); activeSpan.classList.remove('font-semibold'); } const emoji = btn.getAttribute('data-emoji') || '🥰'; const label = btn.getAttribute('data-label') || 'Canlı'; applyMoodState(emoji, label); if (typeof playDropletSound === 'function') playDropletSound(); if (typeof triggerHaptic === 'function') triggerHaptic([20, 25]); if (typeof showToast === 'function') showToast(emoji + ' Ruh hali güncellendi: ' + label, 'sentiment_satisfied'); }); }); if (modalEnergySlider) { let isDraggingEnergy = false; const calculateEnergy = (clientX) => { const rect = modalEnergySlider.getBoundingClientRect(); let x = clientX - rect.left; x = Math.max(0, Math.min(rect.width, x)); const pct = Math.round((x / rect.width) * 100); applyEnergyState(pct); }; modalEnergySlider.addEventListener('mousedown', (e) => { isDraggingEnergy = true; calculateEnergy(e.clientX); }); window.addEventListener('mousemove', (e) => { if (isDraggingEnergy) calculateEnergy(e.clientX); }); window.addEventListener('mouseup', () => { if (isDraggingEnergy) { isDraggingEnergy = false; if (typeof playDropletSound === 'function') playDropletSound(); if (typeof triggerHaptic === 'function') triggerHaptic([25]); } }); modalEnergySlider.addEventListener('touchstart', (e) => { isDraggingEnergy = true; calculateEnergy(e.touches[0].clientX); }, { passive: true }); window.addEventListener('touchmove', (e) => { if (isDraggingEnergy) calculateEnergy(e.touches[0].clientX); }, { passive: true }); window.addEventListener('touchend', () => { isDraggingEnergy = false; }); } const btnEditSymptomsAction = document.getElementById('btn-edit-symptoms-action'); btnEditSymptomsAction?.addEventListener('click', () => { if (typeof closeSymptomCard === 'function') closeSymptomCard(); if (typeof playDropletSound === 'function') playDropletSound(); if (typeof triggerHaptic === 'function') triggerHaptic([30, 40, 25]); if (typeof showToast === 'function') showToast('🌸 Günlük semptomlar ve ritim başarıyla kaydedildi!', 'task_alt'); const banner = document.getElementById('daily-recap-banner'); if (banner) { banner.classList.remove('opacity-60'); if (typeof triggerSpringPop === 'function') triggerSpringPop(banner); } }); document.getElementById('energy-vitality-card')?.addEventListener('click', () => { if (typeof openSymptomCard === 'function') openSymptomCard('14 Mayıs Canlı Ritim', 'Enerji ve Ruh Hali Düzeyi'); }); const btnCompleteDay = document.getElementById('btn-complete-day-action'); btnCompleteDay?.addEventListener('click', () => { if (typeof playDropletSound === 'function') playDropletSound(); if (typeof triggerHaptic === 'function') triggerHaptic([35, 45, 30]); if (typeof showToast === 'function') showToast('🌙 14 Mayıs döngü günü tamamlandı ve arşive kaydedildi! Harika bir gün.', 'bedtime'); const banner = document.getElementById('daily-recap-banner'); if (banner) { banner.classList.add('opacity-75'); btnCompleteDay.innerHTML = '<span class="material-symbols-outlined text-[15px]">check</span><span>Günü Tamamlandı</span>'; btnCompleteDay.classList.remove('from-primary', 'to-primary-container'); btnCompleteDay.classList.add('bg-secondary'); } }); document.getElementById('btn-dismiss-recap')?.addEventListener('click', () => { const banner = document.getElementById('daily-recap-banner'); if (banner) { banner.style.display = 'none'; if (typeof showToast === 'function') showToast('Gün sonu özeti gizlendi', 'visibility_off'); } }); document.getElementById('btn-quick-recap-details')?.addEventListener('click', () => { if (typeof openSymptomCard === 'function') openSymptomCard('14 Mayıs Gün Sonu Özeti', 'Biyometri, Enerji & Alışkanlıklar'); }); applyEnergyState(85); applyMoodState('🥰', 'Canlı & Pozitif'); })();</script>
+
+
+
+<script id="pollen-sparkle-burst-engine">function createPollenBurst(x, y) { const colors = ['#fde047', '#ffd9de', '#a7f3d0', '#fbcfe8', '#fed7aa', '#d81b60', '#86efac']; const symbols = ['✦', '•', '✧', '🌸', '✨', '🍃', '•']; const particleCount = 10 + Math.floor(Math.random() * 4); for (let i = 0; i < particleCount; i++) { const p = document.createElement('span'); p.className = 'pollen-burst-particle'; const angle = (i / particleCount) * Math.PI * 2 + (Math.random() * 0.4 - 0.2); const distance = 28 + Math.random() * 45; const pdx = `${Math.cos(angle) * distance}px`; const pdy = `${Math.sin(angle) * distance - 8}px`; const prot = `${(Math.random() * 360 - 180)}deg`; const color = colors[Math.floor(Math.random() * colors.length)]; const isChar = Math.random() > 0.45; p.style.left = `${x}px`; p.style.top = `${y}px`; p.style.setProperty('--pdx', pdx); p.style.setProperty('--pdy', pdy); p.style.setProperty('--prot', prot); if (isChar) { p.textContent = symbols[Math.floor(Math.random() * symbols.length)]; p.style.fontSize = `${9 + Math.random() * 7}px`; p.style.color = color; } else { const size = 4 + Math.random() * 5; p.style.width = `${size}px`; p.style.height = `${size}px`; p.style.backgroundColor = color; p.style.boxShadow = `0 0 6px ${color}`; } document.body.appendChild(p); setTimeout(() => p.remove(), 750); } if (typeof triggerHaptic === 'function') triggerHaptic([12, 18]); if (typeof playDropletSound === 'function') playDropletSound(); } document.addEventListener('click', (e) => { const target = e.target.closest('.botanical-glow-petal, .botanical-sparkle, .petal-drift, #cycle-ring, .day-chip, #fav-btn'); if (target) { const rect = target.getBoundingClientRect(); const x = e.clientX || (rect.left + rect.width / 2); const y = e.clientY || (rect.top + rect.height / 2); createPollenBurst(x, y); } });</script>
+
+</body></html>

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="tr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "outline-variant": "#e3bdc3", "primary-fixed": "#ffd9de", "surface-container-high": "#f0e6e8", "on-surface-variant": "#5a4044", "inverse-on-surface": "#f9eef0", "on-error-container": "#93000a", "outline": "#8e6f74", "on-tertiary": "#ffffff", "surface-container-low": "#fcf1f3", "secondary-fixed": "#ffd9e4", "primary-container": "#d81b60", "tertiary-container": "#a35879", "on-primary": "#ffffff", "surface-bright": "#fff8f8", "background": "#fff8f8", "on-error": "#ffffff", "tertiary-fixed": "#ffd8e5", "inverse-primary": "#ffb2bf", "secondary-fixed-dim": "#f2b6cb", "surface-container-lowest": "#ffffff", "on-tertiary-container": "#fff2f4", "surface-variant": "#eae0e2", "tertiary-fixed-dim": "#ffb0cf", "secondary": "#805062", "on-background": "#1f1a1c", "on-primary-fixed-variant": "#90003b", "error-container": "#ffdad6", "surface": "#fff8f8", "surface-container": "#f6ebed", "on-secondary": "#ffffff", "surface-dim": "#e2d7d9", "on-surface": "#1f1a1c", "on-tertiary-fixed-variant": "#72304f", "inverse-surface": "#352f31", "tertiary": "#874061", "primary-fixed-dim": "#ffb2bf", "secondary-container": "#fec1d6", "surface-tint": "#bc004f", "on-primary-container": "#fff2f3", "primary": "#b0004a", "error": "#ba1a1a", "surface-container-highest": "#eae0e2", "on-secondary-fixed": "#330f1f", "on-secondary-container": "#7b4c5e", "on-tertiary-fixed": "#3c0223", "on-secondary-fixed-variant": "#65394b", "on-primary-fixed": "#3f0016" }, borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, spacing: { "space-xl": "2.25rem", "space-lg": "1.5rem", "space-sm": "0.5rem", "gutter": "1rem", "space-xs": "0.25rem", "gutter-tablet": "1.5rem", "margin-tablet": "2rem", "margin-desktop": "3rem", "margin": "1.25rem", "space-md": "1rem", "gutter-desktop": "2rem" }, fontFamily: { "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "display": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"] }, fontSize: { "body-lg": ["1.125rem", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }], "body-md": ["1rem", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }], "headline-sm": ["1.25rem", { "lineHeight": "1.35", "letterSpacing": "-0.01em", "fontWeight": "600" }], "display": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800" }], "label-lg": ["0.875rem", { "lineHeight": "1.25", "letterSpacing": "0.01em", "fontWeight": "600" }], "body-sm": ["0.875rem", { "lineHeight": "1.45", "letterSpacing": "0", "fontWeight": "400" }], "headline-lg-mobile": ["1.75rem", { "lineHeight": "1.25", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-sm": ["0.6875rem", { "lineHeight": "1.15", "letterSpacing": "0.03em", "fontWeight": "500" }], "label-md": ["0.75rem", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-md": ["1.5rem", { "lineHeight": "1.3", "letterSpacing": "-0.015em", "fontWeight": "600" }], "headline-lg": ["2.25rem", { "lineHeight": "1.2", "letterSpacing": "-0.025em", "fontWeight": "700" }] } } } };</script>
+<style>
+  @layer base{
+    html,body{width:100vw;margin:0;padding:0;background-color:#fff8f8;}
+    .pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}
+    .pt-safe{padding-top:env(safe-area-inset-top,0px);}
+    main>:first-child{margin-top:0!important;}
+    main>:last-child{margin-bottom:0!important;}
+  }
+  ::-webkit-scrollbar{display:none;}
+  .topographic-pattern{
+    background-image:radial-gradient(#e3bdc3 0.6px, transparent 0.6px), radial-gradient(#ffd9de 0.6px, #fff8f8 0.6px);
+    background-size:24px 24px;
+    background-position:0 0, 12px 12px;
+    opacity:0.35;
+  }
+  body {
+    min-height: max(884px, 100dvh);
+  }
+
+  /* Ultra-luminous Botanical Animations */
+  @keyframes spin-slow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes spin-reverse-slow {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
+  }
+  @keyframes aura-pulse {
+    0%, 100% { opacity: 0.65; transform: scale(1); filter: drop-shadow(0 0 16px rgba(255,182,193,0.7)); }
+    50% { opacity: 0.95; transform: scale(1.06); filter: drop-shadow(0 0 28px rgba(255,105,180,0.9)) drop-shadow(0 0 12px rgba(20,241,149,0.5)); }
+  }
+  @keyframes float-gentle {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-4px) rotate(3deg); }
+  }
+  @keyframes liquid-shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .animate-spin-slow {
+    animation: spin-slow 22s linear infinite;
+  }
+  .animate-spin-reverse-slow {
+    animation: spin-reverse-slow 28s linear infinite;
+  }
+  .animate-aura {
+    animation: aura-pulse 3.5s ease-in-out infinite;
+  }
+  .animate-float {
+    animation: float-gentle 4s ease-in-out infinite;
+  }
+  .liquid-gradient {
+    background: linear-gradient(90deg, #06b6d4, #10b981, #f59e0b, #ec4899, #d81b60);
+    background-size: 300% 300%;
+    animation: liquid-shimmer 6s ease infinite;
+  }
+
+  /* Claymorphic 3D Card styles */
+  .clay-card {
+    box-shadow: 0 16px 32px -8px rgba(176,0,74,0.12),
+                0 6px 14px -2px rgba(135,64,97,0.08),
+                inset 0 2px 4px rgba(255,255,255,0.95),
+                inset 0 -2px 4px rgba(216,27,96,0.05);
+  }
+  .clay-card-sm {
+    box-shadow: 0 8px 18px -4px rgba(128,80,98,0.12),
+                inset 0 1.5px 2px rgba(255,255,255,0.9),
+                inset 0 -1.5px 2px rgba(128,80,98,0.06);
+  }
+  .clay-pill-active {
+    box-shadow: 0 10px 24px -4px rgba(216,27,96,0.45),
+                inset 0 2px 3px rgba(255,255,255,0.7),
+                inset 0 -2px 4px rgba(0,0,0,0.15);
+  }
+
+  /* Pollen & Blossom particle styles */
+  .pollen-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 9999px;
+    animation: particle-fly 0.9s cubic-bezier(0.12, 0.89, 0.32, 1.28) forwards;
+  }
+  @keyframes particle-fly {
+    0% {
+      opacity: 1;
+      transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--tw-tx), var(--tw-ty)) scale(0.1) rotate(var(--tw-rot));
+    }
+  }
+</style>
+</head>
+<body class="bg-surface text-on-surface font-body-md text-body-md min-h-full flex flex-col relative selection:bg-secondary-container selection:text-on-secondary-container overflow-x-hidden">
+<div class="fixed inset-0 pointer-events-none topographic-pattern z-0"></div>
+<!-- Floating Ambient Botanic Light Orbs in Background -->
+<div class="fixed top-20 -left-20 w-72 h-72 rounded-full bg-gradient-to-tr from-amber-300/30 via-pink-400/25 to-emerald-300/30 blur-3xl pointer-events-none z-0 animate-aura"></div>
+<div class="fixed top-96 -right-24 w-80 h-80 rounded-full bg-gradient-to-br from-cyan-400/20 via-primary/20 to-amber-200/25 blur-3xl pointer-events-none z-0"></div>
+<header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_4px_24px_-4px_rgba(216,27,96,0.08)] border-b border-primary-fixed/40">
+<div class="h-16 px-margin flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="relative w-11 h-11 rounded-full bg-gradient-to-tr from-primary to-amber-400 flex items-center justify-center text-white shadow-[0_4px_14px_rgba(216,27,96,0.35)]">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">spa</span>
+<span class="absolute -top-1 -right-1 flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border border-white"></span>
+</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-bold flex items-center gap-1.5">
+          Profil 
+          <span class="text-xs px-2 py-0.5 rounded-full bg-gradient-to-r from-pink-500/15 to-emerald-500/15 text-primary border border-primary/20 font-bold">Botanik Bahçe</span>
+</h1>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button aria-label="Bildirimler" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90 bg-surface-container/60 shadow-sm" onclick="triggerPollen(event, 'sparkle')">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary via-primary-container to-amber-400 flex items-center justify-center shadow-[0_2px_10px_rgba(176,0,74,0.35)]">
+<span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col relative w-full pt-16 pb-32 bg-transparent z-10">
+<div class="flex flex-col w-full px-margin pb-6 gap-space-lg">
+<!-- Sub-header Bar: Status sync & Settings trigger with Botanic Shimmer -->
+<div class="flex items-center justify-between pt-2">
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-surface-container via-surface-container-low to-secondary-fixed/50 border border-secondary-fixed shadow-[0_4px_14px_rgba(216,27,96,0.08)]">
+<span class="material-symbols-outlined text-[17px] text-emerald-600 animate-pulse" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span class="font-label-md text-label-md text-secondary font-medium">Apple Health &amp; Biyo-Flora Eşitlendi</span>
+</div>
+<button aria-label="Genel Tercihler" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-transform active:rotate-45 shadow-[0_4px_14px_rgba(216,27,96,0.1)] border border-white" onclick="triggerPollen(event, 'gold')">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+</div>
+<!-- HERO PROFILE CLAY CARD with DUAL-LAYER ROTATING BOTANIC HALO & BREATHING AURA -->
+<div class="w-full bg-surface-container-lowest/95 backdrop-blur-md rounded-2xl p-space-lg clay-card relative overflow-hidden border border-white/80">
+<!-- Glowing Animated Ambient Aurora Inside Card -->
+<div class="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-gradient-to-br from-pink-400/40 via-amber-300/35 to-emerald-300/35 blur-2xl pointer-events-none animate-aura"></div>
+<div class="absolute -bottom-14 -left-12 w-40 h-40 rounded-full bg-gradient-to-tr from-cyan-400/25 via-primary/20 to-transparent blur-2xl pointer-events-none"></div>
+<!-- Profile Content with Double Botanic Orbit -->
+<div class="flex items-center gap-5 mb-space-lg relative z-10">
+<!-- Avatar with Multi-layer Botanical Orbit Halo -->
+<div class="relative flex-shrink-0 cursor-pointer" onclick="triggerPollen(event, 'blossom')">
+<!-- Breathing Luminous Outer Aura -->
+<div class="absolute -inset-3 rounded-full bg-gradient-to-r from-amber-400 via-pink-500 to-emerald-400 blur-md opacity-70 animate-aura"></div>
+<!-- Layer 1: Outer Rotating Botanic Halo (Flowers & Sparkles - Clockwise) -->
+<div class="absolute -inset-3 rounded-full animate-spin-slow pointer-events-none flex items-center justify-center">
+<!-- Botanical elements positioned around orbit ring -->
+<span class="absolute -top-1.5 left-1/2 -translate-x-1/2 text-[15px] select-none filter drop-shadow-[0_0_6px_rgba(255,215,0,0.8)]">🌸</span>
+<span class="absolute top-1/2 -right-2 -translate-y-1/2 text-[14px] select-none filter drop-shadow-[0_0_6px_rgba(16,185,129,0.8)]">🌿</span>
+<span class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 text-[15px] select-none filter drop-shadow-[0_0_6px_rgba(236,72,153,0.8)]">✨</span>
+<span class="absolute top-1/2 -left-2 -translate-y-1/2 text-[13px] select-none filter drop-shadow-[0_0_6px_rgba(6,182,212,0.8)]">🌼</span>
+</div>
+<!-- Layer 2: Inner Rotating Botanic Halo (Leaves & Golden Pollen - Counter Clockwise) -->
+<div class="absolute -inset-1 rounded-full animate-spin-reverse-slow pointer-events-none border border-dashed border-amber-300/60 flex items-center justify-center">
+<span class="absolute top-1 right-1 text-[11px] select-none filter drop-shadow-[0_0_4px_rgba(255,182,193,0.9)]">🌺</span>
+<span class="absolute bottom-1 left-1 text-[10px] select-none filter drop-shadow-[0_0_4px_rgba(52,211,153,0.9)]">🍃</span>
+</div>
+<!-- Actual Avatar Frame with Multi-chromatic Gradient -->
+<div class="relative w-20 h-20 rounded-full p-[3px] bg-gradient-to-tr from-amber-400 via-primary to-emerald-400 shadow-[0_8px_22px_rgba(216,27,96,0.35)]">
+<img class="w-full h-full object-cover rounded-full bg-surface-container" data-alt="A gentle, glowing, warm portrait of a 28-year-old Turkish woman with soft hazel eyes and a peaceful joyful expression, photographed in warm diffused pinkish studio light, high key minimalism, soft blush undertones matching feminine wellness app aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEHAJgV3wZ7EIDsWKkAd4CYAth3xIQWwmmcXtVKEXZ2ELUzLYkFPXRAU-_D79K0lsgDcI2USlG8phX6OryKsGf-SuYkDp5-xw6J-OV02mQqFyveoRHsEuEhPoKU0JGVd56IZ1Fk2eby7oEqg_hPFvG5GAqzv7QEvVMcaJ6qKmZO6hSwViyuw8JdJfGDq6dWoy5MA369W6jntcWurcc28M2lyMdbp9eG978Y-2WuBY"/>
+</div>
+<!-- Edit Floating Badge with Flower Sparkle -->
+<div class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-gradient-to-tr from-primary to-amber-500 flex items-center justify-center shadow-[0_3px_8px_rgba(176,0,74,0.45)] border-2 border-white">
+<span class="material-symbols-outlined text-[13px] text-white">stylus_note</span>
+</div>
+</div>
+<!-- Name & Status Info -->
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<h2 class="font-headline-sm text-headline-sm text-on-surface truncate font-bold">Zeynep Kaya</h2>
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-sm animate-bounce" title="Bahar Çiçeği">🌷</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary truncate flex items-center gap-1">
+<span>28 Yaş • Kadıköy, İstanbul</span>
+</p>
+<div class="mt-2 self-start px-3 py-1 rounded-full bg-gradient-to-r from-secondary-fixed via-pink-100 to-amber-100 text-on-secondary-fixed font-label-sm text-label-sm flex items-center gap-1.5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_6px_rgba(216,27,96,0.12)] border border-pink-200/50">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+<span class="font-semibold text-primary">Doğurganlık &amp; Gebe Modu</span>
+<span class="text-[12px]">✨</span>
+</div>
+</div>
+</div>
+<!-- 3-Column 3D Neumorphic Clay Bio-Pill Stats with Botanical Tint -->
+<div class="grid grid-cols-3 gap-2.5 relative z-10">
+<div class="bg-gradient-to-b from-white to-surface-container-low rounded-xl p-3 flex flex-col items-center justify-center text-center clay-card-sm border border-pink-100/80 transition-transform active:scale-95" onclick="triggerPollen(event, 'rose')">
+<div class="flex items-center gap-1 mb-0.5">
+<span class="text-[12px]">🌿</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Döngü</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">28</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant font-medium">Gün Ritmi</span>
+</div>
+<div class="bg-gradient-to-b from-white to-surface-container-low rounded-xl p-3 flex flex-col items-center justify-center text-center clay-card-sm border border-rose-100/80 transition-transform active:scale-95" onclick="triggerPollen(event, 'rose')">
+<div class="flex items-center gap-1 mb-0.5">
+<span class="text-[12px]">🌸</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Regl</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-pink-600 font-bold tracking-tight">5</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant font-medium">Gün Akış</span>
+</div>
+<div class="bg-gradient-to-b from-white to-surface-container-low rounded-xl p-3 flex flex-col items-center justify-center text-center clay-card-sm border border-amber-100/80 transition-transform active:scale-95" onclick="triggerPollen(event, 'gold')">
+<div class="flex items-center gap-1 mb-0.5">
+<span class="text-[12px]">✨</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Luteal</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-amber-600 font-bold tracking-tight">14</span>
+<span class="font-label-sm text-[11px] text-on-surface-variant font-medium">Altın Faz</span>
+</div>
+</div>
+</div>
+<!-- Tracking Objective Selector (Tactile 3D Cards with Botanic Flair) -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between px-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-1.5">
+<span>Takip Hedefi</span>
+<span class="text-base">🌺</span>
+</h3>
+<button class="font-label-md text-label-md text-primary font-bold hover:underline flex items-center gap-0.5" onclick="triggerPollen(event, 'sparkle')">
+<span>Değiştir</span>
+<span class="material-symbols-outlined text-[16px]">tune</span>
+</button>
+</div>
+<div class="grid grid-cols-3 gap-2.5 mt-1">
+<!-- Option 1 -->
+<button class="bg-surface-container-lowest rounded-xl p-3 flex flex-col items-center text-center gap-2 clay-card-sm border border-white hover:border-pink-200 transition-all active:scale-95 group" onclick="triggerPollen(event, 'sparkle')">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-secondary group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface leading-tight font-medium">Sadece Regl</span>
+</button>
+<!-- Option 2: Active Ultra Vibrant Fuchsia Embossed Botanical Card -->
+<button class="relative overflow-hidden bg-gradient-to-tr from-primary via-primary-container to-amber-500 text-on-primary rounded-xl p-3 flex flex-col items-center text-center gap-2 clay-pill-active transform scale-[1.03] transition-all" onclick="triggerPollen(event, 'blossom')">
+<div class="absolute inset-0 bg-white/10 opacity-30 animate-pulse pointer-events-none"></div>
+<div class="w-10 h-10 rounded-full bg-white/25 backdrop-blur-md flex items-center justify-center text-white shadow-inner">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<span class="font-label-md text-label-md text-on-primary font-bold leading-tight flex items-center gap-1">
+<span>Hamilelik / Doğurganlık</span>
+</span>
+<span class="absolute top-1 right-1 text-[11px]">✨</span>
+</button>
+<!-- Option 3 -->
+<button class="bg-surface-container-lowest rounded-xl p-3 flex flex-col items-center text-center gap-2 clay-card-sm border border-white hover:border-pink-200 transition-all active:scale-95 group" onclick="triggerPollen(event, 'sparkle')">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-secondary group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">child_care</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface leading-tight font-medium">Gebelikte Hafta Hafta</span>
+</button>
+</div>
+</div>
+<!-- NEW BOTANIC FEATURE: Organik Sıvı Kaydırıcı & Hidrasyon Hedefi (Organic Liquid Slider & Sleep Shield) -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between px-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-1.5">
+<span>Organik Biyo-Ritim &amp; Sıvı</span>
+<span class="text-base">💧</span>
+</h3>
+<span class="font-label-sm text-label-sm text-emerald-600 font-semibold px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200">Optimal Flora</span>
+</div>
+<div class="bg-surface-container-lowest/90 backdrop-blur-md rounded-2xl p-4 clay-card border border-white flex flex-col gap-3.5">
+<!-- Liquid Slider Control -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-cyan-100 text-cyan-600 flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-[17px]">water_full</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Günlük Canlı Su &amp; Hidrasyon</span>
+</div>
+<span class="font-label-lg text-label-lg font-bold text-cyan-700 bg-cyan-50 px-2.5 py-0.5 rounded-full border border-cyan-200" id="waterValueLabel">2.4 Litre (8 Bardak)</span>
+</div>
+<!-- Tactile Fluid 3D Track -->
+<div class="relative w-full h-8 bg-surface-container rounded-full p-1 shadow-[inset_0_2px_4px_rgba(0,0,0,0.1),inset_0_-1px_2px_rgba(255,255,255,0.8)] overflow-hidden flex items-center">
+<!-- Animated fluid bar with multi-colored wave shimmer -->
+<div class="h-full rounded-full liquid-gradient shadow-[0_2px_10px_rgba(6,182,212,0.4)] relative transition-all duration-300" id="fluidBar" style="width: 78%;">
+<!-- Water surface shimmer bubbles -->
+<div class="absolute inset-0 flex items-center justify-between px-2 text-white/70 text-[10px] select-none">
+<span>🫧</span>
+<span>💧</span>
+<span>✨</span>
+</div>
+</div>
+<!-- Interactive range input overlay -->
+<input class="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-20" max="4.0" min="1.0" oninput="updateWaterSlider(this, event)" step="0.1" type="range" value="2.4"/>
+</div>
+<div class="flex justify-between items-center text-[11px] font-medium text-outline mt-1 px-1">
+<span>1.0 L (Hafif)</span>
+<span class="text-primary font-semibold">🌸 Doğurganlık için +0.5 L Önerilir</span>
+<span>4.0 L (Yüksek)</span>
+</div>
+</div>
+<!-- Sleep Protection Hours Tactile Pill -->
+<div class="flex items-center justify-between pt-2 border-t border-surface-container-high/60">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-200 to-amber-400 text-amber-900 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[18px]">bedtime</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Melatonin &amp; Gece Koruma Saati</p>
+<p class="font-label-sm text-[11px] text-secondary">23:00 - 07:30 (Sessiz Botanik Uyku)</p>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-primary font-label-sm text-label-sm font-bold clay-card-sm border border-white hover:bg-surface-container-high transition-transform active:scale-95" onclick="triggerPollen(event, 'sparkle')">
+        Düzenle
+      </button>
+</div>
+</div>
+</div>
+<!-- Biological Parameters & Medical History (Delicate Minimal Rows with Clay Depth) -->
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface px-1 font-bold flex items-center gap-1.5">
+<span>Biyolojik Parametreler</span>
+<span class="text-base">🧬</span>
+</h3>
+<div class="bg-surface-container-lowest rounded-2xl p-space-sm flex flex-col clay-card border border-white divide-y divide-surface-container/60">
+<!-- Row 1: Döngü Uzunluğu -->
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer group" onclick="triggerPollen(event, 'rose')">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-pink-100 to-pink-200 flex items-center justify-center text-primary shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[20px]">autorenew</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Döngü Uzunluğu</span>
+<span class="font-label-sm text-label-sm text-secondary">Düzenli botanik ritim</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-primary font-bold px-2 py-0.5 rounded-full bg-primary-fixed/60">28 Gün</span>
+<span class="material-symbols-outlined text-outline-variant text-[18px]">chevron_right</span>
+</div>
+</div>
+<!-- Row 2: Kanama Süresi -->
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer group" onclick="triggerPollen(event, 'blossom')">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-rose-100 to-red-200 flex items-center justify-center text-primary shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[20px]">water_drop</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Ortalama Kanama Süresi</span>
+<span class="font-label-sm text-label-sm text-secondary">Hafif-orta akış</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-primary font-bold px-2 py-0.5 rounded-full bg-primary-fixed/60">5 Gün</span>
+<span class="material-symbols-outlined text-outline-variant text-[18px]">chevron_right</span>
+</div>
+</div>
+<!-- Row 3: Doğum Kontrol & Takviye -->
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer group" onclick="triggerPollen(event, 'gold')">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-100 to-amber-200 flex items-center justify-center text-amber-700 shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[20px]">medication</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Doğum Kontrol &amp; Biyo-Takviye</span>
+<span class="font-label-sm text-label-sm text-secondary">Folik Asit, D3 Vitamini &amp; İnositol</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-secondary font-medium">3 Aktif</span>
+<span class="material-symbols-outlined text-outline-variant text-[18px]">chevron_right</span>
+</div>
+</div>
+<!-- Row 4: Hormon & PCOS -->
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors cursor-pointer group" onclick="triggerPollen(event, 'sparkle')">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-emerald-100 to-teal-200 flex items-center justify-center text-emerald-700 shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[20px]">ecg_heart</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Hormonal Denge &amp; PCOS</span>
+<span class="font-label-sm text-label-sm text-secondary">Belirti yok, dengeli flora</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-emerald-700 font-semibold">Dengeli</span>
+<span class="material-symbols-outlined text-outline-variant text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Smart Tactile Notifications & Toggles (Enhanced with 3D Tactile Buttons & Ripple) -->
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface px-1 font-bold flex items-center gap-1.5">
+<span>Akıllı Bildirimler &amp; Bahar Uyarıları</span>
+<span class="text-base">🔔</span>
+</h3>
+<div class="bg-surface-container-lowest rounded-2xl p-space-sm flex flex-col gap-1.5 clay-card border border-white">
+<!-- Toggle Item 1 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-pink-200 to-rose-200 flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[18px]">event_upcoming</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Gelecek Regl Uyarısı</span>
+<span class="font-label-sm text-label-sm text-secondary">2 gün önceden nazik uyarı</span>
+</div>
+</div>
+<button class="w-12 h-7 rounded-full bg-gradient-to-r from-primary to-pink-500 p-0.5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.25),0_2px_8px_rgba(216,27,96,0.3)] transition-all duration-300 relative flex items-center justify-end" data-checked="true" onclick="toggleSwitchWithPollen(this, event)">
+<div class="w-6 h-6 rounded-full bg-white shadow-md transform transition-transform"></div>
+</button>
+</div>
+<!-- Toggle Item 2 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-200 to-pink-200 flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[18px]">bubble_chart</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Doğurganlık Zirve Bildirimi</span>
+<span class="font-label-sm text-label-sm text-secondary">En yüksek şans penceresi &amp; polen uyarısı</span>
+</div>
+</div>
+<button class="w-12 h-7 rounded-full bg-gradient-to-r from-primary to-pink-500 p-0.5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.25),0_2px_8px_rgba(216,27,96,0.3)] transition-all duration-300 relative flex items-center justify-end" data-checked="true" onclick="toggleSwitchWithPollen(this, event)">
+<div class="w-6 h-6 rounded-full bg-white shadow-md transform transition-transform"></div>
+</button>
+</div>
+<!-- Toggle Item 3 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-purple-200 to-pink-200 flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined text-[18px]">self_improvement</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">PMS Şefkat Notu</span>
+<span class="font-label-sm text-label-sm text-secondary">Zorlu günlerde iyi hissettiren içgörü</span>
+</div>
+</div>
+<button class="w-12 h-7 rounded-full bg-gradient-to-r from-primary to-pink-500 p-0.5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.25),0_2px_8px_rgba(216,27,96,0.3)] transition-all duration-300 relative flex items-center justify-end" data-checked="true" onclick="toggleSwitchWithPollen(this, event)">
+<div class="w-6 h-6 rounded-full bg-white shadow-md transform transition-transform"></div>
+</button>
+</div>
+<!-- Toggle Item 4 -->
+<div class="flex items-center justify-between p-2.5 rounded-xl hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-cyan-100 to-blue-200 flex items-center justify-center text-cyan-700 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">local_drink</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface font-semibold">Su &amp; Botanik Çay Hatırlatıcı</span>
+<span class="font-label-sm text-label-sm text-secondary">Günde 2 kez nazikçe fısılda</span>
+</div>
+</div>
+<button class="w-12 h-7 rounded-full bg-surface-container-high p-0.5 shadow-[inset_0_2px_4px_rgba(0,0,0,0.15)] transition-all duration-300 relative flex items-center justify-start" data-checked="false" onclick="toggleSwitchWithPollen(this, event)">
+<div class="w-6 h-6 rounded-full bg-white shadow-md transform transition-transform"></div>
+</button>
+</div>
+</div>
+</div>
+<!-- Device & Health Integrations Section with Enhanced Claymorphic 3D Elevation -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between px-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-1.5">
+<span>Cihaz &amp; Biyo-Entegrasyonlar</span>
+<span class="text-base">⌚</span>
+</h3>
+<span class="font-label-sm text-label-sm text-emerald-600 font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+      Senkronize
+    </span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<!-- Apple Health Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 flex flex-col justify-between clay-card border border-white relative overflow-hidden transition-all active:scale-95 cursor-pointer" onclick="triggerPollen(event, 'blossom')">
+<div class="absolute -top-6 -right-6 w-16 h-16 rounded-full bg-red-100/60 blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_6px_rgba(239,68,68,0.2)]">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">Bağlı</span>
+</div>
+<div class="mt-3">
+<p class="font-label-lg text-label-lg text-on-surface font-bold">Apple Health</p>
+<p class="font-label-sm text-label-sm text-secondary">Uyku, Nabız &amp; Isı</p>
+</div>
+</div>
+<!-- Oura Ring / Smart Thermometer Card -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 flex flex-col justify-between clay-card border border-white relative overflow-hidden transition-all active:scale-95 cursor-pointer" onclick="triggerPollen(event, 'gold')">
+<div class="absolute -top-6 -right-6 w-16 h-16 rounded-full bg-amber-100/60 blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<div class="w-10 h-10 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center shadow-[inset_0_1px_1px_rgba(255,255,255,0.9),0_2px_6px_rgba(245,158,11,0.2)]">
+<span class="material-symbols-outlined text-[22px]">watch</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-secondary font-label-sm text-label-sm font-semibold">Eşle</span>
+</div>
+<div class="mt-3">
+<p class="font-label-lg text-label-lg text-on-surface font-bold">Oura &amp; Termometre</p>
+<p class="font-label-sm text-label-sm text-secondary">Bazal vücut ısısı</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Medical Privacy & Biometric Vault (Claymorphic Deep Velvet Plum with Luminous Accents) -->
+<div class="w-full bg-gradient-to-br from-inverse-surface via-[#2d1b24] to-[#4a0e2e] rounded-2xl p-space-lg text-inverse-on-surface shadow-[0_16px_36px_rgba(53,47,49,0.35),inset_0_1px_2px_rgba(255,255,255,0.2)] border border-pink-500/20 relative overflow-hidden">
+<!-- Glowing Botanic Aura inside Vault -->
+<div class="absolute -right-8 -bottom-8 w-40 h-40 rounded-full bg-gradient-to-tr from-primary/30 to-amber-500/20 blur-3xl pointer-events-none"></div>
+<div class="absolute top-0 right-10 text-[20px] opacity-20 pointer-events-none">🌿</div>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-11 h-11 rounded-full bg-gradient-to-tr from-white/20 to-white/5 backdrop-blur-md flex items-center justify-center text-pink-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.3)] border border-white/10">
+<span class="material-symbols-outlined text-[24px]">shield</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-white font-bold flex items-center gap-1.5">
+<span>Tıbbi Gizlilik &amp; Kasa</span>
+<span class="text-xs bg-pink-500/30 text-pink-200 px-2 py-0.5 rounded-full border border-pink-400/30">AES-256</span>
+</h4>
+<p class="font-label-sm text-label-sm text-inverse-on-surface/80">Uçtan uca şifrelenmiş biyolojik DNA &amp; döngü kasası</p>
+</div>
+</div>
+<div class="flex flex-col gap-2.5">
+<!-- Biometric lock row -->
+<div class="flex items-center justify-between py-2.5 px-3.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 shadow-inner">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[22px] text-pink-300">fingerprint</span>
+<span class="font-label-lg text-label-lg text-white font-medium">Face ID ile Kilitle</span>
+</div>
+<button class="w-12 h-7 rounded-full bg-gradient-to-r from-primary to-pink-500 p-0.5 shadow-md transition-all relative flex items-center justify-end" data-checked="true" onclick="toggleSwitchWithPollen(this, event)">
+<div class="w-6 h-6 rounded-full bg-white shadow-md"></div>
+</button>
+</div>
+<!-- Anonymous mode row -->
+<div class="flex items-center justify-between py-2.5 px-3.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 shadow-inner">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[22px] text-pink-300">visibility_off</span>
+<span class="font-label-lg text-label-lg text-white font-medium">Anonim Mod</span>
+</div>
+<button class="w-12 h-7 rounded-full bg-white/20 p-0.5 shadow-inner transition-all relative flex items-center justify-start" data-checked="false" onclick="toggleSwitchWithPollen(this, event)">
+<div class="w-6 h-6 rounded-full bg-white shadow-md"></div>
+</button>
+</div>
+<!-- Export Data Button with Tactile 3D Glow -->
+<button class="mt-2 w-full py-3 px-4 rounded-xl bg-gradient-to-r from-white/15 via-white/20 to-white/10 hover:from-white/25 hover:to-white/15 active:scale-[0.98] transition-all text-white font-label-md text-label-md font-bold flex items-center justify-center gap-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.35),0_6px_16px_rgba(0,0,0,0.25)] border border-white/20" onclick="triggerPollen(event, 'blossom')">
+<span class="material-symbols-outlined text-[19px] text-amber-300">download_for_offline</span>
+<span>Tüm Sağlık Verilerini Dışa Aktar (PDF/CSV)</span>
+<span class="text-xs">✨</span>
+</button>
+</div>
+</div>
+<!-- Bottom Utility & Exit Links -->
+<div class="flex flex-col gap-2.5 mt-1">
+<a class="w-full p-4 bg-surface-container-lowest rounded-2xl flex items-center justify-between clay-card-sm border border-white text-on-surface hover:text-primary transition-colors cursor-pointer" href="#" onclick="triggerPollen(event, 'sparkle')">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+</div>
+<span class="font-label-lg text-label-lg font-semibold">Yardım &amp; Klinik Danışma Rehberi</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[18px]">chevron_right</span>
+</a>
+<button class="w-full p-3.5 rounded-2xl bg-surface-container-low text-error hover:bg-error-container/30 transition-all active:scale-[0.99] flex items-center justify-center gap-2 font-label-lg text-label-lg font-bold shadow-[inset_0_1px_1px_rgba(255,255,255,0.85),0_4px_10px_rgba(186,26,26,0.06)] border border-pink-100" onclick="triggerPollen(event, 'rose')">
+<span class="material-symbols-outlined text-[19px]">logout</span>
+<span>Güvenli Çıkış Yap</span>
+</button>
+<div class="text-center py-2">
+<span class="font-label-sm text-label-sm text-outline flex items-center justify-center gap-1">
+<span>🌸 Sürüm 3.4.2 • Kadife Botanik Sağlık Güvencesi</span>
+</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BOTTOM NAVIGATION BAR (Profil sekmesi aktif olarak korunmuştur) -->
+<nav class="fixed bottom-0 w-full z-50 pb-safe pointer-events-none" data-active-classes="bg-gradient-to-tr from-primary to-primary-container text-on-primary shadow-[0_8px_20px_rgba(216,27,96,0.38)] scale-105">
+<div class="mx-4 mb-4 pointer-events-auto">
+<div class="h-20 px-3 bg-surface-container-lowest/90 backdrop-blur-xl rounded-full shadow-[0_12px_32px_rgba(128,80,98,0.15)] flex items-center justify-around border border-white/80">
+<a class="flex flex-col items-center justify-center min-w-[56px] min-h-[52px] rounded-full px-3 py-1.5 text-on-surface-variant transition-all duration-300 hover:text-primary group" data-path="bugun" href="#">
+<span class="material-symbols-outlined text-[24px] mb-0.5 group-hover:scale-110 transition-transform">favorite</span>
+<span class="font-label-sm text-label-sm tracking-normal">Bugün</span>
+</a>
+<a class="flex flex-col items-center justify-center min-w-[56px] min-h-[52px] rounded-full px-3 py-1.5 text-on-surface-variant transition-all duration-300 hover:text-primary group" data-path="dongu" href="#">
+<span class="material-symbols-outlined text-[24px] mb-0.5 group-hover:scale-110 transition-transform">calendar_month</span>
+<span class="font-label-sm text-label-sm tracking-normal">Döngü</span>
+</a>
+<a class="flex flex-col items-center justify-center min-w-[56px] min-h-[52px] rounded-full px-3 py-1.5 text-on-surface-variant transition-all duration-300 hover:text-primary group" data-path="raporlar" href="#">
+<span class="material-symbols-outlined text-[24px] mb-0.5 group-hover:scale-110 transition-transform">bar_chart_4_bars</span>
+<span class="font-label-sm text-label-sm tracking-normal">Raporlar</span>
+</a>
+<a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] min-h-[52px] rounded-full px-3 py-1.5 transition-all duration-300 group bg-gradient-to-tr from-primary to-primary-container text-on-primary shadow-[0_8px_20px_rgba(216,27,96,0.38)] scale-105" data-path="profil" href="#">
+<span class="material-symbols-outlined text-[24px] mb-0.5 group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm tracking-normal font-bold">Profil</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Botanical Audio & Spring Pollen Interactive Script -->
+<script>
+  // Web Audio Synthetic Crystal Water Drop Chime
+  let audioCtx = null;
+  function playCrystalChime(pitchModifier = 1) {
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+      if (!audioCtx) {
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      
+      const now = audioCtx.currentTime;
+      
+      // Main sparkling resonant bell/drop
+      const osc1 = audioCtx.createOscillator();
+      const gain1 = audioCtx.createGain();
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(880 * pitchModifier, now);
+      osc1.frequency.exponentialRampToValueAtTime(1760 * pitchModifier, now + 0.08);
+      osc1.frequency.exponentialRampToValueAtTime(1320 * pitchModifier, now + 0.35);
+
+      gain1.gain.setValueAtTime(0.001, now);
+      gain1.gain.linearRampToValueAtTime(0.2, now + 0.02);
+      gain1.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
+
+      // Delicate high shimmer overtone
+      const osc2 = audioCtx.createOscillator();
+      const gain2 = audioCtx.createGain();
+      osc2.type = 'triangle';
+      osc2.frequency.setValueAtTime(2640 * pitchModifier, now);
+      gain2.gain.setValueAtTime(0.08, now);
+      gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.25);
+
+      osc1.connect(gain1);
+      gain1.connect(audioCtx.destination);
+      osc2.connect(gain2);
+      gain2.connect(audioCtx.destination);
+
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + 0.45);
+      osc2.stop(now + 0.3);
+    } catch(e) {
+      // Audio playback fails silently if user policy requires interaction
+    }
+  }
+
+  // Pollen & Botanical Petal Particle Explosion
+  function triggerPollen(e, theme = 'blossom') {
+    playCrystalChime(theme === 'gold' ? 1.2 : (theme === 'rose' ? 0.9 : 1.05));
+    
+    const clickX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : window.innerWidth / 2);
+    const clickY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : window.innerHeight / 2);
+
+    const petals = ['🌸', '🌺', '✨', '🍃', '🌼', '💖', '💧', '🌿', '⭐'];
+    const colors = ['#f43f5e', '#ec4899', '#10b981', '#f59e0b', '#06b6d4', '#d81b60', '#ffd700'];
+
+    const count = 14;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'pollen-particle select-none';
+      
+      const angle = (Math.PI * 2 / count) * i + (Math.random() - 0.5);
+      const distance = 40 + Math.random() * 85;
+      const tx = Math.cos(angle) * distance;
+      const ty = Math.sin(angle) * distance;
+      const rot = (Math.random() * 360) + 'deg';
+
+      p.style.setProperty('--tw-tx', `${tx}px`);
+      p.style.setProperty('--tw-ty', `${ty}px`);
+      p.style.setProperty('--tw-rot', rot);
+
+      p.style.left = `${clickX}px`;
+      p.style.top = `${clickY}px`;
+
+      if (i % 2 === 0) {
+        // Emoji petal or sparkle
+        p.innerText = petals[Math.floor(Math.random() * petals.length)];
+        p.style.fontSize = `${12 + Math.random() * 10}px`;
+      } else {
+        // Glowing pollen sphere
+        p.style.width = `${6 + Math.random() * 8}px`;
+        p.style.height = p.style.width;
+        p.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        p.style.boxShadow = `0 0 10px ${p.style.backgroundColor}`;
+      }
+
+      document.body.appendChild(p);
+
+      setTimeout(() => {
+        if (p && p.parentNode) {
+          p.parentNode.removeChild(p);
+        }
+      }, 950);
+    }
+  }
+
+  // Toggle button handler with flower pollen effect
+  function toggleSwitchWithPollen(btn, event) {
+    event.stopPropagation();
+    const isChecked = btn.getAttribute('data-checked') === 'true';
+    const newState = !isChecked;
+    btn.setAttribute('data-checked', newState ? 'true' : 'false');
+    
+    const isVault = btn.closest('.from-inverse-surface');
+    
+    if (newState) {
+      btn.classList.remove('bg-surface-container-high', 'bg-white/20', 'justify-start');
+      btn.classList.add('bg-gradient-to-r', 'from-primary', 'to-pink-500', 'justify-end');
+      triggerPollen(event, 'blossom');
+    } else {
+      btn.classList.remove('bg-gradient-to-r', 'from-primary', 'to-pink-500', 'justify-end');
+      btn.classList.add(isVault ? 'bg-white/20' : 'bg-surface-container-high', 'justify-start');
+      playCrystalChime(0.75);
+    }
+  }
+
+  // Update Liquid Slider dynamically
+  function updateWaterSlider(slider, event) {
+    const val = parseFloat(slider.value).toFixed(1);
+    const min = parseFloat(slider.min);
+    const max = parseFloat(slider.max);
+    const percentage = ((val - min) / (max - min)) * 100;
+    
+    const bar = document.getElementById('fluidBar');
+    const label = document.getElementById('waterValueLabel');
+    
+    if (bar) {
+      bar.style.width = percentage + '%';
+    }
+    if (label) {
+      const glasses = Math.round(val / 0.3);
+      label.innerText = `${val} Litre (${glasses} Bardak)`;
+    }
+
+    if (Math.random() > 0.6) {
+      triggerPollen(event, 'sparkle');
+    }
+  }
+</script>
+</body></html>
